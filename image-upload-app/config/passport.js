@@ -1,0 +1,32 @@
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { saveUserToDynamoDB } = require('../models/dynamoDB');
+
+// Serialize and deserialize user information
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+// Set up Google OAuth strategy
+passport.use(new GoogleStrategy({
+  clientID: '274022818559-ea6ef22vv6li95t754epb48ug70hoh4m.apps.googleusercontent.com',
+  clientSecret: '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',
+  callbackURL: 'http://motif-official.com/auth/google/callback',
+}, async (accessToken, refreshToken, profile, done) => {
+  const user = {
+    google_id: profile.id,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+  };
+
+  // Save user to DynamoDB if new
+  await saveUserToDynamoDB(user);
+  return done(null, user);
+}));
+
+module.exports = passport;
+

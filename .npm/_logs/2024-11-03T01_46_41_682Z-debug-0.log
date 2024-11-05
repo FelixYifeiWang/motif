@@ -1,0 +1,419 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@8.19.4
+2 info using node@v16.20.2
+3 timing npm:load:whichnode Completed in 0ms
+4 timing config:load:defaults Completed in 2ms
+5 timing config:load:file:/usr/lib/node_modules/npm/npmrc Completed in 14ms
+6 timing config:load:builtin Completed in 14ms
+7 timing config:load:cli Completed in 6ms
+8 timing config:load:env Completed in 0ms
+9 timing config:load:file:/home/ec2-user/image-upload-app/.npmrc Completed in 0ms
+10 timing config:load:project Completed in 1ms
+11 timing config:load:file:/home/ec2-user/.npmrc Completed in 1ms
+12 timing config:load:user Completed in 1ms
+13 timing config:load:file:/usr/etc/npmrc Completed in 0ms
+14 timing config:load:global Completed in 0ms
+15 timing config:load:validate Completed in 0ms
+16 timing config:load:credentials Completed in 1ms
+17 timing config:load:setEnvs Completed in 0ms
+18 timing config:load Completed in 25ms
+19 timing npm:load:configload Completed in 25ms
+20 timing npm:load:mkdirpcache Completed in 1ms
+21 timing npm:load:mkdirplogs Completed in 0ms
+22 verbose title npm install aws-sdk
+23 verbose argv "install" "aws-sdk"
+24 timing npm:load:setTitle Completed in 2ms
+25 timing config:load:flatten Completed in 3ms
+26 timing npm:load:display Completed in 4ms
+27 verbose logfile logs-max:10 dir:/home/ec2-user/.npm/_logs
+28 verbose logfile /home/ec2-user/.npm/_logs/2024-11-03T01_46_41_682Z-debug-0.log
+29 timing npm:load:logFile Completed in 5ms
+30 timing npm:load:timers Completed in 0ms
+31 timing npm:load:configScope Completed in 0ms
+32 timing npm:load Completed in 37ms
+33 timing arborist:ctor Completed in 1ms
+34 silly logfile done cleaning log files
+35 timing arborist:ctor Completed in 0ms
+36 timing idealTree:init Completed in 12ms
+37 timing idealTree:userRequests Completed in 1ms
+38 silly idealTree buildDeps
+39 silly fetch manifest aws-sdk@*
+40 http fetch GET 200 https://registry.npmjs.org/npm 164ms (cache miss)
+41 http fetch GET 200 https://registry.npmjs.org/aws-sdk 196ms (cache miss)
+42 silly placeDep ROOT aws-sdk@2.1691.0 OK for: image-upload-app@1.0.0 want: *
+43 silly fetch manifest buffer@4.9.2
+44 silly fetch manifest events@1.1.1
+45 silly fetch manifest ieee754@1.1.13
+46 silly fetch manifest jmespath@0.16.0
+47 silly fetch manifest querystring@0.2.0
+48 silly fetch manifest sax@1.2.1
+49 silly fetch manifest url@0.10.3
+50 silly fetch manifest util@^0.12.4
+51 silly fetch manifest uuid@8.0.0
+52 silly fetch manifest xml2js@0.6.2
+53 http fetch GET 200 https://registry.npmjs.org/buffer 39ms (cache miss)
+54 http fetch GET 200 https://registry.npmjs.org/events 40ms (cache miss)
+55 http fetch GET 200 https://registry.npmjs.org/url 104ms (cache miss)
+56 http fetch GET 200 https://registry.npmjs.org/jmespath 114ms (cache miss)
+57 http fetch GET 200 https://registry.npmjs.org/querystring 115ms (cache miss)
+58 http fetch GET 200 https://registry.npmjs.org/ieee754 117ms (cache miss)
+59 http fetch GET 200 https://registry.npmjs.org/sax 117ms (cache miss)
+60 http fetch GET 200 https://registry.npmjs.org/util 112ms (cache miss)
+61 http fetch GET 200 https://registry.npmjs.org/xml2js 111ms (cache miss)
+62 http fetch GET 200 https://registry.npmjs.org/uuid 114ms (cache miss)
+63 timing idealTree:#root Completed in 354ms
+64 silly placeDep ROOT buffer@4.9.2 OK for: aws-sdk@2.1691.0 want: 4.9.2
+65 silly placeDep ROOT events@1.1.1 OK for: aws-sdk@2.1691.0 want: 1.1.1
+66 silly placeDep ROOT ieee754@1.1.13 OK for: aws-sdk@2.1691.0 want: 1.1.13
+67 silly placeDep ROOT jmespath@0.16.0 OK for: aws-sdk@2.1691.0 want: 0.16.0
+68 silly placeDep ROOT querystring@0.2.0 OK for: aws-sdk@2.1691.0 want: 0.2.0
+69 silly placeDep ROOT sax@1.2.1 OK for: aws-sdk@2.1691.0 want: 1.2.1
+70 silly placeDep ROOT url@0.10.3 OK for: aws-sdk@2.1691.0 want: 0.10.3
+71 silly placeDep ROOT util@0.12.5 OK for: aws-sdk@2.1691.0 want: ^0.12.4
+72 silly placeDep ROOT uuid@8.0.0 OK for: aws-sdk@2.1691.0 want: 8.0.0
+73 silly placeDep ROOT xml2js@0.6.2 OK for: aws-sdk@2.1691.0 want: 0.6.2
+74 silly fetch manifest base64-js@^1.0.2
+75 silly fetch manifest isarray@^1.0.0
+76 silly fetch manifest punycode@1.3.2
+77 silly fetch manifest inherits@^2.0.3
+78 silly fetch manifest is-arguments@^1.0.4
+79 silly fetch manifest is-generator-function@^1.0.7
+80 silly fetch manifest is-typed-array@^1.1.3
+81 silly fetch manifest which-typed-array@^1.1.2
+82 silly fetch manifest xmlbuilder@~11.0.0
+83 http fetch GET 200 https://registry.npmjs.org/base64-js 26ms (cache miss)
+84 http fetch GET 200 https://registry.npmjs.org/is-generator-function 49ms (cache miss)
+85 http fetch GET 200 https://registry.npmjs.org/inherits 50ms (cache miss)
+86 http fetch GET 200 https://registry.npmjs.org/is-arguments 51ms (cache miss)
+87 http fetch GET 200 https://registry.npmjs.org/which-typed-array 51ms (cache miss)
+88 http fetch GET 200 https://registry.npmjs.org/isarray 55ms (cache miss)
+89 http fetch GET 200 https://registry.npmjs.org/xmlbuilder 52ms (cache miss)
+90 http fetch GET 200 https://registry.npmjs.org/punycode 59ms (cache miss)
+91 http fetch GET 200 https://registry.npmjs.org/is-typed-array 58ms (cache miss)
+92 timing idealTree:node_modules/aws-sdk Completed in 92ms
+93 silly placeDep ROOT base64-js@1.5.1 OK for: buffer@4.9.2 want: ^1.0.2
+94 silly placeDep ROOT isarray@1.0.0 OK for: buffer@4.9.2 want: ^1.0.0
+95 timing idealTree:node_modules/buffer Completed in 5ms
+96 timing idealTree:node_modules/base64-js Completed in 0ms
+97 timing idealTree:node_modules/events Completed in 0ms
+98 timing idealTree:node_modules/ieee754 Completed in 0ms
+99 timing idealTree:node_modules/isarray Completed in 0ms
+100 timing idealTree:node_modules/jmespath Completed in 0ms
+101 timing idealTree:node_modules/querystring Completed in 0ms
+102 timing idealTree:node_modules/sax Completed in 0ms
+103 silly placeDep ROOT punycode@1.3.2 OK for: url@0.10.3 want: 1.3.2
+104 timing idealTree:node_modules/url Completed in 1ms
+105 timing idealTree:node_modules/punycode Completed in 0ms
+106 silly placeDep ROOT inherits@2.0.4 OK for: util@0.12.5 want: ^2.0.3
+107 silly placeDep ROOT is-arguments@1.1.1 OK for: util@0.12.5 want: ^1.0.4
+108 silly placeDep ROOT is-generator-function@1.0.10 OK for: util@0.12.5 want: ^1.0.7
+109 silly placeDep ROOT is-typed-array@1.1.13 OK for: util@0.12.5 want: ^1.1.3
+110 silly placeDep ROOT which-typed-array@1.1.15 OK for: util@0.12.5 want: ^1.1.2
+111 silly fetch manifest call-bind@^1.0.2
+112 silly fetch manifest has-tostringtag@^1.0.0
+113 silly fetch manifest available-typed-arrays@^1.0.7
+114 silly fetch manifest call-bind@^1.0.7
+115 silly fetch manifest for-each@^0.3.3
+116 silly fetch manifest gopd@^1.0.1
+117 silly fetch manifest has-tostringtag@^1.0.2
+118 http fetch GET 200 https://registry.npmjs.org/gopd 22ms (cache miss)
+119 http fetch GET 200 https://registry.npmjs.org/call-bind 31ms (cache miss)
+120 http fetch GET 200 https://registry.npmjs.org/call-bind 50ms (cache miss)
+121 http fetch GET 200 https://registry.npmjs.org/has-tostringtag 45ms (cache miss)
+122 http fetch GET 200 https://registry.npmjs.org/for-each 50ms (cache miss)
+123 http fetch GET 200 https://registry.npmjs.org/has-tostringtag 51ms (cache miss)
+124 http fetch GET 200 https://registry.npmjs.org/available-typed-arrays 52ms (cache miss)
+125 timing idealTree:node_modules/util Completed in 58ms
+126 timing idealTree:node_modules/inherits Completed in 0ms
+127 silly placeDep ROOT call-bind@1.0.7 OK for: is-arguments@1.1.1 want: ^1.0.2
+128 silly placeDep ROOT has-tostringtag@1.0.2 OK for: is-arguments@1.1.1 want: ^1.0.0
+129 silly fetch manifest es-define-property@^1.0.0
+130 silly fetch manifest es-errors@^1.3.0
+131 silly fetch manifest function-bind@^1.1.2
+132 silly fetch manifest get-intrinsic@^1.2.4
+133 silly fetch manifest set-function-length@^1.2.1
+134 silly fetch manifest has-symbols@^1.0.3
+135 http fetch GET 200 https://registry.npmjs.org/es-define-property 77ms (cache miss)
+136 http fetch GET 200 https://registry.npmjs.org/es-errors 77ms (cache miss)
+137 http fetch GET 200 https://registry.npmjs.org/has-symbols 75ms (cache miss)
+138 http fetch GET 200 https://registry.npmjs.org/set-function-length 76ms (cache miss)
+139 http fetch GET 200 https://registry.npmjs.org/function-bind 78ms (cache miss)
+140 http fetch GET 200 https://registry.npmjs.org/get-intrinsic 79ms (cache miss)
+141 timing idealTree:node_modules/is-arguments Completed in 87ms
+142 silly placeDep ROOT es-define-property@1.0.0 OK for: call-bind@1.0.7 want: ^1.0.0
+143 silly placeDep ROOT es-errors@1.3.0 OK for: call-bind@1.0.7 want: ^1.3.0
+144 silly placeDep ROOT function-bind@1.1.2 OK for: call-bind@1.0.7 want: ^1.1.2
+145 silly placeDep ROOT get-intrinsic@1.2.4 OK for: call-bind@1.0.7 want: ^1.2.4
+146 silly placeDep ROOT set-function-length@1.2.2 OK for: call-bind@1.0.7 want: ^1.2.1
+147 silly fetch manifest has-proto@^1.0.1
+148 silly fetch manifest hasown@^2.0.0
+149 silly fetch manifest define-data-property@^1.1.4
+150 silly fetch manifest has-property-descriptors@^1.0.2
+151 http fetch GET 200 https://registry.npmjs.org/has-proto 34ms (cache miss)
+152 http fetch GET 200 https://registry.npmjs.org/hasown 34ms (cache miss)
+153 http fetch GET 200 https://registry.npmjs.org/has-property-descriptors 33ms (cache miss)
+154 http fetch GET 200 https://registry.npmjs.org/define-data-property 35ms (cache miss)
+155 timing idealTree:node_modules/call-bind Completed in 49ms
+156 timing idealTree:node_modules/es-define-property Completed in 0ms
+157 timing idealTree:node_modules/es-errors Completed in 0ms
+158 timing idealTree:node_modules/function-bind Completed in 0ms
+159 silly placeDep ROOT has-proto@1.0.3 OK for: get-intrinsic@1.2.4 want: ^1.0.1
+160 silly placeDep ROOT has-symbols@1.0.3 OK for: get-intrinsic@1.2.4 want: ^1.0.3
+161 silly placeDep ROOT hasown@2.0.2 OK for: get-intrinsic@1.2.4 want: ^2.0.0
+162 timing idealTree:node_modules/get-intrinsic Completed in 8ms
+163 timing idealTree:node_modules/has-proto Completed in 0ms
+164 timing idealTree:node_modules/has-symbols Completed in 0ms
+165 timing idealTree:node_modules/has-tostringtag Completed in 0ms
+166 timing idealTree:node_modules/hasown Completed in 0ms
+167 timing idealTree:node_modules/is-generator-function Completed in 0ms
+168 timing idealTree:node_modules/is-typed-array Completed in 0ms
+169 silly placeDep ROOT define-data-property@1.1.4 OK for: set-function-length@1.2.2 want: ^1.1.4
+170 silly placeDep ROOT gopd@1.0.1 OK for: set-function-length@1.2.2 want: ^1.0.1
+171 silly placeDep ROOT has-property-descriptors@1.0.2 OK for: set-function-length@1.2.2 want: ^1.0.2
+172 timing idealTree:node_modules/set-function-length Completed in 3ms
+173 timing idealTree:node_modules/define-data-property Completed in 0ms
+174 timing idealTree:node_modules/gopd Completed in 0ms
+175 timing idealTree:node_modules/has-property-descriptors Completed in 0ms
+176 timing idealTree:node_modules/uuid Completed in 0ms
+177 silly placeDep ROOT available-typed-arrays@1.0.7 OK for: which-typed-array@1.1.15 want: ^1.0.7
+178 silly placeDep ROOT for-each@0.3.3 OK for: which-typed-array@1.1.15 want: ^0.3.3
+179 silly fetch manifest possible-typed-array-names@^1.0.0
+180 silly fetch manifest is-callable@^1.1.3
+181 http fetch GET 200 https://registry.npmjs.org/possible-typed-array-names 32ms (cache miss)
+182 http fetch GET 200 https://registry.npmjs.org/is-callable 32ms (cache miss)
+183 timing idealTree:node_modules/which-typed-array Completed in 37ms
+184 silly placeDep ROOT possible-typed-array-names@1.0.0 OK for: available-typed-arrays@1.0.7 want: ^1.0.0
+185 timing idealTree:node_modules/available-typed-arrays Completed in 1ms
+186 silly placeDep ROOT is-callable@1.2.7 OK for: for-each@0.3.3 want: ^1.1.3
+187 timing idealTree:node_modules/for-each Completed in 1ms
+188 timing idealTree:node_modules/is-callable Completed in 0ms
+189 timing idealTree:node_modules/possible-typed-array-names Completed in 0ms
+190 silly placeDep ROOT xmlbuilder@11.0.1 OK for: xml2js@0.6.2 want: ~11.0.0
+191 timing idealTree:node_modules/xml2js Completed in 1ms
+192 timing idealTree:node_modules/xmlbuilder Completed in 0ms
+193 timing idealTree:buildDeps Completed in 702ms
+194 timing idealTree:fixDepFlags Completed in 1ms
+195 timing idealTree Completed in 718ms
+196 timing reify:loadTrees Completed in 718ms
+197 timing reify:diffTrees Completed in 1ms
+198 silly reify moves {}
+199 timing reify:retireShallow Completed in 0ms
+200 timing reify:createSparse Completed in 6ms
+201 timing reify:loadBundles Completed in 0ms
+202 silly audit bulk request {
+202 silly audit   'aws-sdk': [ '2.1691.0' ],
+202 silly audit   buffer: [ '4.9.2' ],
+202 silly audit   events: [ '1.1.1' ],
+202 silly audit   ieee754: [ '1.1.13' ],
+202 silly audit   jmespath: [ '0.16.0' ],
+202 silly audit   querystring: [ '0.2.0' ],
+202 silly audit   sax: [ '1.2.1' ],
+202 silly audit   url: [ '0.10.3' ],
+202 silly audit   util: [ '0.12.5' ],
+202 silly audit   uuid: [ '8.0.0' ],
+202 silly audit   xml2js: [ '0.6.2' ],
+202 silly audit   'base64-js': [ '1.5.1' ],
+202 silly audit   isarray: [ '1.0.0' ],
+202 silly audit   punycode: [ '1.3.2' ],
+202 silly audit   inherits: [ '2.0.4' ],
+202 silly audit   'is-arguments': [ '1.1.1' ],
+202 silly audit   'is-generator-function': [ '1.0.10' ],
+202 silly audit   'is-typed-array': [ '1.1.13' ],
+202 silly audit   'which-typed-array': [ '1.1.15' ],
+202 silly audit   'call-bind': [ '1.0.7' ],
+202 silly audit   'has-tostringtag': [ '1.0.2' ],
+202 silly audit   'es-define-property': [ '1.0.0' ],
+202 silly audit   'es-errors': [ '1.3.0' ],
+202 silly audit   'function-bind': [ '1.1.2' ],
+202 silly audit   'get-intrinsic': [ '1.2.4' ],
+202 silly audit   'set-function-length': [ '1.2.2' ],
+202 silly audit   'has-proto': [ '1.0.3' ],
+202 silly audit   'has-symbols': [ '1.0.3' ],
+202 silly audit   hasown: [ '2.0.2' ],
+202 silly audit   'define-data-property': [ '1.1.4' ],
+202 silly audit   gopd: [ '1.0.1' ],
+202 silly audit   'has-property-descriptors': [ '1.0.2' ],
+202 silly audit   'available-typed-arrays': [ '1.0.7' ],
+202 silly audit   'for-each': [ '0.3.3' ],
+202 silly audit   'possible-typed-array-names': [ '1.0.0' ],
+202 silly audit   'is-callable': [ '1.2.7' ],
+202 silly audit   xmlbuilder: [ '11.0.1' ]
+202 silly audit }
+203 silly tarball no local data for xmlbuilder@https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-11.0.1.tgz. Extracting by manifest.
+204 silly tarball no local data for is-callable@https://registry.npmjs.org/is-callable/-/is-callable-1.2.7.tgz. Extracting by manifest.
+205 silly tarball no local data for possible-typed-array-names@https://registry.npmjs.org/possible-typed-array-names/-/possible-typed-array-names-1.0.0.tgz. Extracting by manifest.
+206 silly tarball no local data for for-each@https://registry.npmjs.org/for-each/-/for-each-0.3.3.tgz. Extracting by manifest.
+207 silly tarball no local data for available-typed-arrays@https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.7.tgz. Extracting by manifest.
+208 silly tarball no local data for has-property-descriptors@https://registry.npmjs.org/has-property-descriptors/-/has-property-descriptors-1.0.2.tgz. Extracting by manifest.
+209 silly tarball no local data for gopd@https://registry.npmjs.org/gopd/-/gopd-1.0.1.tgz. Extracting by manifest.
+210 silly tarball no local data for define-data-property@https://registry.npmjs.org/define-data-property/-/define-data-property-1.1.4.tgz. Extracting by manifest.
+211 silly tarball no local data for hasown@https://registry.npmjs.org/hasown/-/hasown-2.0.2.tgz. Extracting by manifest.
+212 silly tarball no local data for has-symbols@https://registry.npmjs.org/has-symbols/-/has-symbols-1.0.3.tgz. Extracting by manifest.
+213 silly tarball no local data for has-proto@https://registry.npmjs.org/has-proto/-/has-proto-1.0.3.tgz. Extracting by manifest.
+214 silly tarball no local data for set-function-length@https://registry.npmjs.org/set-function-length/-/set-function-length-1.2.2.tgz. Extracting by manifest.
+215 silly tarball no local data for get-intrinsic@https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.4.tgz. Extracting by manifest.
+216 silly tarball no local data for function-bind@https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz. Extracting by manifest.
+217 silly tarball no local data for es-errors@https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz. Extracting by manifest.
+218 silly tarball no local data for es-define-property@https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.0.tgz. Extracting by manifest.
+219 silly tarball no local data for has-tostringtag@https://registry.npmjs.org/has-tostringtag/-/has-tostringtag-1.0.2.tgz. Extracting by manifest.
+220 silly tarball no local data for call-bind@https://registry.npmjs.org/call-bind/-/call-bind-1.0.7.tgz. Extracting by manifest.
+221 silly tarball no local data for which-typed-array@https://registry.npmjs.org/which-typed-array/-/which-typed-array-1.1.15.tgz. Extracting by manifest.
+222 silly tarball no local data for is-typed-array@https://registry.npmjs.org/is-typed-array/-/is-typed-array-1.1.13.tgz. Extracting by manifest.
+223 silly tarball no local data for is-generator-function@https://registry.npmjs.org/is-generator-function/-/is-generator-function-1.0.10.tgz. Extracting by manifest.
+224 silly tarball no local data for is-arguments@https://registry.npmjs.org/is-arguments/-/is-arguments-1.1.1.tgz. Extracting by manifest.
+225 silly tarball no local data for inherits@https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz. Extracting by manifest.
+226 silly tarball no local data for punycode@https://registry.npmjs.org/punycode/-/punycode-1.3.2.tgz. Extracting by manifest.
+227 silly tarball no local data for isarray@https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz. Extracting by manifest.
+228 silly tarball no local data for base64-js@https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz. Extracting by manifest.
+229 silly tarball no local data for xml2js@https://registry.npmjs.org/xml2js/-/xml2js-0.6.2.tgz. Extracting by manifest.
+230 silly tarball no local data for uuid@https://registry.npmjs.org/uuid/-/uuid-8.0.0.tgz. Extracting by manifest.
+231 silly tarball no local data for util@https://registry.npmjs.org/util/-/util-0.12.5.tgz. Extracting by manifest.
+232 silly tarball no local data for url@https://registry.npmjs.org/url/-/url-0.10.3.tgz. Extracting by manifest.
+233 silly tarball no local data for sax@https://registry.npmjs.org/sax/-/sax-1.2.1.tgz. Extracting by manifest.
+234 silly tarball no local data for querystring@https://registry.npmjs.org/querystring/-/querystring-0.2.0.tgz. Extracting by manifest.
+235 silly tarball no local data for jmespath@https://registry.npmjs.org/jmespath/-/jmespath-0.16.0.tgz. Extracting by manifest.
+236 silly tarball no local data for ieee754@https://registry.npmjs.org/ieee754/-/ieee754-1.1.13.tgz. Extracting by manifest.
+237 silly tarball no local data for events@https://registry.npmjs.org/events/-/events-1.1.1.tgz. Extracting by manifest.
+238 silly tarball no local data for buffer@https://registry.npmjs.org/buffer/-/buffer-4.9.2.tgz. Extracting by manifest.
+239 silly tarball no local data for aws-sdk@https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1691.0.tgz. Extracting by manifest.
+240 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 156ms
+241 timing auditReport:getReport Completed in 159ms
+242 silly audit report {}
+243 timing auditReport:init Completed in 0ms
+244 timing reify:audit Completed in 160ms
+245 http fetch GET 200 https://registry.npmjs.org/hasown/-/hasown-2.0.2.tgz 625ms (cache miss)
+246 timing reifyNode:node_modules/hasown Completed in 662ms
+247 http fetch GET 200 https://registry.npmjs.org/possible-typed-array-names/-/possible-typed-array-names-1.0.0.tgz 635ms (cache miss)
+248 timing reifyNode:node_modules/possible-typed-array-names Completed in 665ms
+249 http fetch GET 200 https://registry.npmjs.org/has-property-descriptors/-/has-property-descriptors-1.0.2.tgz 651ms (cache miss)
+250 timing reifyNode:node_modules/has-property-descriptors Completed in 683ms
+251 http fetch GET 200 https://registry.npmjs.org/gopd/-/gopd-1.0.1.tgz 647ms (cache miss)
+252 timing reifyNode:node_modules/gopd Completed in 683ms
+253 http fetch GET 200 https://registry.npmjs.org/for-each/-/for-each-0.3.3.tgz 654ms (cache miss)
+254 timing reifyNode:node_modules/for-each Completed in 685ms
+255 http fetch GET 200 https://registry.npmjs.org/is-typed-array/-/is-typed-array-1.1.13.tgz 625ms (cache miss)
+256 timing reifyNode:node_modules/is-typed-array Completed in 685ms
+257 http fetch GET 200 https://registry.npmjs.org/is-arguments/-/is-arguments-1.1.1.tgz 623ms (cache miss)
+258 timing reifyNode:node_modules/is-arguments Completed in 685ms
+259 http fetch GET 200 https://registry.npmjs.org/is-generator-function/-/is-generator-function-1.0.10.tgz 628ms (cache miss)
+260 timing reifyNode:node_modules/is-generator-function Completed in 689ms
+261 http fetch GET 200 https://registry.npmjs.org/punycode/-/punycode-1.3.2.tgz 622ms (cache miss)
+262 timing reifyNode:node_modules/punycode Completed in 689ms
+263 http fetch GET 200 https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz 628ms (cache miss)
+264 timing reifyNode:node_modules/inherits Completed in 690ms
+265 http fetch GET 200 https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.0.tgz 640ms (cache miss)
+266 timing reifyNode:node_modules/es-define-property Completed in 692ms
+267 http fetch GET 200 https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz 625ms (cache miss)
+268 timing reifyNode:node_modules/isarray Completed in 693ms
+269 http fetch GET 200 https://registry.npmjs.org/querystring/-/querystring-0.2.0.tgz 591ms (cache miss)
+270 warn deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+271 timing reifyNode:node_modules/querystring Completed in 694ms
+272 http fetch GET 200 https://registry.npmjs.org/ieee754/-/ieee754-1.1.13.tgz 584ms (cache miss)
+273 timing reifyNode:node_modules/ieee754 Completed in 694ms
+274 http fetch GET 200 https://registry.npmjs.org/sax/-/sax-1.2.1.tgz 596ms (cache miss)
+275 timing reifyNode:node_modules/sax Completed in 697ms
+276 http fetch GET 200 https://registry.npmjs.org/jmespath/-/jmespath-0.16.0.tgz 588ms (cache miss)
+277 timing reifyNode:node_modules/jmespath Completed in 697ms
+278 http fetch GET 200 https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.7.tgz 669ms (cache miss)
+279 timing reifyNode:node_modules/available-typed-arrays Completed in 700ms
+280 http fetch GET 200 https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz 631ms (cache miss)
+281 timing reifyNode:node_modules/base64-js Completed in 700ms
+282 http fetch GET 200 https://registry.npmjs.org/events/-/events-1.1.1.tgz 593ms (cache miss)
+283 http fetch GET 200 https://registry.npmjs.org/has-proto/-/has-proto-1.0.3.tgz 663ms (cache miss)
+284 timing reifyNode:node_modules/has-proto Completed in 706ms
+285 http fetch GET 200 https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz 658ms (cache miss)
+286 timing reifyNode:node_modules/es-errors Completed in 709ms
+287 http fetch GET 200 https://registry.npmjs.org/define-data-property/-/define-data-property-1.1.4.tgz 674ms (cache miss)
+288 timing reifyNode:node_modules/define-data-property Completed in 710ms
+289 http fetch GET 200 https://registry.npmjs.org/call-bind/-/call-bind-1.0.7.tgz 657ms (cache miss)
+290 timing reifyNode:node_modules/call-bind Completed in 711ms
+291 timing reifyNode:node_modules/events Completed in 710ms
+292 http fetch GET 200 https://registry.npmjs.org/url/-/url-0.10.3.tgz 613ms (cache miss)
+293 timing reifyNode:node_modules/url Completed in 711ms
+294 http fetch GET 200 https://registry.npmjs.org/set-function-length/-/set-function-length-1.2.2.tgz 667ms (cache miss)
+295 timing reifyNode:node_modules/set-function-length Completed in 712ms
+296 http fetch GET 200 https://registry.npmjs.org/util/-/util-0.12.5.tgz 616ms (cache miss)
+297 timing reifyNode:node_modules/util Completed in 713ms
+298 http fetch GET 200 https://registry.npmjs.org/is-callable/-/is-callable-1.2.7.tgz 688ms (cache miss)
+299 timing reifyNode:node_modules/is-callable Completed in 717ms
+300 http fetch GET 200 https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.4.tgz 670ms (cache miss)
+301 timing reifyNode:node_modules/get-intrinsic Completed in 716ms
+302 http fetch GET 200 https://registry.npmjs.org/which-typed-array/-/which-typed-array-1.1.15.tgz 660ms (cache miss)
+303 timing reifyNode:node_modules/which-typed-array Completed in 719ms
+304 http fetch GET 200 https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz 674ms (cache miss)
+305 timing reifyNode:node_modules/function-bind Completed in 721ms
+306 http fetch GET 200 https://registry.npmjs.org/has-symbols/-/has-symbols-1.0.3.tgz 680ms (cache miss)
+307 timing reifyNode:node_modules/has-symbols Completed in 722ms
+308 http fetch GET 200 https://registry.npmjs.org/has-tostringtag/-/has-tostringtag-1.0.2.tgz 670ms (cache miss)
+309 timing reifyNode:node_modules/has-tostringtag Completed in 723ms
+310 http fetch GET 200 https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-11.0.1.tgz 726ms (cache miss)
+311 timing reifyNode:node_modules/xmlbuilder Completed in 757ms
+312 http fetch GET 200 https://registry.npmjs.org/uuid/-/uuid-8.0.0.tgz 675ms (cache miss)
+313 timing reifyNode:node_modules/uuid Completed in 761ms
+314 http fetch GET 200 https://registry.npmjs.org/buffer/-/buffer-4.9.2.tgz 659ms (cache miss)
+315 timing reifyNode:node_modules/buffer Completed in 770ms
+316 http fetch GET 200 https://registry.npmjs.org/xml2js/-/xml2js-0.6.2.tgz 751ms (cache miss)
+317 timing reifyNode:node_modules/xml2js Completed in 822ms
+318 http fetch GET 200 https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1691.0.tgz 2153ms (cache miss)
+319 timing reifyNode:node_modules/aws-sdk Completed in 2270ms
+320 timing reify:unpack Completed in 2275ms
+321 timing reify:unretire Completed in 0ms
+322 timing build:queue Completed in 3ms
+323 timing build:link:node_modules/uuid Completed in 1ms
+324 timing build:link Completed in 2ms
+325 info run aws-sdk@2.1691.0 postinstall node_modules/aws-sdk node scripts/warn-maintenance-mode.js
+326 info run aws-sdk@2.1691.0 postinstall { code: 0, signal: null }
+327 timing build:run:postinstall:node_modules/aws-sdk Completed in 52ms
+328 timing build:run:postinstall Completed in 52ms
+329 timing build:deps Completed in 58ms
+330 timing build Completed in 59ms
+331 timing reify:build Completed in 59ms
+332 timing reify:trash Completed in 0ms
+333 timing reify:save Completed in 18ms
+334 timing reify Completed in 3123ms
+335 silly ADD node_modules/xmlbuilder
+336 silly ADD node_modules/is-callable
+337 silly ADD node_modules/possible-typed-array-names
+338 silly ADD node_modules/for-each
+339 silly ADD node_modules/available-typed-arrays
+340 silly ADD node_modules/has-property-descriptors
+341 silly ADD node_modules/gopd
+342 silly ADD node_modules/define-data-property
+343 silly ADD node_modules/hasown
+344 silly ADD node_modules/has-symbols
+345 silly ADD node_modules/has-proto
+346 silly ADD node_modules/set-function-length
+347 silly ADD node_modules/get-intrinsic
+348 silly ADD node_modules/function-bind
+349 silly ADD node_modules/es-errors
+350 silly ADD node_modules/es-define-property
+351 silly ADD node_modules/has-tostringtag
+352 silly ADD node_modules/call-bind
+353 silly ADD node_modules/which-typed-array
+354 silly ADD node_modules/is-typed-array
+355 silly ADD node_modules/is-generator-function
+356 silly ADD node_modules/is-arguments
+357 silly ADD node_modules/inherits
+358 silly ADD node_modules/punycode
+359 silly ADD node_modules/isarray
+360 silly ADD node_modules/base64-js
+361 silly ADD node_modules/xml2js
+362 silly ADD node_modules/uuid
+363 silly ADD node_modules/util
+364 silly ADD node_modules/url
+365 silly ADD node_modules/sax
+366 silly ADD node_modules/querystring
+367 silly ADD node_modules/jmespath
+368 silly ADD node_modules/ieee754
+369 silly ADD node_modules/events
+370 silly ADD node_modules/buffer
+371 silly ADD node_modules/aws-sdk
+372 timing command:install Completed in 3129ms
+373 notice
+373 notice New [31mmajor[39m version of npm available! [31m8.19.4[39m -> [32m10.9.0[39m
+373 notice Changelog: [36mhttps://github.com/npm/cli/releases/tag/v10.9.0[39m
+373 notice Run [32mnpm install -g npm@10.9.0[39m to update!
+373 notice
+374 verbose exit 0
+375 timing npm Completed in 3235ms
+376 info ok
