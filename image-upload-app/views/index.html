@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motif</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+
+  <!-- Google Fonts for Amiri -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset and Basic Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Amiri', serif; /* Apply Amiri font globally */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: white;
+      /* background: url('assets/bg1.png') no-repeat center center / cover; */
+      overflow: hidden;
+    }
+
+    /* Warning Message for Desktop Users */
+    .desktop-warning {
+      display: none;
+      text-align: center;
+      color: #333;
+      font-size: 3vw;
+      font-family: 'Amiri', serif;
+      position: fixed;
+      top: 40vh;
+      width: 100vw;
+      text-align: center;
+    }
+
+    /* Main Container for Mobile Layout */
+    .mobile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 100vw;
+      max-width: 600px;
+    }
+
+    .bg {
+      position: fixed;
+      width: 100vw;
+      height: auto;
+      top: 0;
+    }
+
+    /* Images - Logo */
+    .logo {
+      position: fixed;
+      top: 7.3vh;
+      left: 6.4vw;
+      width: 18.6vw;
+      max-width: 100px;
+    }
+
+    /* Black Square Overlay for Upload Button */
+    .black-square {
+      position: fixed;
+      top: 10vh;
+      width: 110vw;
+      cursor: pointer;
+    }
+
+    /* OR Text */
+    .or-text {
+      position: fixed;
+      bottom: 20.9vh;
+      width: 41.7vw;
+    }
+
+    /* Google Login Button */
+    .login-button {
+      position: fixed;
+      bottom: 12.9vh;
+      width: 35.11vw;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Warning Message for Desktop Users -->
+  <div class="desktop-warning">
+    Please view this page on a mobile device.
+  </div>
+
+  <!-- Mobile Container -->
+  <div class="mobile-container hide-on-desktop">
+
+    <!-- Background -->
+    <img src="assets/bg1.png" alt="" class="bg">
+
+    <!-- Logo Image -->
+    <img src="assets/logo.png" alt="Motif Logo" class="logo">
+
+    <!-- Black Square Image with Click Event (Upload Outfits Button) -->
+    <img src="assets/first-upload.png" alt="Upload Outfits Button" class="black-square" onclick="handleBlackSquareClick()">
+
+    <!-- OR Text Image -->
+    <img src="assets/or.png" alt="OR" class="or-text">
+
+    <!-- Google Login Button Image with Click Event -->
+    <img src="assets/login.png" alt="Log in with Google" class="login-button" onclick="handleLoginClick()">
+    
+  </div>
+
+  <script>
+    // TODO: Handle click event for the black square
+    function handleBlackSquareClick() {
+      console.log("Black square clicked");
+      // Add functionality here to handle what happens on click
+    }
+
+    // TODO: Handle Google login click
+    function handleLoginClick() {
+      console.log("Login button clicked");
+      // Add functionality here to handle Google login
+    }
+
+    // Detect screen width and display warning for desktop users
+    function checkScreenWidth() {
+      if (window.innerWidth > 768) {
+        document.querySelector('.desktop-warning').style.display = 'block';
+        document.querySelector('.hide-on-desktop').style.display = 'none';
+      } else {
+        document.querySelector('.desktop-warning').style.display = 'none';
+        document.querySelector('.hide-on-desktop').style.display = 'flex';
+      }
+    }
+
+    // Initial check and resize event listener
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+  </script>
+
+</body>
+</html>
