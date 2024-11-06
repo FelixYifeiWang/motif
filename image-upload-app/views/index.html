@@ -9,7 +9,9 @@
   <link rel="icon" href="assets/favicon.png" type="image/png">
 
   <!-- Google Fonts for Amiri -->
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
+
 
   <style>
     /* Reset and Basic Styles */
@@ -19,13 +21,12 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Amiri', serif; /* Apply Amiri font globally */
+      font-family: 'Amiri', serif;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       background-color: white;
-      /* background: url('assets/bg1.png') no-repeat center center / cover; */
       overflow: hidden;
     }
 
@@ -90,6 +91,19 @@
       width: 36vw;
       cursor: pointer;
     }
+
+    /* Analyzing Text */
+    .analyzing-text {
+      display: none;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: 'Antic Didone', serif;
+      color: #333;
+      text-align: center;
+      position: fixed;
+      top: 45vh;
+      margin-left: -15vw;
+    }
   </style>
 </head>
 <body>
@@ -119,11 +133,60 @@
     
   </div>
 
+  <!-- Hidden File Input for Image Upload -->
+  <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;" onchange="handleFilesSelected()">
+
+  <!-- Analyzing Text -->
+  <div class="analyzing-text" id="analyzingText">Analyzing your Designer DNA...</div>
+
   <script>
-    // TODO: Handle click event for the black square
+    // Function to handle black square click and open file input
     function handleBlackSquareClick() {
-      console.log("Black square clicked");
-      // Add functionality here to handle what happens on click
+      document.getElementById('imageUpload').click();
+    }
+
+    // Function to handle selected files
+    function handleFilesSelected() {
+      const files = document.getElementById('imageUpload').files;
+      
+      if (files.length > 3) {
+        alert("Please upload a maximum of 3 images.");
+        return;
+      }
+
+      if (files.length === 0) {
+        alert("Please select at least one image.");
+        return;
+      }
+
+      // Hide all elements except the logo
+      document.querySelector('.black-square').style.display = 'none';
+      document.querySelector('.or-text').style.display = 'none';
+      document.querySelector('.login-button').style.display = 'none';
+      document.querySelector('.bg').style.display = 'none';
+
+      // Show analyzing text
+      document.getElementById('analyzingText').style.display = 'block';
+
+      // Send files to OpenAI API (placeholder function)
+      analyzeImages(files);
+    }
+
+    // Placeholder function to simulate OpenAI API call
+    async function analyzeImages(files) {
+      console.log("Sending images to OpenAI API...");
+
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // TODO: Replace with actual OpenAI API call
+      console.log("Images analyzed. TODO: Display result here.");
+
+      // Hide the analyzing text and display the result when available
+      document.getElementById('analyzingText').style.display = 'none';
+
+      // TODO: Display the analysis result here
+      console.log("Analysis result:", "TODO: Replace with actual result");
     }
 
     // TODO: Handle Google login click
