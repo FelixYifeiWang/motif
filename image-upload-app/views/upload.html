@@ -44,7 +44,7 @@
       color: #333;
     }
 
-    #imageFile {
+    #imageFiles {
       display: none;
     }
 
@@ -82,38 +82,11 @@
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* Shaking Animation */
-    .shake {
-      animation: shake 0.3s infinite;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: rotate(-2deg); }
-      50% { transform: rotate(2deg); }
-    }
-
-    /* Delete Button */
-    .delete-button {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: #ff4c4c;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
+    .result-text {
       font-size: 0.8em;
-      cursor: pointer;
+      color: #555;
+      margin-top: 5px;
       text-align: center;
-      line-height: 20px;
-      padding: 0;
-      display: none;
-    }
-
-    /* Show delete button when shaking */
-    .gallery-item.shaking .delete-button {
-      display: block;
     }
 
     /* Logout Button */
@@ -137,11 +110,12 @@
 </head>
 <body>
 
-  <div class="upload-square" onclick="document.getElementById('imageFile').click()">
-    Click to Upload
+  <div class="upload-square" onclick="document.getElementById('imageFiles').click()">
+    Click to Upload (Up to 3 Images)
   </div>
 
-  <input type="file" id="imageFile" name="image" accept="image/*" required onchange="handleFileUpload()">
+  <!-- Modified input to accept multiple files -->
+  <input type="file" id="imageFiles" name="images" accept="image/*" multiple onchange="handleFileUpload()">
 
   <p id="uploadStatus"></p>
 
@@ -153,113 +127,71 @@
   <button class="logout-button" onclick="window.location.href='/auth/logout'">Logout</button>
 
   <script>
-    let lastTap = 0;
-    let deleteMode = false;
-
-    // Function to handle file upload
     async function handleFileUpload() {
-      const fileInput = document.getElementById('imageFile');
+      const fileInput = document.getElementById('imageFiles');
       const formData = new FormData();
-      formData.append('image', fileInput.files[0]);
 
-      document.getElementById('uploadStatus').textContent = 'Uploading...';
+      // Limit to 3 images
+      const files = Array.from(fileInput.files).slice(0, 3);
+      files.forEach(file => formData.append('images', file));
+
+      document.getElementById('uploadStatus').textContent = 'Analyzing images...';
 
       try {
-        const response = await fetch('/upload', {
+        // Send files to OpenAI analysis API
+        const response = await fetch('/api/openai/analyze-images', {
           method: 'POST',
           body: formData,
         });
         const result = await response.json();
+
         if (response.ok) {
-          document.getElementById('uploadStatus').textContent = 'Image uploaded successfully!';
-          fetchUserImages(); // Refresh gallery
+          document.getElementById('uploadStatus').textContent = 'Analysis complete!';
+          displayResults(files, result.results);
         } else {
-          document.getElementById('uploadStatus').textContent = 'Upload failed: ' + result.error;
+          document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
         }
       } catch (error) {
-        document.getElementById('uploadStatus').textContent = 'Upload failed. Please try again.';
+        document.getElementById('uploadStatus').textContent = 'Error during analysis. Please try again.';
+        console.error('Error analyzing images:', error);
       }
     }
 
-    // Function to fetch and display user images
-    async function fetchUserImages() {
-      try {
-        const response = await fetch('/upload/list');
-        const images = await response.json();
-        const gallery = document.getElementById('gallery');
-        gallery.innerHTML = ''; 
+    // Function to display uploaded images with analysis results
+    function displayResults(files, results) {
+      const gallery = document.getElementById('gallery');
+      
+      // Clear current gallery content
+      gallery.innerHTML = '';
 
-        images.forEach((image) => {
-          const itemDiv = document.createElement('div');
-          itemDiv.className = 'gallery-item';
-          itemDiv.dataset.imageId = image.image_id;
+      files.forEach((file, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'gallery-item';
 
-          const imgElement = document.createElement('img');
-          imgElement.src = image.image_url;
-          imgElement.alt = 'Uploaded Image';
+        // Display uploaded image
+        const imgElement = document.createElement('img');
+        imgElement.src = URL.createObjectURL(file);
+        imgElement.alt = 'Uploaded Image';
 
-          const deleteButton = document.createElement('button');
-          deleteButton.className = 'delete-button';
-          deleteButton.textContent = '✕';
-          deleteButton.onclick = (e) => {
-            e.stopPropagation();
-            deleteImage(image.image_id);
-          };
+        // Display result text from OpenAI
+        const resultText = document.createElement('div');
+        resultText.className = 'result-text';
+        resultText.textContent = results[index] || 'No result';
 
-          itemDiv.appendChild(imgElement);
-          itemDiv.appendChild(deleteButton);
-
-          // Add double-tap event listener
-          itemDiv.addEventListener('click', handleDoubleTap);
-
-          gallery.appendChild(itemDiv);
-        });
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
-    }
-
-    // Double-tap detection to toggle delete mode
-    function handleDoubleTap(event) {
-      const currentTime = new Date().getTime();
-      const tapLength = currentTime - lastTap;
-
-      if (tapLength < 300 && tapLength > 0) {
-        toggleDeleteMode();
-      }
-      lastTap = currentTime;
-    }
-
-    // Toggle delete mode
-    function toggleDeleteMode() {
-      deleteMode = !deleteMode;
-      const galleryItems = document.querySelectorAll('.gallery-item');
-      galleryItems.forEach(item => {
-        if (deleteMode) {
-          item.classList.add('shake', 'shaking');
-        } else {
-          item.classList.remove('shake', 'shaking');
-        }
+        itemDiv.appendChild(imgElement);
+        itemDiv.appendChild(resultText);
+        gallery.appendChild(itemDiv);
       });
-    }
-
-    // Function to delete an image
-    async function deleteImage(imageId) {
-      try {
-	const encodedImageId = encodeURIComponent(imageId);
-        const response = await fetch(`/upload?imageId=${encodedImageId}`, { method: 'DELETE' });
-        if (response.ok) {
-          fetchUserImages(); // Refresh gallery after deletion
-        } else {
-          alert('Failed to delete image.');
-        }
-      } catch (error) {
-        console.error('Error deleting image:', error);
-      }
     }
 
     // Fetch images on page load
     window.onload = fetchUserImages;
+
+    // Mock fetchUserImages function, replace with actual implementation if needed
+    async function fetchUserImages() {
+      // Clear the initial gallery on load
+      document.getElementById('gallery').innerHTML = '';
+    }
   </script>
 
 </body>

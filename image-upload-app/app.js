@@ -6,7 +6,10 @@ const uploadRoutes = require('./routes/upload');
 
 // Initialize Express app
 const app = express();
+require('dotenv').config(); // Load environment variables
+const openaiRoutes = require('./routes/openai');
 
+app.use('/api/openai', openaiRoutes);
 app.use(express.static('views'));
 // Express session configuration
 app.use(session({
