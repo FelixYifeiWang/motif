@@ -7,6 +7,7 @@ const uploadRoutes = require('./routes/upload');
 // Initialize Express app
 const app = express();
 
+app.use(express.static('views'));
 // Express session configuration
 app.use(session({
   secret: 'your_secret_key',
@@ -25,7 +26,7 @@ app.use('/upload', uploadRoutes);   // Image upload routes
 
 app.get('/', (req, res) => {
   res.send(`
-    <h1>Welcome to Image Uploader App</h1>
+    <h1>Welcome to Motif</h1>
     <p>If you see this message, your server is running correctly!</p>
     <p><a href="/auth/google">Login with Google</a> to get started.</p>
   `);

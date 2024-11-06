@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motif Demo</title>
+  <style>
+    /* Basic styling for the form and gallery */
+    .upload-form, .image-gallery {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .image-gallery img {
+      width: 100%;
+      max-width: 150px;
+      margin: 10px;
+      border-radius: 8px;
+    }
+    .logout-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #ff4c4c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button class="logout-button" onclick="window.location.href='/auth/logout'">Logout</button>
+
+  <!-- Image Upload Form -->
+  <div class="upload-form">
+    <h2>Upload an Image</h2>
+    <form id="uploadForm">
+      <input type="file" id="imageFile" name="image" accept="image/*" required>
+      <button type="submit">Upload</button>
+    </form>
+    <p id="uploadStatus"></p>
+  </div>
+
+  <!-- Image Gallery -->
+  <div class="image-gallery">
+    <h2>Your Uploaded Images</h2>
+    <div id="gallery"></div>
+  </div>
+
+  <script>
+    // JavaScript to handle upload and display
+
+    // Function to upload image
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const fileInput = document.getElementById('imageFile');
+      const formData = new FormData();
+      formData.append('image', fileInput.files[0]);
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData,
+        })
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById('uploadStatus').textContent = 'Image uploaded successfully!';
+          fetchUserImages(); // Refresh the gallery after upload
+        } else {
+          document.getElementById('uploadStatus').textContent = 'Upload failed: ' + result.error;
+        }
+      } catch (error) {
+        document.getElementById('uploadStatus').textContent = 'Upload failed. Please try again.';
+      }
+    });
+
+    // Function to fetch and display user images
+    async function fetchUserImages() {
+      try {
+        const response = await fetch('/upload/list', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        const images = await response.json();
+
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = ''; // Clear current gallery
+
+        images.forEach((image) => {
+          const imgElement = document.createElement('img');
+          imgElement.src = image.image_url;
+          imgElement.alt = 'Uploaded Image';
+          gallery.appendChild(imgElement);
+        });
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    }
+
+    // Fetch images on page load
+    window.onload = fetchUserImages;
+  </script>
+
+</body>
+</html>
+
