@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motif Demo</title>
   <style>
-    /* General and minimalist styling */
+    /* General Styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #ffffff;
@@ -25,6 +25,7 @@
       margin-bottom: 20px;
     }
 
+    /* Empty Square for Upload */
     .upload-square {
       width: 200px;
       height: 200px;
@@ -44,10 +45,12 @@
       color: #333;
     }
 
+    /* File Input */
     #imageFile {
-      display: none;
+      display: none; /* Hide the default file input */
     }
 
+    /* Status Message */
     #uploadStatus {
       font-size: 0.85em;
       color: #666;
@@ -55,6 +58,7 @@
       margin-top: 10px;
     }
 
+    /* Image Gallery */
     .image-gallery {
       width: 90%;
       max-width: 500px;
@@ -68,52 +72,17 @@
       justify-items: center;
     }
 
-    .gallery-item {
-      position: relative;
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-item img {
+    .gallery-grid img {
       width: 100%;
       height: auto;
       max-width: 100px;
       border-radius: 8px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
     }
 
-    /* Shaking Animation */
-    .shake {
-      animation: shake 0.3s infinite;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: rotate(-2deg); }
-      50% { transform: rotate(2deg); }
-    }
-
-    /* Delete Button */
-    .delete-button {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: #ff4c4c;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      font-size: 0.8em;
-      cursor: pointer;
-      text-align: center;
-      line-height: 20px;
-      padding: 0;
-      display: none;
-    }
-
-    /* Show delete button when shaking */
-    .gallery-item.shaking .delete-button {
-      display: block;
+    .gallery-grid img:hover {
+      transform: scale(1.05);
     }
 
     /* Logout Button */
@@ -137,124 +106,75 @@
 </head>
 <body>
 
+  <!-- Upload Square -->
   <div class="upload-square" onclick="document.getElementById('imageFile').click()">
     Click to Upload
   </div>
-
+  
+  <!-- Hidden File Input -->
   <input type="file" id="imageFile" name="image" accept="image/*" required onchange="handleFileUpload()">
 
   <p id="uploadStatus"></p>
 
+  <!-- Image Gallery -->
   <div class="image-gallery">
     <h2>Your Uploaded Images</h2>
     <div id="gallery" class="gallery-grid"></div>
   </div>
 
+  <!-- Logout Button -->
   <button class="logout-button" onclick="window.location.href='/auth/logout'">Logout</button>
 
   <script>
-    let lastTap = 0;
-    let deleteMode = false;
+    // JavaScript to handle upload and display
 
     // Function to handle file upload
-    async function handleFileUpload() {
+    function handleFileUpload() {
       const fileInput = document.getElementById('imageFile');
       const formData = new FormData();
       formData.append('image', fileInput.files[0]);
 
+      // Display "Uploading..." message
       document.getElementById('uploadStatus').textContent = 'Uploading...';
 
-      try {
-        const response = await fetch('/upload', {
-          method: 'POST',
-          body: formData,
-        });
-        const result = await response.json();
-        if (response.ok) {
+      fetch('/upload', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result && result.imageUrl) {
           document.getElementById('uploadStatus').textContent = 'Image uploaded successfully!';
-          fetchUserImages(); // Refresh gallery
+          fetchUserImages(); // Refresh the gallery after upload
         } else {
-          document.getElementById('uploadStatus').textContent = 'Upload failed: ' + result.error;
+          document.getElementById('uploadStatus').textContent = 'Upload failed: ' + (result.error || 'Unknown error');
         }
-      } catch (error) {
+      })
+      .catch(() => {
         document.getElementById('uploadStatus').textContent = 'Upload failed. Please try again.';
-      }
+      });
     }
 
     // Function to fetch and display user images
     async function fetchUserImages() {
       try {
-        const response = await fetch('/upload/list');
+        const response = await fetch('/upload/list', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
         const images = await response.json();
+
         const gallery = document.getElementById('gallery');
-        gallery.innerHTML = ''; 
+        gallery.innerHTML = ''; // Clear current gallery
 
         images.forEach((image) => {
-          const itemDiv = document.createElement('div');
-          itemDiv.className = 'gallery-item';
-          itemDiv.dataset.imageId = image.image_id;
-
           const imgElement = document.createElement('img');
           imgElement.src = image.image_url;
           imgElement.alt = 'Uploaded Image';
-
-          const deleteButton = document.createElement('button');
-          deleteButton.className = 'delete-button';
-          deleteButton.textContent = '✕';
-          deleteButton.onclick = (e) => {
-            e.stopPropagation();
-            deleteImage(image.image_id);
-          };
-
-          itemDiv.appendChild(imgElement);
-          itemDiv.appendChild(deleteButton);
-
-          // Add double-tap event listener
-          itemDiv.addEventListener('click', handleDoubleTap);
-
-          gallery.appendChild(itemDiv);
+          gallery.appendChild(imgElement);
         });
       } catch (error) {
         console.error('Error fetching images:', error);
-      }
-    }
-
-    // Double-tap detection to toggle delete mode
-    function handleDoubleTap(event) {
-      const currentTime = new Date().getTime();
-      const tapLength = currentTime - lastTap;
-
-      if (tapLength < 300 && tapLength > 0) {
-        toggleDeleteMode();
-      }
-      lastTap = currentTime;
-    }
-
-    // Toggle delete mode
-    function toggleDeleteMode() {
-      deleteMode = !deleteMode;
-      const galleryItems = document.querySelectorAll('.gallery-item');
-      galleryItems.forEach(item => {
-        if (deleteMode) {
-          item.classList.add('shake', 'shaking');
-        } else {
-          item.classList.remove('shake', 'shaking');
-        }
-      });
-    }
-
-    // Function to delete an image
-    async function deleteImage(imageId) {
-      try {
-	const encodedImageId = encodeURIComponent(imageId);
-        const response = await fetch(`/upload?imageId=${encodedImageId}`, { method: 'DELETE' });
-        if (response.ok) {
-          fetchUserImages(); // Refresh gallery after deletion
-        } else {
-          alert('Failed to delete image.');
-        }
-      } catch (error) {
-        console.error('Error deleting image:', error);
       }
     }
 

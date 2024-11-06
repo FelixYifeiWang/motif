@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const AWS = require('aws-sdk');
-const { saveImageData, getUserImages } = require('../models/dynamoDB');
+const { saveImageData, getUserImages, deleteImageData } = require('../models/dynamoDB');
 const router = express.Router();
 const path = require('path');
 const isLoggedIn = require('../middleware/auth'); // Middleware to protect routes
@@ -66,5 +66,36 @@ router.get('/list', isLoggedIn, async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve image' });
   }
 });
+
+router.delete('/', isLoggedIn, async (req, res) => {
+  const encodedImageId = req.query.imageId;
+  if (!encodedImageId) {
+    return res.status(400).json({ error: 'Image ID is required' });
+  }
+
+  const imageId = decodeURIComponent(encodedImageId); // Decode the image ID to get the full path
+  const userId = req.user.google_id;
+
+  const s3Params = {
+    Bucket: 'motif-user-images',
+    Key: imageId,
+  };
+
+  try {
+    // Delete the image from S3
+    await s3.deleteObject(s3Params).promise();
+    console.log(`Image ${imageId} deleted from S3`);
+
+    // Delete the image metadata from DynamoDB
+    await deleteImageData(userId, imageId);
+    console.log(`Image ${imageId} metadata deleted from DynamoDB`);
+
+    res.status(200).json({ message: 'Image deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    res.status(500).json({ error: 'Failed to delete image'+String(error) });
+  }
+});
+
 
 module.exports = router;

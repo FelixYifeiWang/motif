@@ -1,0 +1,19 @@
+# Node.js dependencies
+node_modules/
+.npm/
+
+# Temporary files
+.cache/
+*.log
+
+# Bash and shell history files
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+
+# Other unnecessary files
+*.swp
+*.DS_Store
+.ssh/
+.pm2/

@@ -3,7 +3,7 @@ const dynamodb = new AWS.DynamoDB.DocumentClient({ region: 'us-east-1' });
 
 const saveUserToDynamoDB = async (user) => {
   const params = {
-    TableName: 'UsersImages',
+    TableName: 'Users',
     Item: {
       user_id: user.google_id,
       name: user.name,
@@ -20,7 +20,7 @@ const saveUserToDynamoDB = async (user) => {
 
 const saveImageData = async (userId, imageId, imageUrl) => {
   const params = {
-    TableName: 'UsersImages',
+    TableName: 'Images',
     Item: {
       user_id: userId,
       image_id: imageId,
@@ -38,7 +38,7 @@ const saveImageData = async (userId, imageId, imageUrl) => {
 
 const getUserImages = async (userId) => {
   const params = {
-    TableName: 'UsersImages',
+    TableName: 'Images',
     KeyConditionExpression: 'user_id = :user_id',
     ExpressionAttributeValues: {
       ':user_id': userId,
@@ -53,9 +53,27 @@ const getUserImages = async (userId) => {
   }
 };
 
+const deleteImageData = async (userId, imageId) => {
+  const params = {
+    TableName: 'Images',
+    Key: {
+      user_id: userId,
+      image_id: imageId,
+    },
+  };
+  try {
+    await dynamodb.delete(params).promise();
+    console.log('Image deleted successfully from DynamoDB');
+  } catch (error) {
+    console.error('Error deleting image from DynamoDB:', error);
+  }
+};
+
 module.exports = {
   saveUserToDynamoDB,
   saveImageData,
   getUserImages,
+  deleteImageData,
 };
+
 
