@@ -15,7 +15,7 @@ const replicateRoutes = require('./routes/replicate');
 app.use('/api/openai', openaiRoutes);
 app.use('/api/replicate', replicateRoutes);
 app.use('/static', express.static('views'));
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/assets', express.static(path.join(__dirname, 'views/assets')));
 // Express session configuration
 app.use(session({
   secret: 'motif_secret_key',
