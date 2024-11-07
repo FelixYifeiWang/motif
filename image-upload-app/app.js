@@ -8,8 +8,10 @@ const uploadRoutes = require('./routes/upload');
 const app = express();
 require('dotenv').config(); // Load environment variables
 const openaiRoutes = require('./routes/openai');
+const replicateRoutes = require('./routes/replicate');
 
 app.use('/api/openai', openaiRoutes);
+app.use('/api/replicate', replicateRoutes);
 app.use(express.static('views'));
 // Express session configuration
 app.use(session({
