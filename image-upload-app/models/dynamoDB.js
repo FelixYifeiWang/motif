@@ -37,7 +37,7 @@ const getUserFromDynamoDB = async (googleId) => {
   }
 }
 
-const saveImageData = async (userId, imageId, imageUrl) => {
+const saveImageData = async (userId, imageId, imageUrl, styles) => {
   const params = {
     TableName: 'Images',
     Item: {
@@ -45,6 +45,7 @@ const saveImageData = async (userId, imageId, imageUrl) => {
       image_id: imageId,
       image_url: imageUrl,
       upload_date: new Date().toISOString(),
+      styles: styles,
     },
   };
   try {
