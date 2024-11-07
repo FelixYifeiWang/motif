@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const { saveUserToDynamoDB } = require('../models/dynamoDB');
+const { saveUserToDynamoDB, getUserFromDynamoDB } = require('../models/dynamoDB');
 
 // Serialize and deserialize user information
 passport.serializeUser((user, done) => {
