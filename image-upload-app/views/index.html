@@ -92,6 +92,7 @@
       position: fixed;
       bottom: 12vh;
       width: 42vw;
+      z-index: 10;
     }
 
     /* Google Login Button */
@@ -170,9 +171,80 @@
     }
   
     .dots {
+      display: none;
       position: fixed;
       bottom: 6vh;
       width: 10vw;
+    }
+
+    .dna {
+      display: none;
+      position: fixed;
+      top: 15vh;
+      width: 110vw;
+    }
+
+    .dna .dna-img {
+      width: 110vw;
+    }
+
+    .dna .designername {
+      display: none;
+      position: absolute;
+      top: 13vh;
+      width: 80vw;
+      left: 12vw;
+      font-family: 'Antic Didone', serif;
+      font-size: 10vw;
+      color: white;
+      text-align: left;
+      z-index: 1111;
+      transform: rotate(-2deg);
+    }
+
+    .designerdesc {
+      display: none;
+      position: absolute;
+      bottom: 45vw;
+      width: 60vw;
+      right: 12vw;
+      font-family: 'Amiri', serif;
+      font-size: 4vw;
+      line-height: 4vw;
+      color: white;
+      text-align: left;
+      z-index: 1111;
+      transform: rotate(-2deg);
+    }
+
+    .pg4bg {
+      display: none;
+      position: fixed;
+      top: 10vh;
+      width: 120vw;
+    }
+
+    .pg4bg .pg4img-left {
+      position: absolute;
+      width: 90vw;
+      left: -5vw;
+      z-index: 3;
+    }
+    
+    .pg4bg .pg4img-right {
+      position: absolute;
+      width: 60vw;
+      right: -5vw;
+      top: 15vw;
+      z-index: 1;
+    }
+
+    .pg4bg .overlaytxt {
+      position: absolute;
+      width: 70vw;
+      left: 10vw;
+      top: 13vw;
+      z-index: 10;
     }
 
     .page2 .page3 {
@@ -222,6 +294,25 @@
     </div>
     
     <img src="assets/dots1.png" alt="" class="dots page3">
+
+    <div class="dna page4">
+      <img src="assets/dna.png" alt="" class="dna-img">
+      <div class="designername page4" id="designername">Jacquemus</div>
+      <div class="designerdesc page4" id="designerdesc">Known for bold colors and playful silhouettes, Jacquemus sets the stage for effortless chic that celebrates the body and Mediterranean aesthetics.<br><br>Founded in 2009, the brand captures the joie de vivre of Provencal life through its innovative designs. </div>
+    </div>
+
+    <img src="assets/dots2.png" alt="" class="dots page4">
+
+    <div class="pg4bg page5">
+      <img src="assets/pg4bg-left.png" alt="Sharing Page" class="pg4img-left">
+      <img src="assets/pg4bg-right.png" alt="Sharing Page" class="pg4img-right">
+      <img src="assets/overlaytxt.png" alt="" class="overlaytxt">
+      <div class="designername page4" id="designername">Jacquemus</div>
+      <div class="designerdesc page4" id="designerdesc">Known for bold colors and playful silhouettes, Jacquemus sets the stage for effortless chic that celebrates the body and Mediterranean aesthetics.<br><br>Founded in 2009, the brand captures the joie de vivre of Provencal life through its innovative designs. </div>
+    </div>
+
+
+    <img src="assets/login.png" alt="Log in with Google" class="login-button page5" onclick="handleLoginClick()">
   </div>
 
   <!-- Hidden File Input for Image Upload -->
@@ -236,25 +327,37 @@
     document.querySelectorAll('.page3').forEach(element => {
       element.style.display = 'none';
     });
+    document.querySelectorAll('.page4').forEach(element => {
+      element.style.display = 'none';
+    });
+    document.querySelectorAll('.page5').forEach(element => {
+      element.style.display = 'none';
+    });
 
     // Function to handle black square click and open file input
     function handleBlackSquareClick() {
       document.getElementById('imageUpload').click();
     }
 
+    var file_inputs;
+    const formData = new FormData();
+
     // Function to handle selected files
-    function handleFilesSelected() {
-      const files = document.getElementById('imageUpload').files;
+    async function handleFilesSelected() {
+      const files = document.getElementById('imageUpload');
       
       if (files.length > 3) {
-        alert("Please upload a maximum of 3 images.");
+        alert("Please upload 3 images.");
         return;
       }
 
       if (files.length === 0) {
-        alert("Please select at least one image.");
+        alert("Please upload 3 images.");
         return;
       }
+
+      file_inputs = Array.from(files.files).slice(0, 3);
+      file_inputs.forEach(file => formData.append('images', file));
 
       // Hide all elements except the logo
       document.querySelectorAll('.page1').forEach(element => {
@@ -267,21 +370,26 @@
       });
 
       // Send files to OpenAI API (placeholder function)
-      analyzeImages(files);
+      analyzeImages();
     }
 
     // Placeholder function to simulate OpenAI API call
-    async function analyzeImages(files) {
+    async function analyzeImages() {
       console.log("Sending images to OpenAI API...");
 
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // TODO: Replace with actual OpenAI API call
-      console.log("Images analyzed. TODO: Display result here.");
-
-      // TODO: Display the analysis result here
-      console.log("Analysis result:", "TODO: Replace with actual result");
+      // await new Promise(resolve => setTimeout(resolve, 20));
+      try {
+        // Send files to OpenAI analysis API
+        const response = await fetch('/api/openai/analyze-images', {
+          method: 'POST',
+          body: formData,
+        });
+        const result = response.choices[0];
+        console.log(result)
+      } catch (error) {
+        console.error('Error analyzing images:', error);
+      }
 
       document.querySelectorAll('.page2').forEach(element => {
         element.style.display = 'none';
