@@ -247,7 +247,7 @@
       z-index: 10;
     }
 
-    .pg4bg .designername1 {
+    .designername1 {
       display: none;
       position: fixed;
       top: 200vw;
@@ -259,7 +259,7 @@
       z-index: 1111;
     }
 
-    .pg4bg .designerdesc1 {
+    .designerdesc1 {
       display: none;
       position: fixed;
       top: 230vw;
@@ -419,10 +419,27 @@
         if (response.ok) {
           aires = result.results[0];
           console.log(aires);
-          designer_name = aires.match(/\*\*(.*?)\*\*/)[1];
-          let sentences = aires.match(/[^\.!\?]+[\.!\?]+/g);
-          comment = sentences[sentences.length - 1].trim();
-          intro = sentences[1].trim() + "<br><br>" + sentences[2].trim();
+          try {
+            designer_name = aires.match(/\*\*(.*?)\*\*/)[1];
+          } catch (error) {
+            designer_name = "Unknown";
+            console.error('Error getting designer name:', error);
+          }
+          try {
+            let sentences = aires.match(/[^\.!\?]+[\.!\?]+/g);
+            comment = sentences[sentences.length - 1].trim();
+            intro = sentences[1].trim() + "<br><br>" + sentences[2].trim();
+          } catch (error) {
+            comment = "Unknown";
+            intro = "Unknown";
+            console.error('Error getting comments:', error);
+          }
+          try {
+            tags = aires.match(/#[\w]+/g);
+          } catch (error) {
+            tags = "Unknown";
+            console.error('Error getting comments:', error);
+          }
           tags = aires.match(/#[\w]+/g);
           document.getElementById('analysisResult').textContent = comment;
           document.getElementById('designername').textContent = designer_name;
@@ -437,7 +454,7 @@
           document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
         }
       } catch (error) {
-        document.getElementById('uploadStatus').textContent = 'Analysis failed. ' + error;
+        document.getElementById('uploadStatus').textContent = 'Analysis failed. ';
         console.error('Error analyzing images:', error);
       }
 
