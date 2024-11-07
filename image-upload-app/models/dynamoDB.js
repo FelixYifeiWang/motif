@@ -9,7 +9,7 @@ const saveUserToDynamoDB = async (user) => {
       name: user.name,
       email: user.email,
       join_time: user.join_time,
-      styles: styles
+      styles: user.styles
     },
   };
   try {
