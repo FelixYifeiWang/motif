@@ -247,10 +247,39 @@
       z-index: 10;
     }
 
+    .pg4bg .photo1 {
+      position: absolute;
+      width: 30vw;
+      height: 40vw;
+      top: 13vw;
+      left: 1vw;
+      z-index: 9;
+      transform: rotate(-5.51deg);
+    }
+
+    .pg4bg .photo2 {
+      position: absolute;
+      width: 30vw;
+      height: 40vw;
+      top: 13vw;
+      left: 5vw;
+      z-index: 9;
+      transform: rotate(-5.07deg);
+    }
+
+    .pg4bg .photo3 {
+      position: absolute;
+      width: 30vw;
+      height: 40vw;
+      right: 1vw;
+      top: 13vw;
+      z-index: 2;
+    }
+
     .designername1 {
       display: none;
       position: fixed;
-      top: 132vw;
+      top: 131vw;
       left: 8vw;
       font-family: 'Antic Didone', serif;
       font-size: 5vw;
@@ -333,6 +362,9 @@
       <img src="assets/pg4bg-left.png" alt="Sharing Page" class="pg4img-left">
       <img src="assets/pg4bg-right.png" alt="Sharing Page" class="pg4img-right">
       <img src="assets/overlaytxt.png" alt="" class="overlaytxt">
+      <img src="assets/photo1.png" alt="" class="photo1">
+      <img src="assets/photo2.png" alt="" class="photo2">
+      <img src="assets/photo3.png" alt="" class="photo3">
     </div>
     <div class="designername1 page5" id="designername1">Jacquemus</div>
     <div class="designerdesc1 page5" id="designerdesc1">Known for bold colors and playful silhouettes, Jacquemus sets the stage for effortless chic that celebrates the body and Mediterranean aesthetics.<br><br>Founded in 2009, the brand captures the joie de vivre of Provencal life through its innovative designs. </div>
@@ -377,13 +409,17 @@
     async function handleFilesSelected() {
       const files = document.getElementById('imageUpload');
       
-      if (files.length > 3) {
-        alert("Please upload a maximum of 3 images.");
-        return;
-      }
+      // if (files.length > 3) {
+      //   alert("Please upload a maximum of 3 images.");
+      //   return;
+      // }
 
-      if (files.length === 0) {
-        alert("Please select at least one image.");
+      // if (files.length === 0) {
+      //   alert("Please select at least one image.");
+      //   return;
+      // }
+      if (files.length != 3) {
+        alert("Please upload 3 images.");
         return;
       }
 
