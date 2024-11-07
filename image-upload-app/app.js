@@ -14,7 +14,7 @@ const replicateRoutes = require('./routes/replicate');
 
 app.use('/api/openai', openaiRoutes);
 app.use('/api/replicate', replicateRoutes);
-// app.use('/static', express.static('views'));
+app.use('/static', express.static('views'));
 // Express session configuration
 app.use(session({
   secret: 'your_secret_key',
@@ -32,12 +32,7 @@ app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/index.html'), (err) => {
-    if (err) {
-      console.error("Error sending file:", err);
-      res.status(503).send("Service Unavailable" + String(err));
-    }
-  });
+  res.sendFile(path.join(__dirname, '/views/upload.html'));
 });
 
 // Start server
