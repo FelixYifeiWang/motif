@@ -32,7 +32,7 @@ app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/upload.html'));
+  res.sendFile(path.join(__dirname, '/views/index.html'));
 });
 
 // Start server
