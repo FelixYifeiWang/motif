@@ -29,7 +29,7 @@ const getUserFromDynamoDB = async (googleId) => {
   };
 
   try {
-    const result = await dynamoDB.get(params).promise();
+    const result = await dynamodb.get(params).promise();
     return result.Item || null; // Return user data if found, otherwise null
   } catch (error) {
     console.error('Error fetching user from DynamoDB:', error);
