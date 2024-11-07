@@ -410,7 +410,7 @@
           document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
         }
       } catch (error) {
-        document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
+        document.getElementById('uploadStatus').textContent = 'Analysis failed. ' + error;
         console.error('Error analyzing images:', error);
       }
 
