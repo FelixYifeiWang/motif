@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const path = require('path');
 const router = express.Router();
 
 // Initiate Google login
@@ -9,7 +10,8 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/upload');  // Redirect to upload page after login
+    // Redirect to home.html after successful login
+    res.sendFile(path.join(__dirname, '../views/home.html'));
   }
 );
 
@@ -22,4 +24,3 @@ router.get('/logout', (req, res) => {
 });
 
 module.exports = router;
-
