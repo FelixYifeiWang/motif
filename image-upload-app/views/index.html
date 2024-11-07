@@ -397,7 +397,7 @@
           designer_name = aires.match(/\*\*(.*?)\*\*/)[1];
           let sentences = aires.match(/[^\.!\?]+[\.!\?]+/g);
           comment = sentences[sentences.length - 1].trim();
-          intro = sentences[1].trim() + " " + sentences[2].trim();
+          intro = sentences[1].trim() + "<br><br>" + sentences[2].trim();
           tags = aires.match(/#[\w]+/g);
           document.getElementById('analysisResult').textContent = comment;
           document.getElementById('designername').textContent = designer_name;
