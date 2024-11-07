@@ -394,9 +394,9 @@
         if (response.ok) {
           aires = result.results[0];
           designer_name = aires.match(/\*\*(.*?)\*\*/)[1];
-          comment = aires.match(/(?:\.\s*)([^.]+)$/)[1];
-          var introMatch = aires.match(/\. (.*?)(?=\.)\.(.*?)(?=\.)\./);
-          intro = introMatch ? `${introMatch[1].trim()}. ${introMatch[2].trim()}.` : "";
+          let sentences = aires.match(/[^\.!\?]+[\.!\?]+/g);
+          comment = sentences[sentences.length - 1].trim();
+          intro = sentences[1].trim() + " " + sentences[2].trim();
           tags = aires.match(/#[\w]+/g);
           document.getElementById('analysisResult').textContent = comment;
           console.log(aires);
