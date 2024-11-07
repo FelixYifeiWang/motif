@@ -386,10 +386,11 @@
           method: 'POST',
           body: formData,
         });
-        const result = await response.json();
-        aires = result.results[0];
+        const result = await response.json().results[0];
+        aires = result;
         if (response.ok) {
           document.getElementById('analysisResult').textContent = aires;
+          console.log(aires);
         } else {
           document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
         }
