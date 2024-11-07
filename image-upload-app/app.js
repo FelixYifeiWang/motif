@@ -36,7 +36,7 @@ router.get('/', !isLoggedIn, (req, res) => {
 });
 
 router.get('/', isLoggedIn, (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/home.html'));
+  res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 // Start server
