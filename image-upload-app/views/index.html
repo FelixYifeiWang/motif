@@ -26,7 +26,7 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background-color: white;
+      background-color: #F4F4F4;
       overflow: hidden;
     }
 
@@ -57,6 +57,7 @@
       position: fixed;
       height: 100vh;
       top: 0;
+      z-index: -20;
     }
 
     /* Images - Logo */
@@ -66,6 +67,7 @@
       left: 6vw;
       width: 18.6vw;
       max-width: 100px;
+      z-index: 1000;
     }
 
     /* Black Square Overlay for Upload Button */
@@ -75,6 +77,7 @@
       height: 63vh;
       margin-left: 1vh;
       cursor: pointer;
+      z-index: 1;
     }
 
     /* OR Text */
@@ -94,15 +97,15 @@
 
     /* Analyzing Text */
     .analyzing-text {
-      display: none;
-      font-size: 20px;
-      font-weight: bold;
-      font-family: 'Antic Didone', serif;
-      color: #333;
-      text-align: center;
       position: fixed;
       top: 45vh;
-      margin-left: -15vw;
+      width: 70vw;
+      left: 5vw;
+      cursor: pointer;
+    }
+
+    .page2 .page3 {
+      display: none;
     }
   </style>
 </head>
@@ -117,29 +120,47 @@
   <div class="mobile-container hide-on-desktop">
 
     <!-- Background -->
-    <img src="assets/bg1.png" alt="" class="bg">
+    <img src="assets/bg1.png" alt="" class="bg page1">
 
     <!-- Logo Image -->
     <img src="assets/logo.png" alt="Motif Logo" class="logo">
 
     <!-- Black Square Image with Click Event (Upload Outfits Button) -->
-    <img src="assets/first-upload.png" alt="Upload Outfits Button" class="black-square" onclick="handleBlackSquareClick()">
+    <img src="assets/first-upload.png" alt="Upload Outfits Button" class="black-square page1" onclick="handleBlackSquareClick()">
 
     <!-- OR Text Image -->
-    <img src="assets/or.png" alt="OR" class="or-text">
+    <img src="assets/or.png" alt="OR" class="or-text page1">
 
     <!-- Google Login Button Image with Click Event -->
-    <img src="assets/login.png" alt="Log in with Google" class="login-button" onclick="handleLoginClick()">
-    
+    <img src="assets/login.png" alt="Log in with Google" class="login-button page1" onclick="handleLoginClick()">
+
+    <img src="assets/analyze-text.png" alt="OR" class="analyzing-text page2" id="analyzingText page2" alt="Analyzing your Designer DNA...">
+
+    <img src="assets/bg2.png" alt="" class="bg page3">
+
+    <div class="analysis-result page3" id="analysisResult">TODO: Replace with OpenAI result</div>
+
+    <!-- Additional Images under Analysis Result -->
+    <div class="result-images page3" id="resultImages">
+      <img src="assets/result-image1.png" class="page3" alt="Result Image 1">
+      <img src="assets/result-image2.png" class="page3" alt="Result Image 2">
+    </div>
+        
   </div>
 
   <!-- Hidden File Input for Image Upload -->
   <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;" onchange="handleFilesSelected()">
 
   <!-- Analyzing Text -->
-  <div class="analyzing-text" id="analyzingText">Analyzing your Designer DNA...</div>
 
   <script>
+    document.querySelectorAll('.page2').forEach(element => {
+      element.style.display = 'none';
+    });
+    document.querySelectorAll('.page3').forEach(element => {
+      element.style.display = 'none';
+    });
+
     // Function to handle black square click and open file input
     function handleBlackSquareClick() {
       document.getElementById('imageUpload').click();
@@ -160,13 +181,14 @@
       }
 
       // Hide all elements except the logo
-      document.querySelector('.black-square').style.display = 'none';
-      document.querySelector('.or-text').style.display = 'none';
-      document.querySelector('.login-button').style.display = 'none';
-      document.querySelector('.bg').style.display = 'none';
+      document.querySelectorAll('.page1').forEach(element => {
+        element.style.display = 'none';
+      });
 
       // Show analyzing text
-      document.getElementById('analyzingText').style.display = 'block';
+      document.querySelectorAll('.page2').forEach(element => {
+        element.style.display = 'block';
+      });
 
       // Send files to OpenAI API (placeholder function)
       analyzeImages(files);
@@ -182,11 +204,17 @@
       // TODO: Replace with actual OpenAI API call
       console.log("Images analyzed. TODO: Display result here.");
 
-      // Hide the analyzing text and display the result when available
-      document.getElementById('analyzingText').style.display = 'none';
-
       // TODO: Display the analysis result here
       console.log("Analysis result:", "TODO: Replace with actual result");
+
+      document.querySelectorAll('.page2').forEach(element => {
+        element.style.display = 'none';
+      });
+
+      // Show analyzing text
+      document.querySelectorAll('.page3').forEach(element => {
+        element.style.display = 'block';
+      });
     }
 
     // TODO: Handle Google login click
