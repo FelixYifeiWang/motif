@@ -17,7 +17,7 @@ app.use('/api/replicate', replicateRoutes);
 app.use('/static', express.static('views'));
 // Express session configuration
 app.use(session({
-  secret: 'your_secret_key',
+  secret: 'motif_secret_key',
   resave: false,
   saveUninitialized: true,
 }));
@@ -32,7 +32,7 @@ app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './views/upload.html'));
+  res.sendFile(path.join(__dirname, '/views/upload.html'));
 });
 
 // Start server
