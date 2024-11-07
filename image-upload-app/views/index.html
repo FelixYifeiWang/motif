@@ -342,6 +342,10 @@
     var file_inputs;
     const formData = new FormData();
     var aires;
+    var designer_name;
+    var comment;
+    var intro;
+    var tags;
 
     // Function to handle selected files
     async function handleFilesSelected() {
@@ -387,10 +391,19 @@
           body: formData,
         });
         const result = await response.json();
-        aires = result.results[0];
         if (response.ok) {
-          document.getElementById('analysisResult').textContent = aires;
+          aires = result.results[0];
+          designer_name = aires.match(/\*\*(.*?)\*\*/)[1];
+          comment = aires.match(/(?:\.\s*)([^.]+)$/)[1];
+          var introMatch = aires.match(/\. (.*?)(?=\.)\.(.*?)(?=\.)\./);
+          intro = introMatch ? `${introMatch[1].trim()}. ${introMatch[2].trim()}.` : "";
+          tags = aires.match(/#[\w]+/g);
+          document.getElementById('analysisResult').textContent = comment;
           console.log(aires);
+          console.log(designer_name);
+          console.log(comment);
+          console.log(intro);
+          console.log(tags);
         } else {
           document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
         }
