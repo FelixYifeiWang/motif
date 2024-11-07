@@ -29,7 +29,7 @@ app.use(passport.session());
 app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
-app.get('/', (req, res) => {
+app.get('/test', (req, res) => {
   res.send(`
     <h1>Welcome to Motif</h1>
     <p>If you see this message, your server is running correctly!</p>
