@@ -15,6 +15,7 @@ const replicateRoutes = require('./routes/replicate');
 app.use('/api/openai', openaiRoutes);
 app.use('/api/replicate', replicateRoutes);
 app.use('/static', express.static('views'));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 // Express session configuration
 app.use(session({
   secret: 'motif_secret_key',
@@ -32,6 +33,9 @@ app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/views/index.html'));
+});
+app.get('/', (req, isLoggedIn, res) => {
   res.sendFile(path.join(__dirname, '/views/index.html'));
 });
 
