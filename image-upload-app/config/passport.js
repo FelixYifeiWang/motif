@@ -22,7 +22,7 @@ passport.use(new GoogleStrategy({
     google_id: profile.id,
     name: profile.displayName,
     email: profile.emails[0].value,
-    // join_time: now.toISOString().split('T')[0],
+    join_time: now.toISOString().split('T')[0],
     // styles: {
     //   "casual": 0,
     //   "edgy": 0,

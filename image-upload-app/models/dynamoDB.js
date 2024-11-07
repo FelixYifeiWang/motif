@@ -8,7 +8,7 @@ const saveUserToDynamoDB = async (user) => {
       user_id: user.google_id,
       name: user.name,
       email: user.email,
-      // join_time: user.join_time,
+      join_time: user.join_time,
       // styles: styles
     },
   };
