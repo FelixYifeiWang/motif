@@ -3,8 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 const authRoutes = require('./routes/auth');
 const uploadRoutes = require('./routes/upload');
-const path = require('path');
-const isLoggedIn = require('../middleware/auth');
+
 
 // Initialize Express app
 const app = express();
@@ -14,8 +13,7 @@ const replicateRoutes = require('./routes/replicate');
 
 app.use('/api/openai', openaiRoutes);
 app.use('/api/replicate', replicateRoutes);
-// app.use('/static', express.static('views'));
-app.use(express.static('views'));
+app.use('/static', express.static('views'));
 // Express session configuration
 app.use(session({
   secret: 'your_secret_key',
@@ -33,7 +31,11 @@ app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/upload.html'));
+  res.send(`
+    <h1>Welcome to Motif</h1>
+    <p>If you see this message, your server is running correctly!</p>
+    <p><a href="/auth/google">Login with Google</a> to get started.</p>
+  `);
 });
 
 // Start server
