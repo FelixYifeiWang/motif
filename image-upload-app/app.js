@@ -4,7 +4,6 @@ const passport = require('passport');
 const authRoutes = require('./routes/auth');
 const uploadRoutes = require('./routes/upload');
 const path = require('path');
-const isLoggedIn = require('./middleware/auth');
 
 // Initialize Express app
 const app = express();
@@ -33,10 +32,13 @@ app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/index.html'));
-});
-app.get('/', (req, isLoggedIn, res) => {
-  res.sendFile(path.join(__dirname, '/views/home.html'));
+  if (req.isAuthenticated()) {
+    // If the user is authenticated, send them to home.html
+    res.sendFile(path.join(__dirname, '/views/home.html'));
+  } else {
+    // If the user is not authenticated, send them to index.html
+    res.sendFile(path.join(__dirname, '/views/index.html'));
+  }
 });
 
 // Start server
