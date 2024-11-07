@@ -393,6 +393,7 @@
         const result = await response.json();
         if (response.ok) {
           aires = result.results[0];
+          console.log(aires);
           designer_name = aires.match(/\*\*(.*?)\*\*/)[1];
           let sentences = aires.match(/[^\.!\?]+[\.!\?]+/g);
           comment = sentences[sentences.length - 1].trim();
@@ -401,7 +402,6 @@
           document.getElementById('analysisResult').textContent = comment;
           document.getElementById('designername').textContent = comment;
           document.getElementById('designerdesc').textContent = comment;
-          console.log(aires);
           console.log(designer_name);
           console.log(comment);
           console.log(intro);
@@ -410,6 +410,7 @@
           document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
         }
       } catch (error) {
+        document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
         console.error('Error analyzing images:', error);
       }
 
