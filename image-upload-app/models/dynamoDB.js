@@ -24,7 +24,7 @@ const getUserFromDynamoDB = async (googleId) => {
   const params = {
     TableName: 'Users',
     Key: {
-      google_id: googleId
+      user_id: googleId
     }
   };
 
