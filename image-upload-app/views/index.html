@@ -434,37 +434,37 @@
 
       var blob;
 
-      try {
-        // Prepare the form data with the first file
-        const formData = new FormData();
-        formData.append('image', file_inputs[0]);
+      // try {
+      //   // Prepare the form data with the first file
+      //   const formData = new FormData();
+      //   formData.append('image', file_inputs[0]);
 
-        // Call the background removal API
-        const response = await fetch('/api/replicate/remove-bg', {
-          method: 'POST',
-          body: formData,
-        });
+      //   // Call the background removal API
+      //   const response = await fetch('/api/replicate/remove-bg', {
+      //     method: 'POST',
+      //     body: formData,
+      //   });
 
-        // Check if the response is successful
-        if (!response.ok) {
-          throw new Error('Failed to remove background');
-        }
+      //   // Check if the response is successful
+      //   if (!response.ok) {
+      //     throw new Error('Failed to remove background');
+      //   }
 
-        // Get the JSON data (base64-encoded image) from the response
-        const data = await response.json();
+      //   // Get the JSON data (base64-encoded image) from the response
+      //   const data = await response.json();
 
-        // Process the returned base64 data for display
-        const byteCharacters = atob(data.imageData.split(',')[1]);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        blob = new Blob([byteArray], { type: 'image/png' });
-      } catch (error) {
-        blob = file_inputs[0];
-        console.error('Error during background removal:', error);
-      }
+      //   // Process the returned base64 data for display
+      //   const byteCharacters = atob(data.imageData.split(',')[1]);
+      //   const byteNumbers = new Array(byteCharacters.length);
+      //   for (let i = 0; i < byteCharacters.length; i++) {
+      //     byteNumbers[i] = byteCharacters.charCodeAt(i);
+      //   }
+      //   const byteArray = new Uint8Array(byteNumbers);
+      //   blob = new Blob([byteArray], { type: 'image/png' });
+      // } catch (error) {
+      //   blob = file_inputs[0];
+      //   console.error('Error during background removal:', error);
+      // }
 
 
       const reader1 = new FileReader();
