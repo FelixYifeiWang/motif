@@ -4,7 +4,7 @@ const path = require('path');
 const router = express.Router();
 
 router.use('/static', express.static('../views'));
-rouer.use('/assets', express.static(path.join(__dirname, '../views/assets')));
+router.use('/assets', express.static(path.join(__dirname, '../views/assets')));
 
 // Initiate Google login
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
