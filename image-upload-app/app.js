@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'), (err) => {
     if (err) {
       console.error("Error sending file:", err);
-      res.status(503).send("Service Unavailable");
+      res.status(503).send("Service Unavailable" + String(err));
     }
   });
 });
