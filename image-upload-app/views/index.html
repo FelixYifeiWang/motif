@@ -60,6 +60,13 @@
       z-index: -20;
     }
 
+    .bg2 {
+      position: fixed;
+      width: 100vw;
+      top: 0;
+      z-index: -20;
+    }
+
     /* Images - Logo */
     .logo {
       position: fixed;
@@ -104,6 +111,64 @@
       cursor: pointer;
     }
 
+    .analysis-result {
+      display: none;
+      position: fixed;
+      top: 35vh;
+      width: 80vw;
+      left: 10vw;
+      font-size: 4vw;
+      color: #333;
+      text-align: left;
+      z-index: 2;
+    }
+
+    /* Additional Images under Result */
+    .resultimage1 {
+      display: none;
+      position: fixed;
+      top: 55vh;
+      width: 37vw;
+      height: 41.38vw;
+      left: 10vw;
+      z-index: 2;
+    }
+
+    .resultimage1 .icon-img {
+      width: 37vw;
+    }
+
+    .resultimage2 .icon-img {
+      width: 37vw;
+    }
+
+    .resultimage2 {
+      display: none;
+      position: fixed;
+      top: 55vh;
+      width: 37vw;
+      right: 10vw;
+      z-index: 2;
+    }
+
+    .resultimage1 .t100 {
+      display: none;
+      position: absolute;
+      bottom: 2vw;
+      width: 12vw;
+      right: 3vw;
+      z-index: 3;
+    }
+
+    .resultimage2 .t50 {
+      display: none;
+      position: absolute;
+      bottom: 5vw;
+      width: 10vw;
+      right: 3vw;
+      z-index: 3;
+    }
+  
     .dots {
       position: fixed;
       bottom: 6vh;
@@ -142,14 +207,18 @@
 
     <img src="assets/analyze-text.png" alt="OR" class="analyzing-text page2" id="analyzingText page2" alt="Analyzing your Designer DNA...">
 
-    <img src="assets/bg2.png" alt="" class="bg page3">
+    <img src="assets/bg2.png" alt="" class="bg2 page3">
 
-    <div class="analysis-result page3" id="analysisResult">TODO: Replace with OpenAI result</div>
+    <div class="analysis-result page3" id="analysisResult">Your outfits effortlessly echo Jacquemus' artistic mix of casual elegance and avant-garde flair, perfectly embodying a stylish, modern vibe.</div>
 
     <!-- Additional Images under Analysis Result -->
-    <div class="result-images page3" id="resultImages">
-      <img src="assets/result-image1.png" class="page3" alt="Result Image 1">
-      <img src="assets/result-image2.png" class="page3" alt="Result Image 2">
+    <div class="resultimage1 page3">
+      <img src="assets/casual.png" class="icon-img" alt="Result Image 1">
+      <img src="assets/100.png" class="t100 page3" alt=" ">
+    </div>
+    <div class="resultimage2 page3">
+      <img src="assets/minimalist.png" class="icon-img" alt="Result Image 2">
+      <img src="assets/50.png" class="t50 page3" alt=" ">
     </div>
     
     <img src="assets/dots1.png" alt="" class="dots page3">
@@ -222,6 +291,51 @@
       document.querySelectorAll('.page3').forEach(element => {
         element.style.display = 'block';
       });
+    }
+
+    let startX;
+
+    // Detect the start of a touch event
+    document.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    // Detect the end of a touch event and determine swipe direction
+    document.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = startX - endX;
+
+      if (deltaX > 50) { // Swipe left detected
+        showNextPage();
+      } else if (deltaX < -50) {
+        showLastPage();
+      }
+    });
+
+    function showNextPage() {
+      // Determine which page is currently visible and show the next page
+      if (document.querySelector('.page3').style.display !== 'none') {
+        // Hide page 1 and show page 2
+        document.querySelectorAll('.page3').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
+      } else if (document.querySelector('.page4').style.display !== 'none') {
+        // Hide page 2 and show page 3
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page5').forEach(element => element.style.display = 'block');
+      }
+    }
+
+    function showLastPage() {
+      // Determine which page is currently visible and show the next page
+      if (document.querySelector('.page4').style.display !== 'none') {
+        // Hide page 1 and show page 2
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page3').forEach(element => element.style.display = 'block');
+      } else if (document.querySelector('.page5').style.display !== 'none') {
+        // Hide page 2 and show page 3
+        document.querySelectorAll('.page5').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
+      }
     }
 
     // TODO: Handle Google login click
