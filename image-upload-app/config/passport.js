@@ -37,7 +37,11 @@ passport.use(new GoogleStrategy({
   };
 
   // Save user to DynamoDB if new
-  await saveUserToDynamoDB(user);
+  // await saveUserToDynamoDB(user);
+  const existingUser = await getUserFromDynamoDB(user.google_id);
+  if (!existingUser) {
+    await saveUserToDynamoDB(user);
+  }
   return done(null, user);
 }));
 

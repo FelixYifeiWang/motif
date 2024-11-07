@@ -20,6 +20,23 @@ const saveUserToDynamoDB = async (user) => {
   }
 };
 
+const getUserFromDynamoDB = async (googleId) => {
+  const params = {
+    TableName: 'Users',
+    Key: {
+      google_id: googleId
+    }
+  };
+
+  try {
+    const result = await dynamoDB.get(params).promise();
+    return result.Item || null; // Return user data if found, otherwise null
+  } catch (error) {
+    console.error('Error fetching user from DynamoDB:', error);
+    throw new Error('Could not retrieve user from database');
+  }
+}
+
 const saveImageData = async (userId, imageId, imageUrl) => {
   const params = {
     TableName: 'Images',
@@ -73,6 +90,7 @@ const deleteImageData = async (userId, imageId) => {
 
 module.exports = {
   saveUserToDynamoDB,
+  getUserFromDynamoDB,
   saveImageData,
   getUserImages,
   deleteImageData,
