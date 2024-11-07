@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/index.html'));
 });
 app.get('/', (req, isLoggedIn, res) => {
-  res.sendFile(path.join(__dirname, '/views/index.html'));
+  res.sendFile(path.join(__dirname, '/views/home.html'));
 });
 
 // Start server
