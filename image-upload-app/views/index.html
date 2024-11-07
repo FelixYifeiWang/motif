@@ -341,6 +341,7 @@
 
     var file_inputs;
     const formData = new FormData();
+    var aires;
 
     // Function to handle selected files
     async function handleFilesSelected() {
@@ -386,7 +387,12 @@
           body: formData,
         });
         const result = await response.json();
-        console.log(result)
+        aires = result.results[0];
+        if (response.ok) {
+          document.getElementById('analysisResult').textContent = aires;
+        } else {
+          document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
+        }
       } catch (error) {
         console.error('Error analyzing images:', error);
       }
