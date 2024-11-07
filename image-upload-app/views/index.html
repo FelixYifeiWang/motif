@@ -386,7 +386,7 @@
           method: 'POST',
           body: formData,
         });
-        const result = await response.json().results[0];
+        const result = await response.json();
         aires = result.results[0];
         if (response.ok) {
           document.getElementById('analysisResult').textContent = aires;
