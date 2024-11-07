@@ -432,24 +432,26 @@
       }
       file_inputs.forEach(file => formData.append('images', file));
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
+      const reader1 = new FileReader();
+      reader1.onload = function(e) {
           document.getElementById(`photo1`).src = e.target.result;
       };
       
-      reader.readAsDataURL(file_inputs[0]);
-
-      reader.onload = function(e) {
+      reader1.readAsDataURL(file_inputs[0]);
+      
+      const reader2 = new FileReader();
+      reader2.onload = function(e) {
           document.getElementById(`photo2`).src = e.target.result;
       };
       
-      reader.readAsDataURL(file_inputs[1]);
+      reader2.readAsDataURL(file_inputs[1]);
 
-      reader.onload = function(e) {
+      const reader3 = new FileReader();
+      reader3.onload = function(e) {
           document.getElementById(`photo3`).src = e.target.result;
       };
       
-      reader.readAsDataURL(file_inputs[2]);
+      reader3.readAsDataURL(file_inputs[2]);
 
       // Hide all elements except the logo
       document.querySelectorAll('.page1').forEach(element => {
