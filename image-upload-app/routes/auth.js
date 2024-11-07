@@ -11,7 +11,7 @@ router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     // Redirect to home.html after successful login
-    res.sendFile(path.join(__dirname, '../views/home.html'));
+    res.sendFile(path.join(__dirname, '../views/index.html'));
   }
 );
 
