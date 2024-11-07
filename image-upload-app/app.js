@@ -31,7 +31,7 @@ app.use(passport.session());
 app.use('/auth', authRoutes);       // Authentication routes
 app.use('/upload', uploadRoutes);   // Image upload routes
 
-router.get('/', !isLoggedIn, (req, res) => {
+router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
