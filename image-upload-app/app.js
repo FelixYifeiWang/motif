@@ -14,7 +14,7 @@ const replicateRoutes = require('./routes/replicate');
 
 app.use('/api/openai', openaiRoutes);
 app.use('/api/replicate', replicateRoutes);
-app.use('/static', express.static('views'));
+// app.use('/static', express.static('views'));
 // Express session configuration
 app.use(session({
   secret: 'your_secret_key',
