@@ -408,23 +408,22 @@
     // Function to handle selected files
     async function handleFilesSelected() {
       const files = document.getElementById('imageUpload');
-      
-      // if (files.length > 3) {
+
+      file_inputs = Array.from(files.files).slice(0, 3);
+      // if (file_inputs.length > 3) {
       //   alert("Please upload a maximum of 3 images.");
       //   return;
       // }
 
-      // if (files.length === 0) {
+      // if (file_inputs.length === 0) {
       //   alert("Please select at least one image.");
       //   return;
       // }
-      if (files.length != 3) {
-        console.log(files.length)
+      if (file_inputs.length != 3) {
+        console.log(file_inputs)
         alert("Please upload 3 images.");
         return;
       }
-
-      file_inputs = Array.from(files.files).slice(0, 3);
       file_inputs.forEach(file => formData.append('images', file));
 
       // Hide all elements except the logo
