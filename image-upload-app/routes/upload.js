@@ -14,13 +14,6 @@ const upload = multer({
 
 const s3 = new AWS.S3();
 
-// router.get('/', isLoggedIn, (req, res) => {
-//   res.render('upload');  // This serves the upload.ejs page (or upload.html if you use static HTML)
-// });
-router.get('/', isLoggedIn, (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/upload.html'));
-});
-
 router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'Please upload a file' });
