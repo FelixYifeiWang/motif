@@ -250,30 +250,36 @@
     .pg4bg .photo1 {
       position: absolute;
       width: 30vw;
-      height: 40vw;
-      top: 13vw;
-      left: 1vw;
+      height: 67vw;
+      top: 16vw;
+      left: 10vw;
       z-index: 9;
       transform: rotate(-5.51deg);
+      object-fit: cover; /* Cover the area of the div without stretching */
+      object-position: center;
     }
 
     .pg4bg .photo2 {
       position: absolute;
-      width: 30vw;
-      height: 40vw;
-      top: 13vw;
-      left: 5vw;
+      width: 21vw;
+      height: 28.06vw;
+      top: 48vw;
+      left: 52vw;
       z-index: 9;
       transform: rotate(-5.07deg);
+      object-fit: cover; /* Cover the area of the div without stretching */
+      object-position: center;
     }
 
     .pg4bg .photo3 {
       position: absolute;
-      width: 30vw;
-      height: 40vw;
-      right: 1vw;
-      top: 13vw;
+      width: 33vw;
+      height: 55.89vw;
+      right: 10vw;
+      top: 20vw;
       z-index: 2;
+      object-fit: cover; /* Cover the area of the div without stretching */
+      object-position: center;
     }
 
     .designername1 {
@@ -410,6 +416,7 @@
       const files = document.getElementById('imageUpload');
 
       file_inputs = Array.from(files.files).slice(0, 3);
+      console.log(file_inputs)
       // if (file_inputs.length > 3) {
       //   alert("Please upload a maximum of 3 images.");
       //   return;
@@ -420,7 +427,6 @@
       //   return;
       // }
       if (file_inputs.length != 3) {
-        console.log(file_inputs)
         alert("Please upload 3 images.");
         return;
       }
