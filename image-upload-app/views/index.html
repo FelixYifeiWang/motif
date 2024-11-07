@@ -385,7 +385,7 @@
           method: 'POST',
           body: formData,
         });
-        const result = response.choices[0];
+        const result = await response.json();
         console.log(result)
       } catch (error) {
         console.error('Error analyzing images:', error);
