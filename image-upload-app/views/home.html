@@ -125,9 +125,9 @@
 
     .img-style-1 {
       width: 43vw;
-      height: 52vw;
-      top: 15vw;
-      left: 35vw;
+      height: 55vw;
+      top: 17vw;
+      left: 34vw;
       transform: rotate(2deg);
       z-index: 10;
     }
@@ -237,9 +237,9 @@
                     imgContainer.appendChild(datediv);
 
                 } else {
-                    imgContainer.classList.add(`block-style-${(index % 3)}`);
+                    imgContainer.classList.add(`block-style-${(index % 4)}`);
                     const bgimg = document.createElement('img');
-                    bgimg.src = `/assets/homebg${(index % 3)}.png`;
+                    bgimg.src = `/assets/homebg${(index % 4)}.png`;
                     bgimg.alt = 'Background Image';
                     bgimg.classList.add('bg-img');
                     imgContainer.appendChild(bgimg);
@@ -248,7 +248,7 @@
                     imgElement.src = image.image_url;
                     imgElement.alt = 'Uploaded Image';
                     imgElement.classList.add('innerimg');
-                    imgElement.classList.add(`img-style-${(index % 3)}`);
+                    imgElement.classList.add(`img-style-${(index % 4)}`);
                     imgContainer.appendChild(imgElement);
 
                     const dateStr = image.upload_date;
