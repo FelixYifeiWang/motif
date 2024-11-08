@@ -58,11 +58,19 @@
       max-width: 600px;
     }
     .logo {
-      position: fixed;
+      position: absolute;
       top: 6vh;
       left: 6vw;
       width: 18.6vw;
       max-width: 100px;
+      z-index: 1000;
+    }
+
+    .namecard{
+      position: absolute;
+      top: 10vh;
+      left: 6vw;
+      width: 88vw;
       z-index: 1000;
     }
 
@@ -120,6 +128,9 @@
   <div class="mobile-container hide-on-desktop">
     <!-- Logo Image -->
     <img src="/assets/logo.png" alt="Motif Logo" class="logo">
+    <div class="namecard">
+      <img src="/assets/namecard.png" alt="Motif Card" >
+    </div>
   </div>
 
   <img class="bottombar" src="/assets/bottombar.png">
@@ -128,117 +139,6 @@
   <div class="profile">profile</div>
 
   <script>
-
-    // Function to fetch and display user images
-    async function fetchUserImages() {
-        history.replaceState(null, '', 'https://motif-official.com');
-        try {
-            const response = await fetch('/upload/list', {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            });
-            const images = await response.json();
-            images.sort((a, b) => {
-                return new Date(b.upload_date) - new Date(a.upload_date);
-            });
-
-            const gallery = document.getElementById('gallery');
-
-            images.forEach((image, index) => {
-                const imgContainer = document.createElement('div');
-                imgContainer.className = 'img-container';
-
-                // Apply different styles based on the index
-                if (index === 0) {
-                    imgContainer.classList.add('block-special-1');
-                    const bgimg = document.createElement('img');
-                    bgimg.src = '/assets/homebg0.png';
-                    bgimg.alt = 'Background Image';
-                    bgimg.classList.add('bg-img');
-                    imgContainer.appendChild(bgimg);
-
-                    const imgElement = document.createElement('img');
-                    imgElement.src = image.image_url;
-                    imgElement.alt = 'Uploaded Image';
-                    imgElement.classList.add('innerimg');
-                    imgElement.classList.add('img-special-1');
-                    imgContainer.appendChild(imgElement);
-
-                    const tag1 = document.createElement('img');
-                    tag1.src = '/assets/casual.png';
-                    tag1.alt = 'Uploaded Image';
-                    tag1.classList.add('icon-img1');
-                    imgContainer.appendChild(tag1);
-
-                    const tag2 = document.createElement('img');
-                    tag2.src = '/assets/casual.png';
-                    tag2.alt = 'Uploaded Image';
-                    tag2.classList.add('icon-img2');
-                    imgContainer.appendChild(tag2);
-
-                    const dateStr = image.upload_date;
-                    const dateObj = new Date(dateStr);
-
-                    // Get the day and month
-                    const day = String(dateObj.getDate()).padStart(2, '0');
-                    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-                    const month = monthNames[dateObj.getMonth()];
-                    const datediv = document.createElement('div');
-                    datediv.classList.add('date');
-                    datediv.classList.add('date-special');
-                    const daydiv = document.createElement('div');
-                    daydiv.classList.add('day');
-                    daydiv.textContent = day;
-                    const mondiv = document.createElement('div');
-                    mondiv.classList.add('month');
-                    mondiv.textContent = month;
-                    datediv.appendChild(daydiv);
-                    datediv.appendChild(mondiv);
-                    imgContainer.appendChild(datediv);
-
-                } else {
-                    imgContainer.classList.add(`block-style-${(index % 4)}`);
-                    const bgimg = document.createElement('img');
-                    bgimg.src = `/assets/homebg${(index % 4)}.png`;
-                    bgimg.alt = 'Background Image';
-                    bgimg.classList.add('bg-img');
-                    imgContainer.appendChild(bgimg);
-
-                    const imgElement = document.createElement('img');
-                    imgElement.src = image.image_url;
-                    imgElement.alt = 'Uploaded Image';
-                    imgElement.classList.add('innerimg');
-                    imgElement.classList.add(`img-style-${(index % 4)}`);
-                    imgContainer.appendChild(imgElement);
-
-                    const dateStr = image.upload_date;
-                    const dateObj = new Date(dateStr);
-                    const day = String(dateObj.getDate()).padStart(2, '0');
-                    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-                    const month = monthNames[dateObj.getMonth()];
-                    const datediv = document.createElement('div');
-                    datediv.classList.add('date');
-                    const daydiv = document.createElement('div');
-                    daydiv.classList.add('day');
-                    daydiv.textContent = day;
-                    const mondiv = document.createElement('div');
-                    mondiv.classList.add('month');
-                    mondiv.textContent = month;
-                    datediv.appendChild(daydiv);
-                    datediv.appendChild(mondiv);
-                    imgContainer.appendChild(datediv);
-                }
-                
-                gallery.appendChild(imgContainer);
-            });
-        } catch (error) {
-            console.error('Error fetching images:', error);
-        }
-    }
-
-    // Fetch images on page load
-    window.onload = fetchUserImages;
-
     document.getElementById("ootdButton").addEventListener("click", function() {
         window.location.href = "/home";
     });
