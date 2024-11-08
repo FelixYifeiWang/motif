@@ -76,24 +76,29 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 1; /* Places the image behind other content in the container */
+        z-index: 3; /* Places the image behind other content in the container */
         pointer-events: none; /* Prevents the image from capturing pointer events */
     }
 
     .innerimg {
       position: absolute;
-      width: 30vw;
-      height: 67vw;
-      top: 16vw;
-      left: 10vw;
       z-index: 9;
-      transform: rotate(-5.51deg);
       object-fit: cover; /* Cover the area of the div without stretching */
       object-position: center;
     }
 
+    .img-special-1 {
+      width: 15vw;
+      height: 67vw;
+      top: 16vw;
+      left: 10vw;
+      transform: rotate(2deg);
+      z-index: 1;
+    }
+
     /* Styles for specific blocks */
     .block-special-1 {
+        margin-top: 10vw;
         width: 100vw;
         height: 100vw;
         background-color: #f0f0f0;
@@ -176,19 +181,32 @@
                     bgimg.alt = 'Background Image';
                     bgimg.classList.add('bg-img');
                     imgContainer.appendChild(bgimg);
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image.image_url;
+                    imgElement.alt = 'Uploaded Image';
+                    imgElement.classList.add('innerimg');
+                    imgElement.classList.add('img-special-1');
+                    imgContainer.appendChild(imgElement);
                 } else if (index === 1) {
                     imgContainer.classList.add('block-special-2');
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image.image_url;
+                    imgElement.alt = 'Uploaded Image';
+                    imgElement.classList.add('innerimg');
+                    imgContainer.appendChild(imgElement);
                 } else {
                     const styleClass = `block-style-${(index % 3) + 1}`;
                     imgContainer.classList.add(styleClass);
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image.image_url;
+                    imgElement.alt = 'Uploaded Image';
+                    imgElement.classList.add('innerimg');
+                    imgContainer.appendChild(imgElement);
                 }
-
-                const imgElement = document.createElement('img');
-                imgElement.src = image.image_url;
-                imgElement.alt = 'Uploaded Image';
-                imgElement.classList.add('innerimg');
-
-                imgContainer.appendChild(imgElement);
+                
                 gallery.appendChild(imgContainer);
             });
         } catch (error) {
