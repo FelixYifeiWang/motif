@@ -194,8 +194,24 @@
 
     .camera {
       position: fixed;
-      bottom: 13vw;
-      width: 20vw;
+      bottom: 9vw;
+      width: 21vw;
+      z-index: 10001;
+    }
+
+    .ootd {
+      position: fixed;
+      bottom: 5vw;
+      right: 10vw;
+      height: 3vw;
+      z-index: 10001;
+    }
+
+    .profile {
+      position: fixed;
+      bottom: 5vw;
+      left: 10vw;
+      height: 3vw;
       z-index: 10001;
     }
   </style>
@@ -214,6 +230,8 @@
     <div class="gallery" id="gallery"></div>
     <img class="bottombar" src="/assets/bottombar.png">
     <img class="camera" src="/assets/camera.png">
+    <img class="ootd" src="/assets/ootd.png">
+    <img class="profile" src="/assets/profile.png">
   </div>
 
   <script>
