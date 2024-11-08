@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Home</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+
+  <!-- Google Fonts for Amiri -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap" rel="stylesheet">
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+        overflow-x: hidden; /* Prevents horizontal scrolling */
+        width: 100vw; /* Sets the width to viewport width */
+        margin: 0; /* Ensures no extra space */
+    }
+    body {
+      font-family: 'Amiri', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #FFFFFF;
+      overflow-x: hidden;
+    }
+
+    /* Warning Message for Desktop Users */
+    .desktop-warning {
+      display: none;
+      text-align: center;
+      color: #333;
+      font-size: 3vw;
+      font-family: 'Amiri', serif;
+      position: fixed;
+      top: 40vh;
+      width: 100vw;
+      text-align: center;
+    }
+
+    /* Main Container for Mobile Layout */
+    .mobile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 100vw;
+      max-width: 600px;
+    }
+    .logo {
+      position: fixed;
+      top: 6vh;
+      left: 6vw;
+      width: 18.6vw;
+      max-width: 100px;
+      z-index: 1000;
+    }
+
+    .bottombar {
+      position: fixed;
+      bottom: -6vw;
+      width: 100vw;
+      z-index: 10000;
+    }
+
+    .camera {
+      position: fixed;
+      bottom: 5vw;
+      width: 21vw;
+      z-index: 10001;
+    }
+
+    .ootd {
+      position: fixed;
+      bottom: 7.3vw;
+      left: 18vw;
+      font-family: "Gruppo", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 4.5vw;
+      z-index: 10001;
+      -webkit-text-stroke: 0.1vw black;
+      opacity: 0.6;
+    }
+
+    .profile {
+      position: fixed;
+      bottom: 7.3vw;
+      right: 18vw;
+      font-family: "Gruppo", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 4.5vw;
+      z-index: 10001;
+      -webkit-text-stroke: 0.1vw black;
+    }
+
+    .ootd :hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Warning Message for Desktop Users -->
+  <div class="desktop-warning">
+    Please view this page on a mobile device.
+  </div>
+  <!-- Mobile Container -->
+  <div class="mobile-container hide-on-desktop">
+    <!-- Logo Image -->
+    <img src="/assets/logo.png" alt="Motif Logo" class="logo">
+  </div>
+
+  <img class="bottombar" src="/assets/bottombar.png">
+  <img class="camera" src="/assets/camera.png">
+  <div class="ootd" id="ootdButton">ootd</div>
+  <div class="profile">profile</div>
+
+  <script>
+
+    // Function to fetch and display user images
+    async function fetchUserImages() {
+        history.replaceState(null, '', 'https://motif-official.com');
+        try {
+            const response = await fetch('/upload/list', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            });
+            const images = await response.json();
+            images.sort((a, b) => {
+                return new Date(b.upload_date) - new Date(a.upload_date);
+            });
+
+            const gallery = document.getElementById('gallery');
+
+            images.forEach((image, index) => {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'img-container';
+
+                // Apply different styles based on the index
+                if (index === 0) {
+                    imgContainer.classList.add('block-special-1');
+                    const bgimg = document.createElement('img');
+                    bgimg.src = '/assets/homebg0.png';
+                    bgimg.alt = 'Background Image';
+                    bgimg.classList.add('bg-img');
+                    imgContainer.appendChild(bgimg);
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image.image_url;
+                    imgElement.alt = 'Uploaded Image';
+                    imgElement.classList.add('innerimg');
+                    imgElement.classList.add('img-special-1');
+                    imgContainer.appendChild(imgElement);
+
+                    const tag1 = document.createElement('img');
+                    tag1.src = '/assets/casual.png';
+                    tag1.alt = 'Uploaded Image';
+                    tag1.classList.add('icon-img1');
+                    imgContainer.appendChild(tag1);
+
+                    const tag2 = document.createElement('img');
+                    tag2.src = '/assets/casual.png';
+                    tag2.alt = 'Uploaded Image';
+                    tag2.classList.add('icon-img2');
+                    imgContainer.appendChild(tag2);
+
+                    const dateStr = image.upload_date;
+                    const dateObj = new Date(dateStr);
+
+                    // Get the day and month
+                    const day = String(dateObj.getDate()).padStart(2, '0');
+                    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+                    const month = monthNames[dateObj.getMonth()];
+                    const datediv = document.createElement('div');
+                    datediv.classList.add('date');
+                    datediv.classList.add('date-special');
+                    const daydiv = document.createElement('div');
+                    daydiv.classList.add('day');
+                    daydiv.textContent = day;
+                    const mondiv = document.createElement('div');
+                    mondiv.classList.add('month');
+                    mondiv.textContent = month;
+                    datediv.appendChild(daydiv);
+                    datediv.appendChild(mondiv);
+                    imgContainer.appendChild(datediv);
+
+                } else {
+                    imgContainer.classList.add(`block-style-${(index % 4)}`);
+                    const bgimg = document.createElement('img');
+                    bgimg.src = `/assets/homebg${(index % 4)}.png`;
+                    bgimg.alt = 'Background Image';
+                    bgimg.classList.add('bg-img');
+                    imgContainer.appendChild(bgimg);
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = image.image_url;
+                    imgElement.alt = 'Uploaded Image';
+                    imgElement.classList.add('innerimg');
+                    imgElement.classList.add(`img-style-${(index % 4)}`);
+                    imgContainer.appendChild(imgElement);
+
+                    const dateStr = image.upload_date;
+                    const dateObj = new Date(dateStr);
+                    const day = String(dateObj.getDate()).padStart(2, '0');
+                    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+                    const month = monthNames[dateObj.getMonth()];
+                    const datediv = document.createElement('div');
+                    datediv.classList.add('date');
+                    const daydiv = document.createElement('div');
+                    daydiv.classList.add('day');
+                    daydiv.textContent = day;
+                    const mondiv = document.createElement('div');
+                    mondiv.classList.add('month');
+                    mondiv.textContent = month;
+                    datediv.appendChild(daydiv);
+                    datediv.appendChild(mondiv);
+                    imgContainer.appendChild(datediv);
+                }
+                
+                gallery.appendChild(imgContainer);
+            });
+        } catch (error) {
+            console.error('Error fetching images:', error);
+        }
+    }
+
+    // Fetch images on page load
+    window.onload = fetchUserImages;
+
+    document.getElementById("ootdButton").addEventListener("click", function() {
+        window.location.href = "/home";
+    });
+
+
+    function checkScreenWidth() {
+      if (window.innerWidth > 768) {
+        document.querySelector('.desktop-warning').style.display = 'block';
+        document.querySelector('.hide-on-desktop').style.display = 'none';
+      } else {
+        document.querySelector('.desktop-warning').style.display = 'none';
+        document.querySelector('.hide-on-desktop').style.display = 'flex';
+      }
+    }
+
+    // Initial check and resize event listener
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+  </script>
+
+</body>
+</html>
+
