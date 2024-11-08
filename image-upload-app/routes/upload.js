@@ -15,37 +15,42 @@ const upload = multer({
 const s3 = new AWS.S3();
 
 router.post('/', upload.array('images', 10), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'Please upload a file' });
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ error: 'Please upload at least one file' });
   }
-
-  const fileContent = req.file.buffer;
-  const fileName = `${req.user.google_id}/${Date.now()}_${req.file.originalname}`;
-
-  // S3 Upload parameters
-  const params = {
-    Bucket: 'motif-user-images', // replace with your bucket name
-    Key: fileName,                // File name you want to save as in S3
-    Body: fileContent,
-    ContentType: req.file.mimetype,
-    // ACL: 'public-read',           // Makes the file publicly accessible
-  };
 
   try {
-    // Upload the image to S3
-    console.log(`Upload started`)
-    const data = await s3.upload(params).promise();
-    console.log(`File uploaded successfully. ${data.Location}`);
+    const uploadPromises = req.files.map(async (file) => {
+      const fileContent = file.buffer;
+      const fileName = `${req.user.google_id}/${Date.now()}_${file.originalname}`;
 
-    // Save image data in DynamoDB
-    await saveImageData("req.user.google_id test", fileName, data.Location, req.body.styles);
+      // S3 Upload parameters
+      const params = {
+        Bucket: 'motif-user-images', // replace with your bucket name
+        Key: fileName,               // File name you want to save as in S3
+        Body: fileContent,
+        ContentType: file.mimetype,
+      };
 
-    res.status(200).json({ message: 'Image uploaded successfully', imageUrl: data.Location });
+      // Upload each file to S3
+      const data = await s3.upload(params).promise();
+      console.log(`File uploaded successfully. ${data.Location}`);
+
+      // Save image data in DynamoDB
+      await saveImageData(req.user.google_id, fileName, data.Location, req.body.styles);
+
+      return data.Location;
+    });
+
+    // Wait for all file uploads to complete
+    const uploadedFiles = await Promise.all(uploadPromises);
+    res.status(200).json({ message: 'Images uploaded successfully', imageUrls: uploadedFiles });
   } catch (error) {
-    console.error('Error uploading file:', error);
-    res.status(500).json({ error: 'Failed to upload image' + String(error)});
+    console.error('Error uploading files:', error);
+    res.status(500).json({ error: 'Failed to upload images' });
   }
 });
+
 
 router.get('/list', isLoggedIn, async (req, res) => {
   try {
