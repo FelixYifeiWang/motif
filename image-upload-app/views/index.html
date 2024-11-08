@@ -310,7 +310,7 @@
     }
     
     .second-login-button {
-      z-index: 2000;
+      z-index: 6000;
     }
 
     .page2 .page3 {
@@ -579,50 +579,50 @@
       });
     }
 
-    // let startX;
+    let startX;
 
-    // // Detect the start of a touch event
-    // document.addEventListener('touchstart', (e) => {
-    //   startX = e.touches[0].clientX;
-    // });
+    // Detect the start of a touch event
+    document.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
 
-    // // Detect the end of a touch event and determine swipe direction
-    // document.addEventListener('touchend', (e) => {
-    //   const endX = e.changedTouches[0].clientX;
-    //   const deltaX = startX - endX;
+    // Detect the end of a touch event and determine swipe direction
+    document.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = startX - endX;
 
-    //   if (deltaX > 50) { // Swipe left detected
-    //     showNextPage();
-    //   } else if (deltaX < -50) {
-    //     showLastPage();
-    //   }
-    // });
+      if (deltaX > 50) { // Swipe left detected
+        showNextPage();
+      } else if (deltaX < -50) {
+        showLastPage();
+      }
+    });
 
-    // function showNextPage() {
-    //   // Determine which page is currently visible and show the next page
-    //   if (document.querySelector('.page3').style.display !== 'none') {
-    //     // Hide page 1 and show page 2
-    //     document.querySelectorAll('.page3').forEach(element => element.style.display = 'none');
-    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
-    //   } else if (document.querySelector('.page4').style.display !== 'none') {
-    //     // Hide page 2 and show page 3
-    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
-    //     document.querySelectorAll('.page5').forEach(element => element.style.display = 'block');
-    //   }
-    // }
+    function showNextPage() {
+      // Determine which page is currently visible and show the next page
+      if (document.querySelector('.page3').style.display !== 'none') {
+        // Hide page 1 and show page 2
+        document.querySelectorAll('.page3').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
+      } else if (document.querySelector('.page4').style.display !== 'none') {
+        // Hide page 2 and show page 3
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page5').forEach(element => element.style.display = 'block');
+      }
+    }
 
-    // function showLastPage() {
-    //   // Determine which page is currently visible and show the next page
-    //   if (document.querySelector('.page4').style.display !== 'none') {
-    //     // Hide page 1 and show page 2
-    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
-    //     document.querySelectorAll('.page3').forEach(element => element.style.display = 'block');
-    //   } else if (document.querySelector('.page5').style.display !== 'none') {
-    //     // Hide page 2 and show page 3
-    //     document.querySelectorAll('.page5').forEach(element => element.style.display = 'none');
-    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
-    //   }
-    // }
+    function showLastPage() {
+      // Determine which page is currently visible and show the next page
+      if (document.querySelector('.page4').style.display !== 'none') {
+        // Hide page 1 and show page 2
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page3').forEach(element => element.style.display = 'block');
+      } else if (document.querySelector('.page5').style.display !== 'none') {
+        // Hide page 2 and show page 3
+        document.querySelectorAll('.page5').forEach(element => element.style.display = 'none');
+        document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
+      }
+    }
 
     async function handleLoginClick() {
       if (file_inputs && file_inputs.length > 0) {
