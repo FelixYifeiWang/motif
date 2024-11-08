@@ -530,6 +530,7 @@
                         blob => {
                             if (blob) {
                                 resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                                console.log(`Compressed file size for ${file.name}: ${compressedFile.size} bytes`);
                             } else {
                                 reject(new Error('Image compression failed'));
                             }
