@@ -242,6 +242,8 @@
                     imgElement.classList.add('innerimg');
                     imgContainer.appendChild(imgElement);
 
+                    const dateStr = image.upload_date;
+                    const dateObj = new Date(dateStr);
                     const day = String(dateObj.getDate()).padStart(2, '0');
                     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
                     const month = monthNames[dateObj.getMonth()];
