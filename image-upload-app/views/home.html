@@ -292,7 +292,7 @@
   <img class="bottombar" src="/assets/bottombar.png">
   <img class="camera" src="/assets/camera.png">
   <div class="ootd">ootd</div>
-  <div class="profile">profile</div>
+  <div class="profile" id="profileButton">profile</div>
 
   <script>
 
@@ -405,6 +405,11 @@
 
     // Fetch images on page load
     window.onload = fetchUserImages;
+
+    document.getElementById("profileButton").addEventListener("click", function() {
+        window.location.href = "/profile";
+    });
+
 
     function checkScreenWidth() {
       if (window.innerWidth > 768) {
