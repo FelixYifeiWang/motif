@@ -617,7 +617,9 @@
         const filesArray = [];
         for (let i = 0; i < file_inputs.length; i++) {
           filesArray.push({
-            data: await fileToBase64(file_inputs[i]) // Convert file to base64 for storage
+            data: await fileToBase64(file_inputs[i]), // Convert file to base64 for storage
+            name: file_inputs[i].name,
+            type: file_inputs[i].type,
           });
         }
 
@@ -671,10 +673,13 @@
           const blob = base64ToBlob(file.data, file.type);
           console.log(blob);
           console.log(file.data);
-          formData.append('image', file.data);
+          formData.append('image', blob, file.name);
           formData.append('tags', pendingTags[index] || ''); // Adjust for tags
         });
-        console.log(formData);
+        for (let [key, value] of formData.entries()) {
+          console.log(key, value);
+        }
+
         try {
           // Upload images and tags to the server
           const response = await fetch('/upload', {
