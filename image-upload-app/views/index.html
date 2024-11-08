@@ -612,35 +612,34 @@
       }
     }
 
-    // TODO: Handle Google login click
     async function handleLoginClick() {
-      if (file_inputs != null && file_inputs.length > 0) {
-        // Prepare a FormData object to send files and tags
-        const formData = new FormData();
-        for (let i = 0; i < 3; i++) {
-          formData.append('image', file_inputs[i]);
-          // Assume each file has a corresponding tag field
-          formData.append('tags', tags); // Modify this if you have tags separately
-        }
-        
-        try {
-          // Upload images and tags to the server
-          const response = await fetch('/upload', {
-            method: 'POST',
-            body: formData,
+      if (file_inputs && file_inputs.length > 0) {
+        const filesArray = [];
+        for (let i = 0; i < file_inputs.length; i++) {
+          filesArray.push({
+            name: file_inputs[i].name,
+            type: file_inputs[i].type,
+            data: await fileToBase64(file_inputs[i]) // Convert file to base64 for storage
           });
-          console.log(response);
-          if (response && response.ok) {
-            console.log('Images uploaded successfully');
-          } else {
-            console.error('Image upload failed:', response.error);
-          }
-        } catch (error) {
-          console.error('Error uploading images:', error);
         }
+
+        // Store files and tags in localStorage
+        localStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
+        localStorage.setItem('pendingUploadTags', JSON.stringify(tags));
       }
 
+      // Proceed to Google login
       // window.location.href = '/auth/google';
+    }
+
+    // Helper function to convert a file to base64
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
     }
 
     // Detect screen width and display warning for desktop users
