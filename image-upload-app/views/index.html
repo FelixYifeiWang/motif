@@ -576,7 +576,8 @@
     document.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
       if (document.querySelector('.page5').style.display !== 'none') {
-        document.getElementById('button2').click();
+        handleLoginClick();
+        console.log(1111);
       }
     });
 
