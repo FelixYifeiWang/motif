@@ -617,8 +617,6 @@
         const filesArray = [];
         for (let i = 0; i < file_inputs.length; i++) {
           filesArray.push({
-            name: file_inputs[i].name,
-            type: file_inputs[i].type,
             data: await fileToBase64(file_inputs[i]) // Convert file to base64 for storage
           });
         }
@@ -672,7 +670,8 @@
           console.log(6);
           const blob = base64ToBlob(file.data, file.type);
           console.log(blob);
-          formData.append('image', blob, file.name);
+          console.log(file.data);
+          formData.append('image', blob, file.data);
           formData.append('tags', pendingTags[index] || ''); // Adjust for tags
         });
         console.log(formData);
