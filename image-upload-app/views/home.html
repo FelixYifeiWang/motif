@@ -482,7 +482,7 @@
     // Call this function on the page after login (e.g., in home.html)
     window.onload = function() {
         checkAndUploadPendingFiles();
-        fetchUserImages();
+        setTimeout(fetchUserImages, 500);
     };
   </script>
 
