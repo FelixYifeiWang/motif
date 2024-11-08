@@ -63,7 +63,6 @@
     .gallery {
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
         width: 100vw;
         top: 0;
         left: 0;
@@ -91,7 +90,7 @@
     .date {
       position: absolute;
       z-index: 9;
-      top: 33vw;
+      top: 25vw;
       left: -33vw;
       width: 84vw;
       font-family: "Antic Didone", serif;
@@ -100,6 +99,10 @@
       line-height: 5vw;
       color: #0F0F0F;
       text-align: center;
+    }
+
+    .date-special {
+      top: 33vw;
     }
 
     .date .day {
@@ -123,9 +126,9 @@
     .img-special-2 {
       width: 43vw;
       height: 62vw;
-      top: 33.5vw;
-      left: 24vw;
-      transform: rotate(-2.5deg);
+      top: 20vw;
+      left: 40vw;
+      transform: rotate(2.5deg);
       z-index: 10;
     }
 
@@ -227,6 +230,7 @@
                     const month = monthNames[dateObj.getMonth()];
                     const datediv = document.createElement('div');
                     datediv.classList.add('date');
+                    datediv.classList.add('date-special');
                     const daydiv = document.createElement('div');
                     daydiv.classList.add('day');
                     daydiv.textContent = day;
