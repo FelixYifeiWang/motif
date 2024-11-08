@@ -656,6 +656,56 @@
     // Initial check and resize event listener
     checkScreenWidth();
     window.addEventListener('resize', checkScreenWidth);
+
+    async function checkAndUploadPendingFiles() {
+      // Retrieve pending files and tags from localStorage
+      const pendingFiles = JSON.parse(localStorage.getItem('pendingUploadFiles'));
+      const pendingTags = JSON.parse(localStorage.getItem('pendingUploadTags'));
+
+      if (pendingFiles && pendingFiles.length > 0) {
+        const formData = new FormData();
+
+        pendingFiles.forEach((file, index) => {
+          const blob = base64ToBlob(file.data, file.type);
+          formData.append('image', blob, file.name);
+          formData.append('tags', pendingTags[index] || ''); // Adjust for tags
+        });
+
+        try {
+          // Upload images and tags to the server
+          const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (response && response.ok) {
+            console.log('Images uploaded successfully');
+            // Clear localStorage after successful upload
+            localStorage.removeItem('pendingUploadFiles');
+            localStorage.removeItem('pendingUploadTags');
+          } else {
+            console.error('Image upload failed:', response.status);
+          }
+        } catch (error) {
+          console.error('Error uploading images:', error);
+        }
+      }
+    }
+
+    // Helper function to convert base64 back to a Blob
+    function base64ToBlob(base64, mimeType) {
+      const byteString = atob(base64.split(',')[1]);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        uint8Array[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([arrayBuffer], { type: mimeType });
+    }
+
+    // Call this function on the page after login (e.g., in home.html)
+    document.addEventListener('DOMContentLoaded', checkAndUploadPendingFiles);
+
   </script>
 
 </body>
