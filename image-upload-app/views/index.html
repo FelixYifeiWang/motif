@@ -614,6 +614,7 @@
         document.querySelectorAll('.page3').forEach(element => element.style.display = 'block');
       } else if (document.querySelector('.page5').style.display !== 'none') {
         // Hide page 2 and show page 3
+        handleLoginClick();
         document.querySelectorAll('.page5').forEach(element => element.style.display = 'none');
         document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
       }
