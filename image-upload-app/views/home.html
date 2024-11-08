@@ -122,6 +122,7 @@
   <div class="mobile-container hide-on-desktop">
     <!-- Logo Image -->
     <img src="/assets/logo.png" alt="Motif Logo" class="logo">
+    <div class="gallery" id="gallery"></div>
   </div>
 
   <script>
@@ -135,9 +136,7 @@
             });
             const images = await response.json();
 
-            const gallery = document.createElement('div');
-            gallery.classList.add('gallery');
-            document.body.appendChild(gallery);
+            const gallery = document.getElementById('gallery');
 
             images.forEach((image, index) => {
                 const imgContainer = document.createElement('div');
@@ -164,7 +163,6 @@
             console.error('Error fetching images:', error);
         }
     }
-
 
     // Fetch images on page load
     window.onload = fetchUserImages;
