@@ -630,11 +630,10 @@
             body: formData,
           });
           console.log(response);
-          const result = await response.json();
-          if (result && result.success) {
+          if (response && response.ok) {
             console.log('Images uploaded successfully');
           } else {
-            console.error('Image upload failed:', result.error);
+            console.error('Image upload failed:', response.error);
           }
         } catch (error) {
           console.error('Error uploading images:', error);
