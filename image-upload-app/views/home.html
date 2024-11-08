@@ -236,10 +236,10 @@
                     datediv.appendChild(mondiv);
                     imgContainer.appendChild(datediv);
 
-                } else if (index === 1) {
+                } else {
                     imgContainer.classList.add(`block-style-${(index % 3)}`);
                     const bgimg = document.createElement('img');
-                    bgimg.src = '/assets/homebg1.png';
+                    bgimg.src = `/assets/homebg${(index % 3)}.png`;
                     bgimg.alt = 'Background Image';
                     bgimg.classList.add('bg-img');
                     imgContainer.appendChild(bgimg);
@@ -267,22 +267,6 @@
                     datediv.appendChild(daydiv);
                     datediv.appendChild(mondiv);
                     imgContainer.appendChild(datediv);
-                } else {
-                    imgContainer.classList.add(`block-style-${(index % 3)}`);
-                    const bgimg = document.createElement('img');
-                    bgimg.src = '/assets/homebg2.png';
-                    bgimg.alt = 'Background Image';
-                    bgimg.classList.add('bg-img');
-                    imgContainer.appendChild(bgimg);
-
-                    const styleClass = `block-style-${(index % 3) + 1}`;
-                    imgContainer.classList.add(styleClass);
-
-                    const imgElement = document.createElement('img');
-                    imgElement.src = image.image_url;
-                    imgElement.alt = 'Uploaded Image';
-                    imgElement.classList.add('innerimg');
-                    imgContainer.appendChild(imgElement);
                 }
                 
                 gallery.appendChild(imgContainer);
