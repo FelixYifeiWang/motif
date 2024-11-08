@@ -38,7 +38,7 @@ router.post('/', upload.array('images', 10), async (req, res) => {
     console.log(`File uploaded successfully. ${data.Location}`);
 
     // Save image data in DynamoDB
-    await saveImageData(req.user.google_id, fileName, data.Location, req.body.styles);
+    await saveImageData("req.user.google_id test", fileName, data.Location, req.body.styles);
 
     res.status(200).json({ message: 'Image uploaded successfully', imageUrl: data.Location });
   } catch (error) {
