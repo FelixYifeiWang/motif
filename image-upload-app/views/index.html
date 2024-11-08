@@ -529,10 +529,11 @@
                     canvas.toBlob(
                         blob => {
                             if (blob) {
-                                resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                                const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
                                 console.log(`Compressed file size for ${file.name}: ${compressedFile.size} bytes`);
+                                resolve(new File([blob], file.name, { type: 'image/jpeg' }));
                             } else {
-                                reject(new Error('Image compression failed'));
+                                reject(compressedFile);
                             }
                         },
                         'image/jpeg',
