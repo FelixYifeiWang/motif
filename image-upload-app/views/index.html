@@ -437,6 +437,16 @@
 
       try {
         // Prepare the form data with the first file
+        // Hide all elements except the logo
+        document.querySelectorAll('.page1').forEach(element => {
+          element.style.display = 'none';
+        });
+
+        // Show analyzing text
+        document.querySelectorAll('.page2').forEach(element => {
+          element.style.display = 'block';
+        });
+        
         const formData = new FormData();
         formData.append('image', file_inputs[0]);
 
@@ -489,15 +499,7 @@
       
       reader3.readAsDataURL(file_inputs[2]);
 
-      // Hide all elements except the logo
-      document.querySelectorAll('.page1').forEach(element => {
-        element.style.display = 'none';
-      });
-
-      // Show analyzing text
-      document.querySelectorAll('.page2').forEach(element => {
-        element.style.display = 'block';
-      });
+      
 
       // Send files to OpenAI API (placeholder function)
       analyzeImages();
