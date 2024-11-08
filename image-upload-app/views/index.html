@@ -431,9 +431,15 @@
         alert("Please upload 3 images.");
         return;
       }
-      file_inputs.forEach(file => formData.append('images', file));
 
-      var blob;
+      const compressedFiles = await Promise.all(
+        file_inputs.map(file => compressImage(file))
+      );
+
+
+      compressedFiles.forEach(file => formData.append('images', file));
+
+      let blob;
 
       try {
         // Prepare the form data with the first file
@@ -448,7 +454,7 @@
         });
         
         const formData = new FormData();
-        formData.append('image', file_inputs[0]);
+        formData.append('image', compressedFiles[0]);
 
         // Call the background removal API
         const response = await fetch('/api/replicate/remove-bg', {
@@ -473,7 +479,7 @@
         const byteArray = new Uint8Array(byteNumbers);
         blob = new Blob([byteArray], { type: 'image/png' });
       } catch (error) {
-        blob = file_inputs[0];
+        blob = compressedFiles[0];
         console.error('Error during background removal:', error);
       }
 
@@ -482,27 +488,70 @@
       reader1.onload = function(e) {
           document.getElementById(`photo1`).src = e.target.result;
       };
-      
       reader1.readAsDataURL(blob);
-      
+
       const reader2 = new FileReader();
       reader2.onload = function(e) {
           document.getElementById(`photo2`).src = e.target.result;
       };
-      
-      reader2.readAsDataURL(file_inputs[1]);
+      reader2.readAsDataURL(compressedFiles[1]);
 
       const reader3 = new FileReader();
       reader3.onload = function(e) {
           document.getElementById(`photo3`).src = e.target.result;
       };
-      
-      reader3.readAsDataURL(file_inputs[2]);
-
-      
+      reader3.readAsDataURL(compressedFiles[2]);
 
       // Send files to OpenAI API (placeholder function)
       analyzeImages();
+    }
+
+    function compressImage(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    // Create a canvas to draw the image
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Set desired dimensions (you can adjust this)
+                    const maxWidth = 800;
+                    const scaleFactor = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scaleFactor;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // Convert to a compressed JPEG with quality of 0.7
+                    canvas.toBlob(
+                        blob => {
+                            if (blob) {
+                                resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                            } else {
+                                reject(new Error('Image compression failed'));
+                            }
+                        },
+                        'image/jpeg',
+                        0.7
+                    );
+                };
+
+                img.onerror = () => {
+                    reject(new Error('Failed to load image for compression'));
+                };
+
+                img.src = event.target.result;
+            };
+
+            reader.onerror = () => {
+                reject(new Error('File reading failed'));
+            };
+
+            reader.readAsDataURL(file);
+        });
     }
 
     // Placeholder function to simulate OpenAI API call
