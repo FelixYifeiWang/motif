@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
 
 
+
   <style>
     * {
       margin: 0;
@@ -85,6 +86,28 @@
       z-index: 9;
       object-fit: cover; /* Cover the area of the div without stretching */
       object-position: center;
+    }
+
+    .date {
+      position: absolute;
+      z-index: 9;
+      top: 10vw;
+      left: 1vw;
+      width: 84vw;
+      font-family: "Antic Didone", serif;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 4vw;
+      color: black;
+      text-align: center;
+    }
+
+    .date .day {
+        font-size: 4vw;
+    }
+    .date .month {
+        font-size: 2vw;
+        letter-spacing: 0.1em;
     }
 
     .img-special-1 {
@@ -182,6 +205,26 @@
                     imgElement.classList.add('innerimg');
                     imgElement.classList.add('img-special-1');
                     imgContainer.appendChild(imgElement);
+
+                    const dateStr = image.upload_date;
+                    const dateObj = new Date(dateStr);
+
+                    // Get the day and month
+                    const day = dateObj.getDate();
+                    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+                    const month = monthNames[dateObj.getMonth()];
+                    const datediv = document.createElement('div');
+                    datediv.classList.add('date');
+                    const daydiv = document.createElement('div');
+                    daydiv.classList.add('day');
+                    daydiv.textContent = day;
+                    const mondiv = document.createElement('div');
+                    mondiv.classList.add('month');
+                    mondiv.textContent = month;
+                    datediv.appendChild(daydiv);
+                    datediv.appendChild(mondiv);
+                    imgContainer.appendChild(datediv);
+
                 } else if (index === 1) {
                     imgContainer.classList.add('block-special-2');
 
