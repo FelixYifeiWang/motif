@@ -80,6 +80,17 @@
       width: 88vw;
     }
 
+    .username {
+      position: absolute;
+      top: 7vw;
+      left: 5vw;
+      font-family: "Antic Didone", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 10w;
+      z-index: 1001;
+    }
+
     .bottombar {
       position: fixed;
       bottom: -6vw;
@@ -136,6 +147,7 @@
     <img src="/assets/logo.png" alt="Motif Logo" class="logo">
     <div class="namecard">
       <img src="/assets/namecard.png" alt="Motif Card" class="namecardcard">
+      <div class="username" id="username">Placeholder</div>
     </div>
   </div>
 
@@ -149,6 +161,20 @@
         window.location.href = "/home";
     });
 
+    async function fetchUser() {
+        try {
+            const response = await fetch('/upload/user', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            });
+            const user = await response.json();
+            
+        } catch (error) {
+            console.error('Error fetching user info:', error);
+        }
+    }
+
+    window.onload = fetchUser;
 
     function checkScreenWidth() {
       if (window.innerWidth > 768) {

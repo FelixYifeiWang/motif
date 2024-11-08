@@ -67,6 +67,19 @@ router.get('/list', isLoggedIn, async (req, res) => {
   }
 });
 
+router.get('/user', isLoggedIn, async (req, res) => {
+  try {
+    // Retrieve images for the logged-in user from DynamoDB
+    const user = await getUserFromDynamoDB(req.user.google_id);
+    
+    // Send the list of images as a JSON response
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error retrieving user info:', error);
+    res.status(500).json({ error: 'Failed to retrieve user info' });
+  }
+});
+
 router.delete('/', isLoggedIn, async (req, res) => {
   const encodedImageId = req.query.imageId;
   if (!encodedImageId) {
