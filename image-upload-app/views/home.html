@@ -167,11 +167,13 @@
 
                 // Apply different styles based on the index
                 if (index === 0) {
+                    console.log(111)
                     imgContainer.classList.add('block-special-1');
                     const bgimg = document.createElement('img');
                     bgimg.src = '/assets/homebg1.png';
                     bgimg.alt = 'Background Image';
                     bgimg.classList.add('bg-img');
+                    imgContainer.appendChild(bgimg);
                 } else if (index === 1) {
                     imgContainer.classList.add('block-special-2');
                 } else {
