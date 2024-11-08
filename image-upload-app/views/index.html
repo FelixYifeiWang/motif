@@ -101,7 +101,7 @@
       bottom: 4vh;
       width: 36vw;
       cursor: pointer;
-      z-index: 2000;
+      z-index: 100000;
     }
 
     /* Analyzing Text */
@@ -377,7 +377,7 @@
     <div class="designerdesc1 page5" id="designerdesc1">Known for bold colors and playful silhouettes, Jacquemus sets the stage for effortless chic that celebrates the body and Mediterranean aesthetics.<br><br>Founded in 2009, the brand captures the joie de vivre of Provencal life through its innovative designs. </div>
     
 
-    <img src="/assets/login.png" alt="Log in with Google" id="button2" class="login-button page5" onclick="handleLoginClick()">
+    <img src="/assets/login.png" alt="Log in with Google" class="login-button page5" onclick="handleLoginClick()">
   </div>
 
   <!-- Hidden File Input for Image Upload -->
@@ -575,10 +575,6 @@
     // Detect the start of a touch event
     document.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
-      if (document.querySelector('.page5').style.display !== 'none') {
-        handleLoginClick();
-        console.log(1111);
-      }
     });
 
     // Detect the end of a touch event and determine swipe direction
@@ -614,7 +610,6 @@
         document.querySelectorAll('.page3').forEach(element => element.style.display = 'block');
       } else if (document.querySelector('.page5').style.display !== 'none') {
         // Hide page 2 and show page 3
-        handleLoginClick();
         document.querySelectorAll('.page5').forEach(element => element.style.display = 'none');
         document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
       }
@@ -630,21 +625,12 @@
             type: file_inputs[i].type,
           });
         }
-        // Store files and tags in localStorage
-        try {
-            localStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
-            localStorage.setItem('pendingUploadTags', JSON.stringify(tags));
-            alert(666);
-            return true;
-        } catch (error) {
-            console.error('LocalStorage not available:', error);
-            alert(error);
-            return false;
-        }
-        // localStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
-        // localStorage.setItem('pendingUploadTags', JSON.stringify(tags));
+
+        // Store files and tags in sessionStorage
+        sessionStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
+        sessionStorage.setItem('pendingUploadTags', JSON.stringify(tags));
       }
-      alert("222");
+
       // Proceed to Google login
       window.location.href = '/auth/google';
     }
@@ -675,10 +661,10 @@
     window.addEventListener('resize', checkScreenWidth);
 
     async function checkAndUploadPendingFiles() {
-      // Retrieve pending files and tags from localStorage
+      // Retrieve pending files and tags from sessionStorage
       console.log(1);
-      const pendingFiles = JSON.parse(localStorage.getItem('pendingUploadFiles'));
-      const pendingTags = JSON.parse(localStorage.getItem('pendingUploadTags'));
+      const pendingFiles = JSON.parse(sessionStorage.getItem('pendingUploadFiles'));
+      const pendingTags = JSON.parse(sessionStorage.getItem('pendingUploadTags'));
       console.log(pendingFiles);
       console.log(pendingTags);
       if (pendingFiles && pendingFiles.length > 0) {
@@ -706,9 +692,9 @@
 
           if (response && response.ok) {
             console.log('Images uploaded successfully');
-            // Clear localStorage after successful upload
-            localStorage.removeItem('pendingUploadFiles');
-            localStorage.removeItem('pendingUploadTags');
+            // Clear sessionStorage after successful upload
+            sessionStorage.removeItem('pendingUploadFiles');
+            sessionStorage.removeItem('pendingUploadTags');
           } else {
             console.error('Image upload failed:', response.status);
           }
@@ -731,8 +717,6 @@
 
     // Call this function on the page after login (e.g., in home.html)
     document.addEventListener('DOMContentLoaded', checkAndUploadPendingFiles);
-
-    document.querySelector('.login-button.page5').addEventListener('touchstart', handleLoginClick);
 
   </script>
 
