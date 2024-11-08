@@ -14,7 +14,7 @@ const upload = multer({
 
 const s3 = new AWS.S3();
 
-router.post('/', upload.array('images', 10), async (req, res) => {
+router.post('/', isLoggedIn, upload.array('images', 10), async (req, res) => {
   console.log("Received styles:", req.body.tags);
 
   if (!req.files || req.files.length === 0) {
