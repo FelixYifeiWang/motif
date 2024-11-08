@@ -479,6 +479,9 @@
       }
       return new Blob([arrayBuffer], { type: mimeType });
     }
+
+    // Call this function on the page after login (e.g., in home.html)
+    document.addEventListener('DOMContentLoaded', checkAndUploadPendingFiles);
   </script>
 
 </body>
