@@ -52,7 +52,7 @@
       max-width: 600px;
     }
     .logo {
-      position: absolute;
+      position: fixed;
       top: 6vh;
       left: 6vw;
       width: 18.6vw;
@@ -183,6 +183,9 @@
                 headers: { 'Content-Type': 'application/json' },
             });
             const images = await response.json();
+            images.sort((a, b) => {
+                return new Date(b.upload_date) - new Date(a.upload_date);
+            });
 
             const gallery = document.getElementById('gallery');
 
@@ -192,7 +195,6 @@
 
                 // Apply different styles based on the index
                 if (index === 0) {
-                    console.log(111)
                     imgContainer.classList.add('block-special-1');
                     const bgimg = document.createElement('img');
                     bgimg.src = '/assets/homebg1.png';
@@ -228,12 +230,32 @@
 
                 } else if (index === 1) {
                     imgContainer.classList.add('block-special-2');
+                    const bgimg = document.createElement('img');
+                    bgimg.src = '/assets/homebg2.png';
+                    bgimg.alt = 'Background Image';
+                    bgimg.classList.add('bg-img');
+                    imgContainer.appendChild(bgimg);
 
                     const imgElement = document.createElement('img');
                     imgElement.src = image.image_url;
                     imgElement.alt = 'Uploaded Image';
                     imgElement.classList.add('innerimg');
                     imgContainer.appendChild(imgElement);
+
+                    const day = String(dateObj.getDate()).padStart(2, '0');
+                    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+                    const month = monthNames[dateObj.getMonth()];
+                    const datediv = document.createElement('div');
+                    datediv.classList.add('date');
+                    const daydiv = document.createElement('div');
+                    daydiv.classList.add('day');
+                    daydiv.textContent = day;
+                    const mondiv = document.createElement('div');
+                    mondiv.classList.add('month');
+                    mondiv.textContent = month;
+                    datediv.appendChild(daydiv);
+                    datediv.appendChild(mondiv);
+                    imgContainer.appendChild(datediv);
                 } else {
                     const styleClass = `block-style-${(index % 3) + 1}`;
                     imgContainer.classList.add(styleClass);
