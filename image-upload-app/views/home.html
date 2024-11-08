@@ -91,8 +91,8 @@
     .date {
       position: absolute;
       z-index: 9;
-      top: 10vw;
-      left: 1vw;
+      top: 30vw;
+      left: -10vw;
       width: 84vw;
       font-family: "Antic Didone", serif;
       font-weight: 400;
@@ -103,10 +103,10 @@
     }
 
     .date .day {
-        font-size: 4vw;
+        font-size: 8vw;
     }
     .date .month {
-        font-size: 2vw;
+        font-size: 6vw;
         letter-spacing: 0.1em;
     }
 
@@ -210,7 +210,7 @@
                     const dateObj = new Date(dateStr);
 
                     // Get the day and month
-                    const day = dateObj.getDate();
+                    const day = String(dateObj.getDate()).padStart(2, '0');
                     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
                     const month = monthNames[dateObj.getMonth()];
                     const datediv = document.createElement('div');
