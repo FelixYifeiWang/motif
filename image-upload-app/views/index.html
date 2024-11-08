@@ -614,7 +614,7 @@
 
     // TODO: Handle Google login click
     async function handleLoginClick() {
-      if (file_inputs.length > 0) {
+      if (file_inputs != null && file_inputs.length > 0) {
         // Prepare a FormData object to send files and tags
         const formData = new FormData();
         for (let i = 0; i < 3; i++) {
@@ -629,7 +629,7 @@
             method: 'POST',
             body: formData,
           });
-
+          console.log(response);
           const result = await response.json();
           if (result && result.success) {
             console.log('Images uploaded successfully');
