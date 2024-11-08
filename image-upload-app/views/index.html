@@ -662,13 +662,16 @@
       console.log(1);
       const pendingFiles = JSON.parse(localStorage.getItem('pendingUploadFiles'));
       const pendingTags = JSON.parse(localStorage.getItem('pendingUploadTags'));
-      console.log(2);
+      console.log(pendingFiles);
+      console.log(pendingTags);
       if (pendingFiles && pendingFiles.length > 0) {
         console.log(3);
         const formData = new FormData();
 
         pendingFiles.forEach((file, index) => {
+          console.log(6);
           const blob = base64ToBlob(file.data, file.type);
+          console.log(blob);
           formData.append('image', blob, file.name);
           formData.append('tags', pendingTags[index] || ''); // Adjust for tags
         });
