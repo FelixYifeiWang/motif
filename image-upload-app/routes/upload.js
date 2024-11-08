@@ -15,7 +15,7 @@ const upload = multer({
 const s3 = new AWS.S3();
 
 router.post('/', upload.array('images', 10), async (req, res) => {
-  console.log("Received styles:", req.body.styles);
+  console.log("Received styles:", req.body.tags);
 
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ error: 'Please upload at least one file' });
@@ -39,7 +39,7 @@ router.post('/', upload.array('images', 10), async (req, res) => {
       console.log(`File uploaded successfully. ${data.Location}`);
 
       // Save image data in DynamoDB
-      await saveImageData(req.user.google_id, fileName, data.Location, req.body.styles);
+      await saveImageData(req.user.google_id, fileName, data.Location, req.body.tags);
 
       return data.Location;
     });

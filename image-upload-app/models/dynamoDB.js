@@ -45,7 +45,7 @@ const saveImageData = async (userId, imageId, imageUrl, styles) => {
       image_id: imageId,
       image_url: imageUrl,
       upload_date: new Date().toISOString(),
-      styles: styles,
+      styles: "styles",
     },
   };
   try {
