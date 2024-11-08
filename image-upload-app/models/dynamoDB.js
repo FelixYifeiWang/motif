@@ -20,6 +20,25 @@ const saveUserToDynamoDB = async (user) => {
   }
 };
 
+const updateUserStyles = async (user_id, newStyles) => {
+  const params = {
+    TableName: 'Users',
+    Key: { user_id: user_id },
+    UpdateExpression: 'set styles = :styles',
+    ExpressionAttributeValues: {
+      ':styles': newStyles,
+    },
+    ReturnValues: 'UPDATED_NEW', // Returns the updated attributes
+  };
+
+  try {
+    const result = await dynamodb.update(params).promise();
+    console.log('User styles updated successfully:', result);
+  } catch (error) {
+    console.error('Error updating user styles:', error);
+  }
+};
+
 const getUserFromDynamoDB = async (googleId) => {
   const params = {
     TableName: 'Users',

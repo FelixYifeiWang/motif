@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const AWS = require('aws-sdk');
-const { saveImageData, getUserImages, deleteImageData, getUserFromDynamoDB } = require('../models/dynamoDB');
+const { saveImageData, getUserImages, deleteImageData, getUserFromDynamoDB, updateUserStyles } = require('../models/dynamoDB');
 const router = express.Router();
 const path = require('path');
 const isLoggedIn = require('../middleware/auth'); // Middleware to protect routes
@@ -50,6 +50,24 @@ router.post('/', isLoggedIn, upload.array('images', 10), async (req, res) => {
   } catch (error) {
     console.error('Error uploading files:', error);
     res.status(500).json({ error: 'Failed to upload images' });
+  }
+});
+
+router.post('/update-styles', isLoggedIn, async (req, res) => {
+  const user_id = req.user.google_id; // Assume the user's Google ID is stored in req.user
+  const styles = req.body.tags; // Extract the new styles array from the request body
+
+  if (!styles || !Array.isArray(styles)) {
+    return res.status(400).json({ error: 'Please provide a valid styles array' });
+  }
+
+  try {
+    // Update user styles in DynamoDB
+    await updateUserStyles(user_id, styles);
+    res.status(200).json({ message: 'User styles updated successfully' });
+  } catch (error) {
+    console.error('Error updating user styles:', error);
+    res.status(500).json({ error: 'Failed to update user styles' });
   }
 });
 
