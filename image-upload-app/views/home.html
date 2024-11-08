@@ -69,6 +69,29 @@
         justify-content: center;
     }
 
+    .bg-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensures the image does not crop or stretch */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1; /* Places the image behind other content in the container */
+        pointer-events: none; /* Prevents the image from capturing pointer events */
+    }
+
+    .innerimg {
+      position: absolute;
+      width: 30vw;
+      height: 67vw;
+      top: 16vw;
+      left: 10vw;
+      z-index: 9;
+      transform: rotate(-5.51deg);
+      object-fit: cover; /* Cover the area of the div without stretching */
+      object-position: center;
+    }
+
     /* Styles for specific blocks */
     .block-special-1 {
         width: 100%;
@@ -145,6 +168,10 @@
                 // Apply different styles based on the index
                 if (index === 0) {
                     imgContainer.classList.add('block-special-1');
+                    const bgimg = document.createElement('img');
+                    bgimg.src = '/assets/homebg1.png';
+                    bgimg.alt = 'Background Image';
+                    bgimg.classList.add('bg-img');
                 } else if (index === 1) {
                     imgContainer.classList.add('block-special-2');
                 } else {
@@ -155,6 +182,7 @@
                 const imgElement = document.createElement('img');
                 imgElement.src = image.image_url;
                 imgElement.alt = 'Uploaded Image';
+                imgElement.classList.add('innerimg');
 
                 imgContainer.appendChild(imgElement);
                 gallery.appendChild(imgContainer);
@@ -180,6 +208,10 @@
     // Initial check and resize event listener
     checkScreenWidth();
     window.addEventListener('resize', checkScreenWidth);
+    window.onload = function() {
+      // Change the URL in the browser to www.motif-official.com
+      history.replaceState(null, '', 'https://www.motif-official.com');
+    };
   </script>
 
 </body>
