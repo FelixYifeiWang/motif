@@ -404,7 +404,6 @@
     }
 
     // Fetch images on page load
-    window.onload = fetchUserImages;
 
     document.getElementById("profileButton").addEventListener("click", function() {
         window.location.href = "/profile";
@@ -481,7 +480,10 @@
     }
 
     // Call this function on the page after login (e.g., in home.html)
-    document.addEventListener('DOMContentLoaded', checkAndUploadPendingFiles);
+    window.onload = function() {
+        checkAndUploadPendingFiles();
+        fetchUserImages();
+    };
   </script>
 
 </body>
