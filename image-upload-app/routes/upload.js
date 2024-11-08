@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const AWS = require('aws-sdk');
-const { saveImageData, getUserImages, deleteImageData } = require('../models/dynamoDB');
+const { saveImageData, getUserImages, deleteImageData, getUserFromDynamoDB } = require('../models/dynamoDB');
 const router = express.Router();
 const path = require('path');
 const isLoggedIn = require('../middleware/auth'); // Middleware to protect routes
