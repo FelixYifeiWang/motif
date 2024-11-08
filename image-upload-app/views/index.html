@@ -659,10 +659,12 @@
 
     async function checkAndUploadPendingFiles() {
       // Retrieve pending files and tags from localStorage
+      console.log(1);
       const pendingFiles = JSON.parse(localStorage.getItem('pendingUploadFiles'));
       const pendingTags = JSON.parse(localStorage.getItem('pendingUploadTags'));
-
+      console.log(2);
       if (pendingFiles && pendingFiles.length > 0) {
+        console.log(3);
         const formData = new FormData();
 
         pendingFiles.forEach((file, index) => {
@@ -670,7 +672,7 @@
           formData.append('image', blob, file.name);
           formData.append('tags', pendingTags[index] || ''); // Adjust for tags
         });
-
+        console.log(formData);
         try {
           // Upload images and tags to the server
           const response = await fetch('/upload', {
