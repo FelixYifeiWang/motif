@@ -408,6 +408,7 @@
 
     // Function to handle black square click and open file input
     function handleBlackSquareClick() {
+      event.stopPropagation();
       document.getElementById('imageUpload').click();
     }
 
