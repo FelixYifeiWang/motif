@@ -316,6 +316,11 @@
     .page2 .page3 {
       display: none;
     }
+
+    .page5 {
+      display: flex !important;
+    }
+
   </style>
 </head>
 <body>
@@ -341,7 +346,7 @@
     <img src="/assets/or.png" alt="OR" class="or-text page1">
 
     <!-- Google Login Button Image with Click Event -->
-    <img src="/assets/login.png" alt="Log in with Google" class="login-button page5" onclick="handleLoginClick()">
+    <img src="/assets/login.png" alt="Log in with Google" class="login-button page1" onclick="handleLoginClick()">
 
     <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text page2" id="analyzingText page2" alt="Analyzing your Designer DNA...">
 
@@ -381,7 +386,7 @@
     <div class="designerdesc1 page5" id="designerdesc1">Known for bold colors and playful silhouettes, Jacquemus sets the stage for effortless chic that celebrates the body and Mediterranean aesthetics.<br><br>Founded in 2009, the brand captures the joie de vivre of Provencal life through its innovative designs. </div>
     
 
-    <img src="/assets/logo.png" alt="Log in with Google" class="login-button page1 second-login-button" onclick="handleLoginClick()">
+    <img src="/assets/login.png" alt="Log in with Google" class="login-button page5 second-login-button" onclick="handleLoginClick()">
   </div>
 
   <!-- Hidden File Input for Image Upload -->
@@ -574,50 +579,50 @@
       });
     }
 
-    let startX;
+    // let startX;
 
-    // Detect the start of a touch event
-    document.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
+    // // Detect the start of a touch event
+    // document.addEventListener('touchstart', (e) => {
+    //   startX = e.touches[0].clientX;
+    // });
 
-    // Detect the end of a touch event and determine swipe direction
-    document.addEventListener('touchend', (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const deltaX = startX - endX;
+    // // Detect the end of a touch event and determine swipe direction
+    // document.addEventListener('touchend', (e) => {
+    //   const endX = e.changedTouches[0].clientX;
+    //   const deltaX = startX - endX;
 
-      if (deltaX > 50) { // Swipe left detected
-        showNextPage();
-      } else if (deltaX < -50) {
-        showLastPage();
-      }
-    });
+    //   if (deltaX > 50) { // Swipe left detected
+    //     showNextPage();
+    //   } else if (deltaX < -50) {
+    //     showLastPage();
+    //   }
+    // });
 
-    function showNextPage() {
-      // Determine which page is currently visible and show the next page
-      if (document.querySelector('.page3').style.display !== 'none') {
-        // Hide page 1 and show page 2
-        document.querySelectorAll('.page3').forEach(element => element.style.display = 'none');
-        document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
-      } else if (document.querySelector('.page4').style.display !== 'none') {
-        // Hide page 2 and show page 3
-        document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
-        document.querySelectorAll('.page5').forEach(element => element.style.display = 'block');
-      }
-    }
+    // function showNextPage() {
+    //   // Determine which page is currently visible and show the next page
+    //   if (document.querySelector('.page3').style.display !== 'none') {
+    //     // Hide page 1 and show page 2
+    //     document.querySelectorAll('.page3').forEach(element => element.style.display = 'none');
+    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
+    //   } else if (document.querySelector('.page4').style.display !== 'none') {
+    //     // Hide page 2 and show page 3
+    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
+    //     document.querySelectorAll('.page5').forEach(element => element.style.display = 'block');
+    //   }
+    // }
 
-    function showLastPage() {
-      // Determine which page is currently visible and show the next page
-      if (document.querySelector('.page4').style.display !== 'none') {
-        // Hide page 1 and show page 2
-        document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
-        document.querySelectorAll('.page3').forEach(element => element.style.display = 'block');
-      } else if (document.querySelector('.page5').style.display !== 'none') {
-        // Hide page 2 and show page 3
-        document.querySelectorAll('.page5').forEach(element => element.style.display = 'none');
-        document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
-      }
-    }
+    // function showLastPage() {
+    //   // Determine which page is currently visible and show the next page
+    //   if (document.querySelector('.page4').style.display !== 'none') {
+    //     // Hide page 1 and show page 2
+    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'none');
+    //     document.querySelectorAll('.page3').forEach(element => element.style.display = 'block');
+    //   } else if (document.querySelector('.page5').style.display !== 'none') {
+    //     // Hide page 2 and show page 3
+    //     document.querySelectorAll('.page5').forEach(element => element.style.display = 'none');
+    //     document.querySelectorAll('.page4').forEach(element => element.style.display = 'block');
+    //   }
+    // }
 
     async function handleLoginClick() {
       if (file_inputs && file_inputs.length > 0) {
