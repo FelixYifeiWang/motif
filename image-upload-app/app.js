@@ -4,6 +4,8 @@ const passport = require('passport');
 const authRoutes = require('./routes/auth');
 const uploadRoutes = require('./routes/upload');
 const path = require('path');
+const isLoggedIn = require('../middleware/auth'); // Middleware to protect routes
+
 
 // Initialize Express app
 const app = express();
