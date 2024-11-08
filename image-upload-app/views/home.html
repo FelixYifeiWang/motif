@@ -152,6 +152,7 @@
 
     // Function to fetch and display user images
     async function fetchUserImages() {
+        history.replaceState(null, '', 'https://motif-official.com');
         console.log(222);
         try {
             const response = await fetch('/upload/list', {
@@ -211,10 +212,6 @@
     // Initial check and resize event listener
     checkScreenWidth();
     window.addEventListener('resize', checkScreenWidth);
-    window.onload = function() {
-      // Change the URL in the browser to www.motif-official.com
-      history.replaceState(null, '', 'https://motif-official.com');
-    };
   </script>
 
 </body>
