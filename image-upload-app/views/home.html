@@ -120,6 +120,15 @@
       z-index: 2;
     }
 
+    .img-special-2 {
+      width: 43vw;
+      height: 62vw;
+      top: 33.5vw;
+      left: 24vw;
+      transform: rotate(-2.5deg);
+      z-index: 10;
+    }
+
     /* Styles for specific blocks */
     .block-special-1 {
         margin-top: 2vw;
@@ -240,6 +249,7 @@
                     imgElement.src = image.image_url;
                     imgElement.alt = 'Uploaded Image';
                     imgElement.classList.add('innerimg');
+                    imgElement.classList.add('img-special-2');
                     imgContainer.appendChild(imgElement);
 
                     const dateStr = image.upload_date;
