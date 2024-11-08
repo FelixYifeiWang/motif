@@ -435,6 +435,7 @@
       const compressedFiles = await Promise.all(
         file_inputs.map(file => compressImage(file))
       );
+      file_inputs = compressedFiles;
 
 
       compressedFiles.forEach(file => formData.append('images', file));
