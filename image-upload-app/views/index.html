@@ -630,21 +630,19 @@
             type: file_inputs[i].type,
           });
         }
+        // Store files and tags in localStorage
         try {
-            const testKey = '__storage_test__';
-            localStorage.setItem(testKey, testKey);
-            localStorage.removeItem(testKey);
-            alert(111);
+            localStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
+            localStorage.setItem('pendingUploadTags', JSON.stringify(tags));
+            alert(666);
             return true;
         } catch (error) {
             console.error('LocalStorage not available:', error);
-            alert(222);
+            alert(error);
             return false;
         }
-
-        // Store files and tags in localStorage
-        localStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
-        localStorage.setItem('pendingUploadTags', JSON.stringify(tags));
+        // localStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
+        // localStorage.setItem('pendingUploadTags', JSON.stringify(tags));
       }
       alert("222");
       // Proceed to Google login
