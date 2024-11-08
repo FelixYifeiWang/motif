@@ -227,6 +227,22 @@
     .profile :hover {
       opacity: 1;
     }
+
+    .icon-img1 {
+      position: fixed;
+      top: 55vh;
+      width: 30vw;
+      left: 10vw;
+      z-index: 10002;
+    }
+
+    .icon-img2 {
+      position: fixed;
+      top: 55vh;
+      width: 30vw;
+      right: 10vw;
+      z-index: 10002;
+    }
   </style>
 </head>
 <body>
@@ -283,6 +299,18 @@
                     imgElement.classList.add('innerimg');
                     imgElement.classList.add('img-special-1');
                     imgContainer.appendChild(imgElement);
+
+                    const tag1 = document.createElement('img');
+                    tag1.src = '/assets/casual.png';
+                    tag1.alt = 'Uploaded Image';
+                    tag1.classList.add('icon-img1');
+                    imgContainer.appendChild(tag1);
+
+                    const tag2 = document.createElement('img');
+                    tag2.src = '/assets/casual.png';
+                    tag2.alt = 'Uploaded Image';
+                    tag2.classList.add('icon-img2');
+                    imgContainer.appendChild(tag2);
 
                     const dateStr = image.upload_date;
                     const dateObj = new Date(dateStr);
