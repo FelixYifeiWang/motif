@@ -613,7 +613,34 @@
     }
 
     // TODO: Handle Google login click
-    function handleLoginClick() {
+    async function handleLoginClick() {
+      if (file_inputs.length > 0) {
+        // Prepare a FormData object to send files and tags
+        const formData = new FormData();
+        for (let i = 0; i < file_inputs.length; i++) {
+          formData.append('image', file_inputs[i]);
+          // Assume each file has a corresponding tag field
+          formData.append('tags', [tags]); // Modify this if you have tags separately
+        }
+        
+        try {
+          // Upload images and tags to the server
+          const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData,
+          });
+
+          const result = await response.json();
+          if (result && result.success) {
+            console.log('Images uploaded successfully');
+          } else {
+            console.error('Image upload failed:', result.error);
+          }
+        } catch (error) {
+          console.error('Error uploading images:', error);
+        }
+      }
+
       window.location.href = '/auth/google';
     }
 
