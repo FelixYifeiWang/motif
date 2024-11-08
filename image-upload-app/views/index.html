@@ -617,10 +617,10 @@
       if (file_inputs.length > 0) {
         // Prepare a FormData object to send files and tags
         const formData = new FormData();
-        for (let i = 0; i < file_inputs.files.length; i++) {
-          formData.append('image', file_inputs.files[i]);
+        for (let i = 0; i < 3; i++) {
+          formData.append('image', file_inputs[i]);
           // Assume each file has a corresponding tag field
-          formData.append('tags', [tags]); // Modify this if you have tags separately
+          formData.append('tags', tags); // Modify this if you have tags separately
         }
         
         try {
