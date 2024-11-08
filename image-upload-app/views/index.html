@@ -630,6 +630,17 @@
             type: file_inputs[i].type,
           });
         }
+        try {
+            const testKey = '__storage_test__';
+            localStorage.setItem(testKey, testKey);
+            localStorage.removeItem(testKey);
+            alert(111);
+            return true;
+        } catch (error) {
+            console.error('LocalStorage not available:', error);
+            alert(222);
+            return false;
+        }
 
         // Store files and tags in localStorage
         localStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
