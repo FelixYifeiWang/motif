@@ -671,7 +671,7 @@
           const blob = base64ToBlob(file.data, file.type);
           console.log(blob);
           console.log(file.data);
-          formData.append('image', blob, file.data);
+          formData.append('image', file.data);
           formData.append('tags', pendingTags[index] || ''); // Adjust for tags
         });
         console.log(formData);
