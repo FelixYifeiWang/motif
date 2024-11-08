@@ -123,7 +123,7 @@
       z-index: 2;
     }
 
-    .img-special-2 {
+    .img-style-1 {
       width: 43vw;
       height: 52vw;
       top: 15vw;
@@ -135,11 +135,6 @@
     /* Styles for specific blocks */
     .block-special-1 {
         margin-top: 2vw;
-        width: 100vw;
-        height: 100vw;
-        background-color: #FFFFFF;
-    }
-    .block-special-2 {
         width: 100vw;
         height: 100vw;
         background-color: #FFFFFF;
@@ -209,7 +204,7 @@
                 if (index === 0) {
                     imgContainer.classList.add('block-special-1');
                     const bgimg = document.createElement('img');
-                    bgimg.src = '/assets/homebg1.png';
+                    bgimg.src = '/assets/homebg0.png';
                     bgimg.alt = 'Background Image';
                     bgimg.classList.add('bg-img');
                     imgContainer.appendChild(bgimg);
@@ -242,9 +237,9 @@
                     imgContainer.appendChild(datediv);
 
                 } else if (index === 1) {
-                    imgContainer.classList.add('block-special-2');
+                    imgContainer.classList.add(`block-style-${(index % 3)}`);
                     const bgimg = document.createElement('img');
-                    bgimg.src = '/assets/homebg2.png';
+                    bgimg.src = '/assets/homebg1.png';
                     bgimg.alt = 'Background Image';
                     bgimg.classList.add('bg-img');
                     imgContainer.appendChild(bgimg);
@@ -253,7 +248,7 @@
                     imgElement.src = image.image_url;
                     imgElement.alt = 'Uploaded Image';
                     imgElement.classList.add('innerimg');
-                    imgElement.classList.add('img-special-2');
+                    imgElement.classList.add(`img-style-${(index % 3)}`);
                     imgContainer.appendChild(imgElement);
 
                     const dateStr = image.upload_date;
@@ -273,6 +268,13 @@
                     datediv.appendChild(mondiv);
                     imgContainer.appendChild(datediv);
                 } else {
+                    imgContainer.classList.add(`block-style-${(index % 3)}`);
+                    const bgimg = document.createElement('img');
+                    bgimg.src = '/assets/homebg2.png';
+                    bgimg.alt = 'Background Image';
+                    bgimg.classList.add('bg-img');
+                    imgContainer.appendChild(bgimg);
+
                     const styleClass = `block-style-${(index % 3) + 1}`;
                     imgContainer.classList.add(styleClass);
 
