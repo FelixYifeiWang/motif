@@ -550,7 +550,6 @@
           element.style.display = 'block';
       });
 
-      let compressedFile;
       try {
         file_input = compressImage(file_input);
       } catch (error) {
@@ -559,7 +558,7 @@
       }
 
       const reader = new FileReader();
-      reader.readAsDataURL(compressedFile);
+      reader.readAsDataURL(file_input);
 
       // Send file to OpenAI API (placeholder function)
       analyzeImage();
