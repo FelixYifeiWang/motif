@@ -493,8 +493,8 @@
     <!-- Logo Image -->
     <img src="/assets/logo.png" alt="Motif Logo" class="logo">
 
-    <img src="/assets/start1.png" id="bg11" class="frontbg1 page0 fade-in">
-    <img src="/assets/start2.png" id="bg22" class="frontbg2 page0 fade-in">
+    <img src="/assets/start1.png" id="bg11" class="frontbg1 page0">
+    <img src="/assets/start2.png" id="bg22" class="frontbg2 page0">
     <div class="returnuser page0 emerge">Returning User?</div>
     <img src="/assets/start.png" id="startbutton" class="startbutton page0 fade-in">
 
@@ -587,10 +587,12 @@
     if (currentImage === "image1") {
       image1.classList.add("fade-in-bg");
       image1.style.opacity = 1;
+      image1.classList.add("fade-in");
       image2.style.opacity = 0;
     } else {
       image2.classList.add("fade-in-bg");
       image2.style.opacity = 1;
+      image2.classList.add("fade-in");
       image1.style.opacity = 0;
     }
 
