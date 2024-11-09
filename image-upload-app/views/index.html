@@ -604,11 +604,8 @@
           console.log(comment);
           console.log(intro);
           console.log(tags);
-        } else {
-          document.getElementById('uploadStatus').textContent = 'Analysis failed: ' + result.error;
-        }
+        } 
       } catch (error) {
-        document.getElementById('uploadStatus').textContent = 'Analysis failed. ';
         console.error('Error analyzing images:', error);
       }
 

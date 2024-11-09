@@ -626,7 +626,6 @@
             if (response.ok) {
                 const aires = result.results[0];
                 console.log(aires); 
-                let designer_name, comment, intro, tags;
 
                 try {
                     designer_name = aires["designer"];
@@ -649,6 +648,8 @@
                     console.error('Error getting comments:', error);
                 }
                 
+                console.log(comment);
+                console.log(tags);
                 const filesArray = [];
                 filesArray.push({
                   data: await fileToBase64(file_input), // Convert file to base64 for storage
@@ -656,12 +657,12 @@
                   type: file_inputs[i].type,
                 });
                 sessionStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
+                sessionStorage.setItem('pendingUploadComment', JSON.stringify(comment));
                 sessionStorage.setItem('pendingUploadTags', JSON.stringify(tags));
 
                 console.log(sessionStorage);
             }
         } catch (error) {
-            document.getElementById('uploadStatus').textContent = 'Analysis failed.';
             console.error('Error analyzing image:', error);
         }
     }
