@@ -725,7 +725,19 @@
 
       document.querySelector('.mobile-container').style.display = 'none';
 
+      document.querySelector('.gallery').style.display = 'none';
+
+      document.querySelector('.namecard').style.display = 'none';
+
+      document.querySelector('.msg').style.display = 'none';
+
+      document.querySelector('.mystyle').style.display = 'none';
+
       document.querySelectorAll('.camera').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      document.querySelectorAll('.card').forEach(element => {
           element.style.display = 'none';
       });
 

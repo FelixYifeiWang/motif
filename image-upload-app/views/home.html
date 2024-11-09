@@ -720,8 +720,13 @@
 
       document.querySelector('.mobile-container').style.display = 'none';
       document.querySelector('.cover').style.display = 'none';
+      document.querySelector('.galley').style.display = 'none';
 
       document.querySelectorAll('.camera').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      document.querySelectorAll('.img-container').forEach(element => {
           element.style.display = 'none';
       });
 
