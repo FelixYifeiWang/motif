@@ -335,6 +335,16 @@
       opacity: 0;
     }
 
+    .startbutton {
+      position: fixed;
+      top: 40vw;
+      right: 0;
+      width: 60vw;
+      z-index: 5;
+      object-fit: cover; /* Cover the area of the div without stretching */
+      object-position: left;
+    }
+
     .fade-in {
       animation: fadeIn 3s ease forwards;
     }
@@ -383,6 +393,7 @@
 
     <img src="/assets/start1.png" id="bg11" class="frontbg1 page0">
     <img src="/assets/start2.png" id="bg22" class="frontbg2 page0">
+    <img src="/assets/start.png" id="startbutton" class="startbutton page0">
 
     <!-- Black Square Image with Click Event (Upload Outfits Button) -->
     <img src="/assets/first-upload.png" alt="Upload Outfits Button" class="black-square page1" onclick="handleBlackSquareClick()">
