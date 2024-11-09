@@ -386,7 +386,7 @@
 
         const reader = new FileReader();
         reader.onload = function(e) {
-            document.getElementById(`photo`).src = e.target.result;
+            document.getElementById(`photo`).src = image;
         };
         reader.readAsDataURL(image);
         

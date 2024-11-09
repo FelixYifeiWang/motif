@@ -721,7 +721,9 @@
       document.querySelectorAll('body > *:not(.logo)').forEach(element => {
           element.style.display = 'none';
       });
-
+      document.querySelectorAll('.logo').forEach(element => {
+          element.style.display = 'block';
+      });
       // Show analyzing text
       document.querySelectorAll('.analyzing-text').forEach(element => {
           element.style.display = 'block';
