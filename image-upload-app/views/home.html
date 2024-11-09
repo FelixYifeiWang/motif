@@ -458,7 +458,7 @@
               headers: { 'Content-Type': 'application/json' },
           });
           
-          const user = user_response.json();
+          const user = await user_response.json();
           console.log(user);
           const styles = user["styles"];
           console.log(styles);
