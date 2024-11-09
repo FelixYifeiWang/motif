@@ -295,8 +295,8 @@
       My Style
     </div>
     <div class="gallery">
-      <div class="card">
-          <img src="/assets/casual.png" class="card-image" id="card1">
+      <div class="card" id="card1">
+          <img src="/assets/casual.png" class="card-image" >
           <div class="card-footer">
               <span class="level">Lv 1</span>
               <div class="progress-bar">
@@ -304,7 +304,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card2">
           <img src="/assets/edgy.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -313,7 +313,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card3">
           <img src="/assets/minimalist.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -322,7 +322,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card4">
           <img src="/assets/sophisticated.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -331,7 +331,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card5">
           <img src="/assets/athleisure.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -340,7 +340,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card6">
           <img src="/assets/romantic.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -349,7 +349,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card7">
           <img src="/assets/bohemian.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -358,7 +358,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card8">
           <img src="/assets/street.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -367,7 +367,7 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card" id="card9">
           <img src="/assets/glam.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -378,12 +378,6 @@
       </div>
       <div class="card">
           <img src="/assets/other.png" class="card-image">
-          <div class="card-footer">
-              <span class="level">Lv 1</span>
-              <div class="progress-bar">
-                  <div class="progress" style="width: 40%;"></div>
-              </div>
-          </div>
       </div>
       <!-- Add more cards as needed -->
   </div>
@@ -458,6 +452,15 @@
 
             document.getElementById(`streak`).innerHTML = consecutiveDays;
 
+            rank.forEach((style, index) => {
+                // Select the card image by index (assuming ids are sequential like "card1", "card2", etc.)
+                const cardImage = document.getElementById(`card${index + 1}`);
+                
+                if (cardImage) {
+                    // Set the image source based on the style name
+                    cardImage.src = `/assets/${style}.png`;
+                }
+            });
 
         } catch (error) {
             console.error('Error fetching user info:', error);
