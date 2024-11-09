@@ -534,8 +534,9 @@
     // Function to handle file selection or capture
     async function handleFileSelect(event) {
       const file = document.getElementById('fileInput');
+      file_input = file.files[0];
 
-      if (!file.files[0]) {
+      if (!file_input) {
           alert("Please upload an image.");
           return;
       }
@@ -552,7 +553,7 @@
       console.log(1);
 
       try {
-        file_input = await compressImage(file.files[0]);
+        file_input = await compressImage(file_input);
       } catch (error) {
           console.error('Error during image compression:', error);
           return;
@@ -567,7 +568,7 @@
     function compressImage(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-
+            console.log(1.5)
             reader.onload = function(event) {
                 const img = new Image();
                 img.onload = function() {
@@ -605,6 +606,7 @@
 
                 img.src = event.target.result;
             };
+            console.log(1.9);
         });
     }
     async function analyzeImage() {
