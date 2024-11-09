@@ -552,7 +552,7 @@
 
       let compressedFile;
       try {
-        file_input = await compressImage(file_input);
+        file_input = compressImage(file_input);
       } catch (error) {
           console.error('Error during image compression:', error);
           return;
@@ -629,7 +629,7 @@
             const result = await response.json();
             if (response.ok) {
                 const aires = result.results[0];
-                console.log(aires);
+                console.log(aires); 
                 let designer_name, comment, intro, tags;
 
                 try {
