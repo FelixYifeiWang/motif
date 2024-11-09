@@ -553,7 +553,8 @@
       console.log(1);
 
       try {
-        file_input = await compressImage(file_input);
+        const compressedFile = await compressImage(file_input);
+        file_input = compressedFile;
       } catch (error) {
           console.error('Error during image compression:', error);
           return;
@@ -568,7 +569,6 @@
     function compressImage(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            console.log(1.5)
             reader.onload = function(event) {
                 const img = new Image();
                 img.onload = function() {
@@ -606,7 +606,6 @@
 
                 img.src = event.target.result;
             };
-            console.log(1.9);
         });
     }
     async function analyzeImage() {
