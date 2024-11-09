@@ -348,11 +348,11 @@
     <!-- Additional Images under Analysis Result -->
     <div class="resultimage1 page3">
       <img src="/assets/casual.png" class="icon-img" alt="Result Image 1" id="styleimg1">
-      <img src="/assets/100.png" class="t100 page3" alt=" ">
+      <img src="/assets/100.png" class="t100 page3" id="t100" alt=" ">
     </div>
     <div class="resultimage2 page3">
       <img src="/assets/minimalist.png" class="icon-img" alt="Result Image 2" id="styleimg2">
-      <img src="/assets/50.png" class="t50 page3" alt=" ">
+      <img src="/assets/50.png" class="t50 page3" id="t50" alt=" ">
     </div>
     
     <img src="/assets/dots1.png" alt="" class="dots page3">
@@ -593,6 +593,8 @@
             tags = ["Unknown"];
             console.error('Error getting comments:', error);
           }
+          document.getElementById(`t100`).src = `${tags[0]}.png`;
+          document.getElementById(`t50`).src = `${tags[1]}.png`;
           document.getElementById('analysisResult').textContent = comment;
           document.getElementById('designername').textContent = designer_name;
           document.getElementById('designerdesc').innerHTML = intro;
