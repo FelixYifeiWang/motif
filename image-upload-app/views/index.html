@@ -492,6 +492,8 @@
         // Update opacity
         image1.style.opacity = 0;
         image2.style.opacity = 1;
+        image1.style.zIndex = 1;
+        image2.style.zIndex = 2;
 
         // Switch to image2 as the current image
         currentImage = "image2";
@@ -505,6 +507,8 @@
         // Update opacity
         image2.style.opacity = 0;
         image1.style.opacity = 1;
+        image1.style.zIndex = 2;
+        image2.style.zIndex = 1;
 
         // Switch to image1 as the current image
         currentImage = "image1";
