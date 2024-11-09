@@ -456,7 +456,8 @@
               headers: { 'Content-Type': 'application/json' },
           });
           
-          const styles = user.styles;
+          console.log(user);
+          const styles = user["styles"];
           console.log(styles);
           const formData1 = new FormData();
           styles[pendingTags[0]] = styles[pendingTags[0]] + 100;
