@@ -171,6 +171,147 @@
       font-size: 7vw;
       z-index: 2;
     }
+
+    
+    .fade-in-bg {
+      animation: fadeInBg 3s ease forwards;
+    }
+
+    .fade-out-bg {
+      animation: fadeOutBg 5s ease forwards;
+    }
+
+    .pulsing {
+      animation: pulse 3s ease-in-out infinite;
+      transform-origin: left;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05); /* Slightly enlarges for a 'breathing' effect */
+      }
+      100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInBg {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOutBg {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1; /* Slower fade-out for the first half */
+      }
+      100% {
+        opacity: 0; /* Faster fade-out in the later half */
+      }
+    }
+
+    /* Fade In Animation */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Slide In (from Right to Left) Animation */
+    .side-slide-in {
+      animation: sideslideIn 0.8s ease forwards;
+    }
+
+    @keyframes sideslideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Slide Out (from Left to Right) Animation */
+    .side-slide-out {
+      animation: sideslideOut 0.8s ease forwards;
+    }
+
+    @keyframes sideslideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Emerge Animation */
+    .emerge {
+      animation: emerge 1s ease forwards;
+    }
+
+    @keyframes emerge {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .slide-in {
+        opacity: 0;
+        animation: slidein 1s ease forwards;
+        transform: translateY(10px); /* Starting point for slide-in */
+        /* transition: opacity 1.5s ease-out, transform 1.5s ease-out; */
+    }
+
+    @keyframes slidein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .scroll-in {
+        opacity: 0;
+        transform: translateY(30px); /* Starting point for slide-in */
+        transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+    }
+
+    /* Triggered slide-in effect */
+    .scroll-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
   </style>
 </head>
 <body>
@@ -182,20 +323,20 @@
   <!-- Mobile Container -->
   <div class="mobile-container hide-on-desktop" id="container">
     <!-- Logo Image -->
-    <img src="/assets/logo.png" alt="Motif Logo" class="logo">
-    <img src="/assets/photo.png" alt="" class="photo" id="photo">
+    <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
+    <img src="/assets/photo.png" alt="" class="photo slide-in" id="photo ">
 
-    <div class="resultimage1">
+    <div class="resultimage1 slide-in">
       <img src="/assets/casual.png" class="icon-img" id="i100" alt="Result Image 1" id="styleimg1">
       <img src="/assets/100.png" class="t100 page3" alt=" ">
     </div>
-    <div class="resultimage2">
+    <div class="resultimage2 slide-in">
       <img src="/assets/minimalist.png" class="icon-img" id="i50" alt="Result Image 2" id="styleimg2">
       <img src="/assets/50.png" class="t50 page3" alt=" ">
     </div>
-    <div class="outfitNum" id="outfitNum">Outfit 000</div>
-    <div class="analysis-result" id="analysisResult">Congrats! You’ve unlocked your signature styles!<br><br>Continue to view your best match fashion designer.</div>
-    <img src="/assets/arrow.png" class="arrow" id="arrow">
+    <div class="outfitNum fade-in" id="outfitNum">Outfit 000</div>
+    <div class="analysis-result fade-in" id="analysisResult">Congrats! You’ve unlocked your signature styles!<br><br>Continue to view your best match fashion designer.</div>
+    <img src="/assets/arrow.png" class="arrow fade-in" id="arrow">
   </div>
 
 
