@@ -430,6 +430,9 @@
       if (window.innerWidth > 768) {
         document.querySelector('.desktop-warning').style.display = 'block';
         document.querySelector('.hide-on-desktop').style.display = 'none';
+        document.querySelectorAll('body').forEach(element => {
+            element.style.display = 'none';
+        });
       } else {
         document.querySelector('.desktop-warning').style.display = 'none';
         document.querySelector('.hide-on-desktop').style.display = 'flex';
