@@ -56,10 +56,8 @@ router.post('/', isLoggedIn, upload.array('images', 10), async (req, res) => {
 router.post('/update-styles', isLoggedIn, upload.none(), async (req, res) => {
   const user_id = req.user.google_id; // Assume the user's Google ID is stored in req.user
   const styles = JSON.parse(req.body.tags); // Extract the new styles array from the request body
-  console.log(req.body.tags);
-  console.log(styles);
 
-  if (!styles || !Array.isArray(styles)) {
+  if (!styles) {
     return res.status(400).json({ error: 'Please provide a valid styles array' });
   }
 
