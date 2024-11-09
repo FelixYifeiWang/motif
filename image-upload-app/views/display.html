@@ -378,10 +378,8 @@
       comment = pendingComment;
       if (pendingFiles && pendingFiles.length > 0) {
         pendingFiles.forEach((file, index) => {
-          const blob = base64ToBlob(file.data, file.type);
-          image = blob;
-          console.log(blob);
-          console.log(file.data);
+          image = base64ToBlob(file.data, file.type);
+          console.log(image);
         });
 
         const reader = new FileReader();
