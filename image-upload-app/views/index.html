@@ -309,8 +309,50 @@
       z-index: 1111;
     }
 
-    .page2 .page3 {
+    .page1 .page2 .page3 {
       display: none;
+    }
+    
+    .frontbg1 {
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1;
+      opacity: 0;
+    }
+
+    .frontbg2 {
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1;
+      opacity: 0;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .fade-out {
+      animation: fadeOut 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -325,10 +367,13 @@
   <div class="mobile-container hide-on-desktop">
 
     <!-- Background -->
-    <img src="/assets/bg1.png" alt="" class="bg page1">
+    <!-- <img src="/assets/bg1.png" alt="" class="bg page1"> -->
 
     <!-- Logo Image -->
     <img src="/assets/logo.png" alt="Motif Logo" class="logo">
+
+    <img src="/assets/start1.png" id="bg11" class="frontbg1 page0">
+    <img src="/assets/start2.png" id="bg22" class="frontbg2 page0">
 
     <!-- Black Square Image with Click Event (Upload Outfits Button) -->
     <img src="/assets/first-upload.png" alt="Upload Outfits Button" class="black-square page1" onclick="handleBlackSquareClick()">
@@ -337,7 +382,7 @@
     <img src="/assets/or.png" alt="OR" class="or-text page1">
 
     <!-- Google Login Button Image with Click Event -->
-    <img src="/assets/login.png" alt="Log in with Google" class="login-button page1" onclick="handleLoginClick()">
+    <img src="/assets/login.png" alt="Log in with Google" class="login-button page0" onclick="handleLoginClick()">
 
     <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text page2" id="analyzingText page2" alt="Analyzing your Designer DNA...">
 
@@ -411,6 +456,60 @@
     var comment;
     var intro;
     var tags;
+
+    let flag = true;
+    let currentImage = Math.random() < 0.5 ? "image1" : "image2"; // Randomize the initial image
+    const image1 = document.getElementById("bg11");
+    const image2 = document.getElementById("bg22");
+
+    // Set initial visibility based on the randomized selection
+    if (currentImage === "image1") {
+      image1.classList.add("fade-in");
+      image1.style.opacity = 1;
+      image2.style.opacity = 0;
+    } else {
+      image2.classList.add("fade-in");
+      image2.style.opacity = 1;
+      image1.style.opacity = 0;
+    }
+
+    function toggleImages() {
+      if (!flag) return; // Stop if the flag is set to false
+
+      if (currentImage === "image1") {
+        // Fade out image1 and fade in image2
+        image1.classList.remove("fade-in");
+        image1.classList.add("fade-out");
+        image2.classList.remove("fade-out");
+        image2.classList.add("fade-in");
+
+        // Update opacity
+        image1.style.opacity = 0;
+        image2.style.opacity = 1;
+
+        // Switch to image2 as the current image
+        currentImage = "image2";
+      } else {
+        // Fade out image2 and fade in image1
+        image2.classList.remove("fade-in");
+        image2.classList.add("fade-out");
+        image1.classList.remove("fade-out");
+        image1.classList.add("fade-in");
+
+        // Update opacity
+        image2.style.opacity = 0;
+        image1.style.opacity = 1;
+
+        // Switch to image1 as the current image
+        currentImage = "image1";
+      }
+
+      // Repeat the toggle every 2 seconds (adjust as needed)
+      setTimeout(toggleImages, 2000);
+    }
+
+    // Start the image toggle loop
+    toggleImages();
 
     // Function to handle selected files
     async function handleFilesSelected() {
