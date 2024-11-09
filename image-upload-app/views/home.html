@@ -593,6 +593,11 @@
     // Fetch images on page load
 
     document.getElementById("profileButton").addEventListener("click", function() {
+        gtag('event', 'profile-page', {
+          'event_category': 'Button Clicks',
+          'event_label': 'Profile Page Button Clicked',
+          'value': 1
+        });
         window.location.href = "/profile";
     });
 
@@ -621,6 +626,11 @@
       console.log(pendingFiles);
       console.log(pendingTags);
       if (pendingFiles && pendingFiles.length > 0) {
+        gtag('event', 'ootd-upload', {
+          'event_category': 'Image Loads',
+          'event_label': 'New Ootd Uploaded',
+          'value': 3
+        });
         const formData = new FormData();
 
         pendingFiles.forEach((file, index) => {
@@ -690,6 +700,11 @@
         await checkAndUploadPendingFiles();
         await fetchUserImages();
         animateElements();
+        gtag('event', 'home-visit', {
+          'event_category': 'Page Loads',
+          'event_label': 'Home Page Visited',
+          'value': 1
+        });
         // window.addEventListener('scroll', animateElements);
     };
 
@@ -746,11 +761,8 @@
           element.style.display = 'block';
       });
 
-      console.log(1);
-
       try {
         const compressedFile = await compressImage(file_input);
-        console.log(2);
         file_input = compressedFile;
       } catch (error) {
           console.error('Error during image compression:', error);
@@ -822,6 +834,11 @@
             });
             const result = await response.json();
             if (response.ok) {
+                gtag('event', 'ootd-upload', {
+                  'event_category': 'Image Loads',
+                  'event_label': 'New Ootd Uploaded',
+                  'value': 1
+                });
                 const aires = result.results[0];
                 console.log(aires); 
 

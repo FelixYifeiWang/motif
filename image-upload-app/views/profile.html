@@ -573,6 +573,11 @@
 
     var imageNum = 0;
     document.getElementById("ootdButton").addEventListener("click", function() {
+        gtag('event', 'home-page', {
+          'event_category': 'Button Clicks',
+          'event_label': 'Home Page Button Clicked',
+          'value': 1
+        });
         window.location.href = "/home";
     });
 
@@ -664,6 +669,11 @@
     }
 
     window.onload = async function() {
+        gtag('event', 'profile-visit', {
+          'event_category': 'Page Loads',
+          'event_label': 'Profile Page Visited',
+          'value': 1
+        });
         await fetchUser();
         animateElements();
         // window.addEventListener('scroll', animateElements);
@@ -691,13 +701,13 @@
     }
 
     // Function to handle file selection or capture
-    function handleFileSelect(event) {
-        const file = event.target.files[0];
-        if (file) {
-            // Display the selected file or do something with it
-            console.log("Selected file:", file);
-        }
-    }
+    // function handleFileSelect(event) {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         // Display the selected file or do something with it
+    //         // console.log("Selected file:", file);
+    //     }
+    // }
 
     // handle uplaod
 
@@ -833,6 +843,11 @@
             });
             const result = await response.json();
             if (response.ok) {
+                gtag('event', 'ootd-upload', {
+                  'event_category': 'Image Loads',
+                  'event_label': 'New Ootd Uploaded',
+                  'value': 1
+                });
                 const aires = result.results[0];
                 console.log(aires); 
 
@@ -867,7 +882,7 @@
                 sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
                 sessionStorage.setItem('pendingUploadImageNum', JSON.stringify(imageNum));
 
-                console.log(sessionStorage);
+                // console.log(sessionStorage);
 
                 const formDataUpload = new FormData();
                 formDataUpload.append('images', file_input, file_input.name);
@@ -896,7 +911,7 @@
                     body: formData1,
                   });
 
-                  console.log(response1);
+                  // console.log(response1);
 
                   if (response && response.ok) {
                     console.log('Images uploaded successfully');
