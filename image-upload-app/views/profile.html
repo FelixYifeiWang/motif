@@ -458,7 +458,19 @@
               const card = document.getElementById(`card${index + 1}`);
               if (card) {
                 const img = card.querySelector(".card-image");
+                const levelSpan = card.querySelector(".level");
+                const progressBar = card.querySelector(".progress");
                 img.src = `/assets/${style}.png`; // Update the src with the corresponding style image
+                
+                const score = styles[style];
+                const level = Math.floor(score / 80);
+                const progressPercent = ((score % 80) / 80) * 100;
+
+                // Update level text
+                levelSpan.textContent = `Lv ${level}`;
+
+                // Update progress bar width
+                progressBar.style.width = `${progressPercent}%`;
               }
             });
 
