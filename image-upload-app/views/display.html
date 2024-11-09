@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Home</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+
+  <!-- Google Fonts for Amiri -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap" rel="stylesheet">
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+        overflow-x: hidden; /* Prevents horizontal scrolling */
+        width: 100vw; /* Sets the width to viewport width */
+        margin: 0; /* Ensures no extra space */
+    }
+    body {
+      font-family: 'Amiri', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #FFFFFF;
+      overflow-x: hidden;
+    }
+
+    /* Warning Message for Desktop Users */
+    .desktop-warning {
+      display: none;
+      text-align: center;
+      color: #333;
+      font-size: 3vw;
+      font-family: 'Amiri', serif;
+      position: fixed;
+      top: 40vh;
+      width: 100vw;
+      text-align: center;
+    }
+
+    /* Main Container for Mobile Layout */
+    .mobile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 100vw;
+      max-width: 600px;
+    }
+    .logo {
+      position: fixed;
+      top: 6vh;
+      left: 6vw;
+      width: 18.6vw;
+      max-width: 100px;
+      z-index: 1000;
+    }
+
+    .photo {
+      position: absolute;
+      width: 21vw;
+      height: 28.06vw;
+      top: 48vw;
+      left: 50vw;
+      z-index: 9;
+      object-fit: cover; /* Cover the area of the div without stretching */
+      object-position: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Warning Message for Desktop Users -->
+  <div class="desktop-warning">
+    Please view this page on a mobile device.
+  </div>
+  <img class="cover" src="/assets/cover.png">
+  <!-- Mobile Container -->
+  <div class="mobile-container hide-on-desktop">
+    <!-- Logo Image -->
+    <img src="/assets/logo.png" alt="Motif Logo" class="logo">
+    <img src="/assets/photo.png" alt="" class="photo" id="photo">
+  </div>
+
+
+  <script>
+
+    function checkScreenWidth() {
+      if (window.innerWidth > 768) {
+        document.querySelector('.desktop-warning').style.display = 'block';
+        document.querySelector('.hide-on-desktop').style.display = 'none';
+      } else {
+        document.querySelector('.desktop-warning').style.display = 'none';
+        document.querySelector('.hide-on-desktop').style.display = 'flex';
+      }
+    }
+
+    // Initial check and resize event listener
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+
+    var tags;
+    var image;
+    var comment;
+
+    async function checkAndUploadPendingFiles() {
+      // Retrieve pending files and tags from sessionStorage
+      const pendingFiles = JSON.parse(sessionStorage.getItem('pendingUploadFilesNew'));
+      const pendingTags = JSON.parse(sessionStorage.getItem('pendingUploadTagsNew'));
+      const pendingComment = JSON.parse(sessionStorage.getItem('pendingUploadCommentNew'));
+
+      sessionStorage.removeItem('pendingUploadFiles');
+      sessionStorage.removeItem('pendingUploadTags');
+      console.log(pendingFiles);
+      console.log(pendingTags);
+      tags = pendingTags;
+      comment = pendingComment;
+      if (pendingFiles && pendingFiles.length > 0) {
+        pendingFiles.forEach((file, index) => {
+          const blob = base64ToBlob(file.data, file.type);
+          image = blob;
+          console.log(blob);
+          console.log(file.data);
+        });
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(`photo`).src = e.target.result;
+        };
+        reader.readAsDataURL(image);
+      }
+    }
+
+    // Helper function to convert base64 back to a Blob
+    function base64ToBlob(base64, mimeType) {
+      const byteString = atob(base64.split(',')[1]);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        uint8Array[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([arrayBuffer], { type: mimeType });
+    }
+
+    // Call this function on the page after login (e.g., in home.html)
+    window.onload = function() {
+        checkAndUploadPendingFiles();
+        setTimeout(fetchUserImages, 100);
+    };
+
+
+    // handle uplaod
+
+    var file_input;
+    const formDataAI = new FormData();
+    var aires;
+    var designer_name;
+    var comment;
+    var intro;
+    var tags;
+
+    function triggerFileInput() {
+        document.getElementById("fileInput").click();
+    }
+
+    // Function to handle file selection or capture
+    async function handleFileSelect(event) {
+      const file = document.getElementById('fileInput');
+      file_input = file.files[0];
+
+      if (!file_input) {
+          alert("Please upload an image.");
+          return;
+      }
+
+      document.querySelectorAll('body > *:not(.logo)').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      // Show analyzing text
+      document.querySelectorAll('.analyzing-text').forEach(element => {
+          element.style.display = 'block';
+      });
+
+      console.log(1);
+
+      try {
+        const compressedFile = await compressImage(file_input);
+        console.log(2);
+        file_input = compressedFile;
+      } catch (error) {
+          console.error('Error during image compression:', error);
+          return;
+      }      
+      formDataAI.append('images', file_input);
+
+      // Send file to OpenAI API (placeholder function)
+      analyzeImage();
+    }
+
+    function compressImage(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    // Create a canvas to draw the image
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Set desired dimensions (you can adjust this)
+                    const maxWidth = 800;
+                    const scaleFactor = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scaleFactor;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // Convert to a compressed JPEG with quality of 0.7
+                    canvas.toBlob(
+                        blob => {
+                            if (blob) {
+                                const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
+                                console.log(`Compressed file size for ${file.name}: ${compressedFile.size} bytes`);
+                                resolve(compressedFile);
+                            } else {
+                                reject(new Error('Compression failed'));
+                            }
+                        },
+                        'image/jpeg',
+                        0.7
+                    );
+                };
+
+                img.onerror = () => {
+                    reject(new Error('Failed to load image for compression'));
+                };
+
+                img.src = event.target.result;
+            };
+
+            reader.onerror = () => {
+                reject(new Error('File reading failed'));
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+    async function analyzeImage() {
+        console.log("Sending image to OpenAI API...");
+
+        try {
+            console.log(formDataAI);
+            // Send file to OpenAI analysis API
+            const response = await fetch('/api/openai/analyze-images', {
+                method: 'POST',
+                body: formDataAI,
+            });
+            const result = await response.json();
+            if (response.ok) {
+                const aires = result.results[0];
+                console.log(aires); 
+
+                try {
+                    designer_name = aires["designer"];
+                } catch (error) {
+                    designer_name = "Unknown";
+                    console.error('Error getting designer name:', error);
+                }
+                try {
+                    comment = aires["compliment"];
+                    intro = aires["desc_sentence1"] + "<br><br>" + aires["desc_sentence2"];
+                } catch (error) {
+                    comment = "Unknown";
+                    intro = "Unknown";
+                    console.error('Error getting comments:', error);
+                }
+                try {
+                    tags = aires["tags"];
+                } catch (error) {
+                    tags = ["casual", "other"];
+                    console.error('Error getting comments:', error);
+                }
+                const filesArray = [];
+                filesArray.push({
+                  data: await fileToBase64(file_input), // Convert file to base64 for storage
+                  name: file_input.name,
+                  type: file_input.type,
+                });
+                sessionStorage.setItem('pendingUploadFilesNew', JSON.stringify(filesArray));
+                sessionStorage.setItem('pendingUploadCommentNew', JSON.stringify(comment));
+                sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
+
+                console.log(sessionStorage);
+
+                
+            }
+        } catch (error) {
+            console.error('Error analyzing image:', error);
+        }
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
+  </script>
+
+</body>
+</html>
+

@@ -51,6 +51,10 @@ app.get('/profile', isLoggedIn, (req, res) => {
   res.sendFile(path.join(__dirname, '/views/profile.html'));
 });
 
+app.get('/display', isLoggedIn, (req, res) => {
+  res.sendFile(path.join(__dirname, '/views/display.html'));
+});
+
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -648,10 +648,6 @@
                     tags = ["casual", "other"];
                     console.error('Error getting comments:', error);
                 }
-                
-                console.log(comment);
-                console.log(tags);
-
                 const filesArray = [];
                 filesArray.push({
                   data: await fileToBase64(file_input), // Convert file to base64 for storage
@@ -663,6 +659,46 @@
                 sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
 
                 console.log(sessionStorage);
+
+                const formDataUpload = new FormData();
+                formDataUpload.append('images', file_input, file_input.name);
+                formDataUpload.append('tags', tags);
+                try {
+                  // Upload images and tags to the server
+                  const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formDataUpload,
+                  });
+
+                  const user_response = await fetch('/upload/user', {
+                      method: 'GET',
+                      headers: { 'Content-Type': 'application/json' },
+                  });
+                  
+                  const user = await user_response.json();
+                  const styles = user["styles"];
+                  const formData1 = new FormData();
+                  styles[tags[0]] = styles[tags[0]] + 100;
+                  styles[tags[1]] = styles[tags[1]] + 50;
+                  formData1.append('tags', JSON.stringify(styles));
+
+                  const response1 = await fetch('/upload/update-styles', {
+                    method: 'POST',
+                    body: formData1,
+                  });
+
+                  console.log(response1);
+
+                  if (response && response.ok) {
+                    console.log('Images uploaded successfully');
+                  } else {
+                    console.error('Image upload failed:', response.status);
+                  }
+                } catch (error) {
+                  console.error('Error uploading images:', error);
+                }
+
+                window.location.href = "/display";
             }
         } catch (error) {
             console.error('Error analyzing image:', error);
