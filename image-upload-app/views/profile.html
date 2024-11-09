@@ -451,8 +451,8 @@
             }
 
             document.getElementById(`streak`).innerHTML = consecutiveDays;
-
-            console.log(rank);
+            
+            const exp = 60;
 
             rank.forEach((style, index) => {
               const card = document.getElementById(`card${index + 1}`);
@@ -463,8 +463,8 @@
                 img.src = `/assets/${style}.png`; // Update the src with the corresponding style image
                 
                 const score = styles[style];
-                const level = Math.floor(score / 80);
-                const progressPercent = ((score % 80) / 80) * 100;
+                const level = Math.floor(score / exp);
+                const progressPercent = ((score % exp) / exp) * 100;
 
                 // Update level text
                 levelSpan.textContent = `Lv ${level}`;
