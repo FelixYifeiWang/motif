@@ -574,27 +574,26 @@
           aires = result.results[0];
           console.log(aires);
           try {
-            designer_name = aires.match(/\*\*(.*?)\*\*/)[1];
+            designer_name = aires["designer"];
           } catch (error) {
             designer_name = "Unknown";
             console.error('Error getting designer name:', error);
           }
           try {
-            let sentences = aires.match(/[^\.!\?]+[\.!\?]+/g);
-            comment = sentences[sentences.length - 1].trim();
-            intro = sentences[1].trim() + "<br><br>" + sentences[2].trim();
+            comment = aires["compliment"];
+            intro = aires["description"];
+            intro = intro.split(/(?<=[.!?])\s+/).join("<br><br>");
           } catch (error) {
             comment = "Unknown";
             intro = "Unknown";
             console.error('Error getting comments:', error);
           }
           try {
-            tags = aires.match(/#[\w]+/g);
+            tags = aires["tags"];
           } catch (error) {
-            tags = "Unknown";
+            tags = ["Unknown"];
             console.error('Error getting comments:', error);
           }
-          tags = aires.match(/#[\w]+/g);
           document.getElementById('analysisResult').textContent = comment;
           document.getElementById('designername').textContent = designer_name;
           document.getElementById('designerdesc').innerHTML = intro;
