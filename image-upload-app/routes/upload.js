@@ -53,7 +53,7 @@ router.post('/', isLoggedIn, upload.array('images', 10), async (req, res) => {
   }
 });
 
-router.post('/update-styles', isLoggedIn, async (req, res) => {
+router.post('/update-styles', isLoggedIn, upload.none(), async (req, res) => {
   const user_id = req.user.google_id; // Assume the user's Google ID is stored in req.user
   const styles = req.body.tags; // Extract the new styles array from the request body
 
