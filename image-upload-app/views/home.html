@@ -550,7 +550,11 @@
       });
 
       try {
-        file_input = compressImage(file.files[0]);
+        var file_inputs = [file_input];
+        const compressedFiles = await Promise.all(
+          file_inputs.map(file => compressImage(file))
+        );
+        file_input = compressedFiles[0];
       } catch (error) {
           console.error('Error during image compression:', error);
           return;
@@ -643,8 +647,11 @@
                 
                 console.log(comment);
                 console.log(tags);
+
+                
+                sessionStorage.removeItem('pendingUploadFiles');
+                sessionStorage.removeItem('pendingUploadTags');
                 const filesArray = [];
-                console.log(file_input);
                 filesArray.push({
                   data: await fileToBase64(file_input), // Convert file to base64 for storage
                   name: file_input.name,
