@@ -974,7 +974,6 @@
     }
 
     function openInSecureBrowser() {
-        alert(isiOS());
         // If in an in-app browser
         if (isInAppBrowser()) {
             // Detect platform and redirect accordingly
@@ -984,6 +983,7 @@
             } else if (isiOS()) {
                 // For iOS, try opening Safari
                 window.open(window.location.href, "_blank");
+                alert(isiOS());
             } else {
                 alert("Please open this link in a secure browser like Chrome or Safari.");
             }
