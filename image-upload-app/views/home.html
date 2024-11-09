@@ -554,6 +554,7 @@
 
       try {
         const compressedFile = await compressImage(file_input);
+        console.log(2);
         file_input = compressedFile;
       } catch (error) {
           console.error('Error during image compression:', error);
@@ -562,7 +563,6 @@
       formDataAI.append('images', file_input);
 
       // Send file to OpenAI API (placeholder function)
-      console.log(2);
       analyzeImage();
     }
 
