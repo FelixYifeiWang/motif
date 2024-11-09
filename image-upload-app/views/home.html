@@ -468,8 +468,8 @@
         //     element.classList.add('scroll-in-visible');
         // });
         slideElements.forEach((element) => {
-            if (isInViewport(element)) {
-                element.classList.add('scroll-in-visible');
+            if (isInViewport(element) && !element.classList.contains('animated')) {
+                element.classList.add('scroll-in-visible', 'animated');
             }
         });
         
