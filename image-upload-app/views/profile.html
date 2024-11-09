@@ -447,6 +447,7 @@
             // Start counting consecutive days with at least one image
             let consecutiveDays = 0;
             let currentDate = new Date();
+            currentDate = convertToEST(currentDate);
 
             // Check each day, going back one day at a time
             while (imageDates.has(currentDate.toISOString().split('T')[0])) {
