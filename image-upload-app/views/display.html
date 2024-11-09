@@ -109,7 +109,6 @@
         letter-spacing: 0.05em;
     }
     .resultimage1 {
-      display: none;
       position: fixed;
       top: 55vh;
       width: 37vw;
@@ -125,7 +124,6 @@
     }
 
     .resultimage2 {
-      display: none;
       position: fixed;
       top: 55vh;
       width: 37vw;
@@ -134,7 +132,6 @@
     }
 
     .resultimage1 .t100 {
-      display: none;
       position: absolute;
       bottom: 2vw;
       width: 12vw;
@@ -143,7 +140,6 @@
     }
 
     .resultimage2 .t50 {
-      display: none;
       position: absolute;
       bottom: 5vw;
       width: 10vw;
@@ -257,7 +253,7 @@
         document.getElementById(`i100`).src = `/assets/${tags[0]}.png`;
         document.getElementById(`i50`).src = `/assets/${tags[1]}.png`;
         document.getElementById('analysisResult').innerHTML = comment;
-        const formattedImageNum = imageNum.toString().padStart(3, '0');
+        const formattedImageNum = (imageNum + 1).toString().padStart(3, '0');
         document.getElementById('outfitNum').innerHTML = `Outfit ${formattedImageNum}`;
 
         const dateObj = new Date();
