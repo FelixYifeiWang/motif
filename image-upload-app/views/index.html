@@ -364,15 +364,34 @@
       object-position: left;
     }
 
-    .fade-in {
-      animation: fadeIn 3s ease forwards;
+    .fade-in-bg {
+      animation: fadeInBg 3s ease forwards;
     }
 
-    .fade-out {
-      animation: fadeOut 5s ease forwards;
+    .fade-out-bg {
+      animation: fadeOutBg 5s ease forwards;
     }
 
-    @keyframes fadeIn {
+    .pulsing {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05); /* Slightly enlarges for a 'breathing' effect */
+      }
+      100% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInBg {
       from {
         opacity: 0;
       }
@@ -381,7 +400,7 @@
       }
     }
 
-    @keyframes fadeOut {
+    @keyframes fadeOutBg {
       0% {
         opacity: 1;
       }
@@ -422,7 +441,7 @@
     <!-- Google Login Button Image with Click Event -->
     <img src="/assets/login.png" alt="Log in with Google" class="login-button page0" onclick="handleLoginClick()">
 
-    <img src="/assets/analyze-text.png" class="analyzing-text page2" id="analyzingText page2" alt="Analyzing your Designer DNA...">
+    <img src="/assets/analyze-text.png" class="analyzing-text page2 pulsing" id="analyzingText page2" alt="Analyzing your Designer DNA...">
 
     <img src="/assets/bg2.png" alt="" class="bg2 page3">
 
@@ -502,11 +521,11 @@
 
     // Set initial visibility based on the randomized selection
     if (currentImage === "image1") {
-      image1.classList.add("fade-in");
+      image1.classList.add("fade-in-bg");
       image1.style.opacity = 1;
       image2.style.opacity = 0;
     } else {
-      image2.classList.add("fade-in");
+      image2.classList.add("fade-in-bg");
       image2.style.opacity = 1;
       image1.style.opacity = 0;
     }
@@ -516,10 +535,10 @@
 
       if (currentImage === "image1") {
         // Fade out image1 and fade in image2
-        image1.classList.remove("fade-in");
-        image1.classList.add("fade-out");
-        image2.classList.remove("fade-out");
-        image2.classList.add("fade-in");
+        image1.classList.remove("fade-in-bg");
+        image1.classList.add("fade-out-bg");
+        image2.classList.remove("fade-out-bg");
+        image2.classList.add("fade-in-bg");
 
         // Update opacity
         image1.style.opacity = 0;
@@ -531,10 +550,10 @@
         currentImage = "image2";
       } else {
         // Fade out image2 and fade in image1
-        image2.classList.remove("fade-in");
-        image2.classList.add("fade-out");
-        image1.classList.remove("fade-out");
-        image1.classList.add("fade-in");
+        image2.classList.remove("fade-in-bg");
+        image2.classList.add("fade-out-bg");
+        image1.classList.remove("fade-out-bg");
+        image1.classList.add("fade-in-bg");
 
         // Update opacity
         image2.style.opacity = 0;
