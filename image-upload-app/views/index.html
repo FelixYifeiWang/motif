@@ -590,7 +590,7 @@
           try {
             tags = aires["tags"];
           } catch (error) {
-            tags = ["Unknown"];
+            tags = ["casual", "other"];
             console.error('Error getting comments:', error);
           }
           document.getElementById(`t100`).src = `${tags[0]}.png`;
