@@ -581,8 +581,7 @@
           }
           try {
             comment = aires["compliment"];
-            intro = aires["description"];
-            intro = intro.split(/(?<=[.!?])\s+/).join("<br><br>");
+            intro = aires["desc_sentence1"] + "<br><br>" + aires["desc_sentence2"];
           } catch (error) {
             comment = "Unknown";
             intro = "Unknown";
