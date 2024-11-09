@@ -384,10 +384,11 @@
   </div>
 
   <img class="bottombar" src="/assets/bottombar.png">
-  <img class="camera" src="/assets/camera.png">
+  <img class="camera" src="/assets/camera.png" onclick="triggerFileInput()">
   <div class="ootd" id="ootdButton">ootd</div>
   <div class="profile">profile</div>
 
+  <input type="file" id="fileInput" accept="image/*" capture="environment" style="display: none;" onchange="handleFileSelect(event)">
   <script>
     document.getElementById("ootdButton").addEventListener("click", function() {
         window.location.href = "/home";
@@ -494,6 +495,19 @@
     // Initial check and resize event listener
     checkScreenWidth();
     window.addEventListener('resize', checkScreenWidth);
+
+    function triggerFileInput() {
+        document.getElementById("fileInput").click();
+    }
+
+    // Function to handle file selection or capture
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Display the selected file or do something with it
+            console.log("Selected file:", file);
+        }
+    }
   </script>
 
 </body>
