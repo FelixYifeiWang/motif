@@ -618,7 +618,7 @@
         try {
             console.log(formDataAI);
             // Send file to OpenAI analysis API
-            const response = await fetch('/api/openai/analyze-image', {
+            const response = await fetch('/api/openai/analyze-images', {
                 method: 'POST',
                 body: formDataAI,
             });
