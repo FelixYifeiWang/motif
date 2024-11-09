@@ -568,9 +568,6 @@
         
     }
 
-    // Run animation on scroll
-    window.addEventListener('scroll', animateElements);
-
     var imageNum = 0;
     document.getElementById("ootdButton").addEventListener("click", function() {
         window.location.href = "/home";
@@ -666,6 +663,7 @@
     window.onload = async function() {
         await fetchUser();
         animateElements();
+        window.addEventListener('scroll', animateElements);
     };
 
     function checkScreenWidth() {

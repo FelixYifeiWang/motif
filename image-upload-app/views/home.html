@@ -257,7 +257,7 @@
 
     .icon-img2 {
       position: absolute;
-      top: 77vw;
+      top: 75vw;
       width: 21vw;
       right: 15vw;
       z-index: 10013;
@@ -475,9 +475,6 @@
         
     }
 
-    // Run animation on scroll
-    window.addEventListener('scroll', animateElements);
-
     var imageNum = 0;
     async function fetchUserImages() {
         history.replaceState(null, '', 'https://motif-official.com');
@@ -694,6 +691,7 @@
         await checkAndUploadPendingFiles();
         await fetchUserImages();
         animateElements();
+        window.addEventListener('scroll', animateElements);
     };
 
 
