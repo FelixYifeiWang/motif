@@ -593,8 +593,8 @@
             tags = ["casual", "other"];
             console.error('Error getting comments:', error);
           }
-          document.getElementById(`t100`).src = `${tags[0]}.png`;
-          document.getElementById(`t50`).src = `${tags[1]}.png`;
+          document.getElementById(`t100`).src = `/assets/${tags[0]}.png`;
+          document.getElementById(`t50`).src = `/assets/${tags[1]}.png`;
           document.getElementById('analysisResult').textContent = comment;
           document.getElementById('designername').textContent = designer_name;
           document.getElementById('designerdesc').innerHTML = intro;
