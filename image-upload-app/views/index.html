@@ -932,10 +932,7 @@
       }
 
       // Proceed to Google login
-      alert(222);
-                // For iOS, try opening Safari
-      window.open('/auth/google', "_blank");
-      // window.location.href = '/auth/google';
+      window.location.href = '/auth/google';
     }
 
     // Helper function to convert a file to base64
@@ -968,29 +965,15 @@
         return (/instagram|fb_iab|fb4a|messenger|snapchat|twitter/i.test(ua));
     }
 
-    function isAndroid() {
-        return /android/i.test(navigator.userAgent);
-    }
-
-    function isiOS() {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    }
-
     function openInSecureBrowser() {
         // If in an in-app browser
         if (isInAppBrowser()) {
             // Detect platform and redirect accordingly
-            if (isAndroid()) {
-                // For Android, use an intent to open Chrome
-                window.location.href = "intent://motif-official.com#Intent;scheme=https;package=com.android.chrome;end";
-            } else if (isiOS()) {
-                alert(111);
-                // For iOS, try opening Safari
-                window.open(window.location.href, "_blank");
-                
-            } else {
-                alert("Please open this link in a secure browser like Chrome or Safari.");
-            }
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("Link copied to clipboard! Open your browser and paste it to view the site.");
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
         }
     }
 
