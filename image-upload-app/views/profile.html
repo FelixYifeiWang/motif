@@ -417,9 +417,44 @@
 
             document.getElementById(`username`).innerHTML = user.name;
             document.getElementById(`outfits`).innerHTML = images.length;
+            const dateObj = new Date(user.join_time);
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so we add 1
+            const year = dateObj.getFullYear();
+            const formattedDate = `${month}/${year}`;
+            document.getElementById(`join`).innerHTML = formattedDate;
 
             const styles = user.styles;
-            console.log(styles);
+            const nonZeroCount = Object.values(styles).filter(score => score !== 0).length;
+            const rank = Object.entries(styles)
+              .sort((a, b) => b[1] - a[1]) // Sort by score (value) in descending order
+              .map(entry => entry[0]);
+
+            document.getElementById(`styles`).innerHTML = nonZeroCount;
+
+            function convertToEST(date) {
+                const utcDate = new Date(date);
+                const offset = utcDate.getTimezoneOffset() / 60; // Timezone offset in hours
+                utcDate.setHours(utcDate.getHours() - offset - 5); // Adjust for EST (UTC-5) or EDT (UTC-4)
+                return utcDate;
+            }
+
+            // Create a set of unique dates in EST, formatted as "YYYY-MM-DD"
+            const imageDates = new Set(images.map(image => {
+                const estDate = convertToEST(image.upload_date);
+                return estDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+            }));
+
+            // Start counting consecutive days with at least one image
+            let consecutiveDays = 0;
+            let currentDate = new Date();
+
+            // Check each day, going back one day at a time
+            while (imageDates.has(currentDate.toISOString().split('T')[0])) {
+                consecutiveDays++;
+                // Move to the previous day
+                currentDate.setDate(currentDate.getDate() - 1);
+            }
+
 
         } catch (error) {
             console.error('Error fetching user info:', error);
