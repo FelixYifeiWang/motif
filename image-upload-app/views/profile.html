@@ -277,6 +277,147 @@
       left: 5vw;
       cursor: pointer;
     }
+
+    
+    .fade-in-bg {
+      animation: fadeInBg 3s ease forwards;
+    }
+
+    .fade-out-bg {
+      animation: fadeOutBg 5s ease forwards;
+    }
+
+    .pulsing {
+      animation: pulse 3s ease-in-out infinite;
+      transform-origin: left;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05); /* Slightly enlarges for a 'breathing' effect */
+      }
+      100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInBg {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOutBg {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1; /* Slower fade-out for the first half */
+      }
+      100% {
+        opacity: 0; /* Faster fade-out in the later half */
+      }
+    }
+
+    /* Fade In Animation */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Slide In (from Right to Left) Animation */
+    .side-slide-in {
+      animation: sideslideIn 0.8s ease forwards;
+    }
+
+    @keyframes sideslideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Slide Out (from Left to Right) Animation */
+    .side-slide-out {
+      animation: sideslideOut 0.8s ease forwards;
+    }
+
+    @keyframes sideslideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Emerge Animation */
+    .emerge {
+      animation: emerge 1s ease forwards;
+    }
+
+    @keyframes emerge {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .slide-in {
+        opacity: 0;
+        animation: slidein 1s ease forwards;
+        transform: translateY(10px); /* Starting point for slide-in */
+        /* transition: opacity 1.5s ease-out, transform 1.5s ease-out; */
+    }
+
+    @keyframes slidein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .scroll-in {
+        opacity: 0;
+        transform: translateY(30px); /* Starting point for slide-in */
+        transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+    }
+
+    /* Triggered slide-in effect */
+    .scroll-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
   </style>
 </head>
 <body>
@@ -288,8 +429,8 @@
   <!-- Mobile Container -->
   <div class="mobile-container hide-on-desktop">
     <!-- Logo Image -->
-    <img src="/assets/logo.png" alt="Motif Logo" class="logo">
-    <div class="namecard">
+    <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
+    <div class="namecard slide-in">
       <img src="/assets/namecard.png" alt="Motif Card" class="namecardcard">
       <div class="username" id="username">Placeholder</div>
       <div class="outfits" id="outfits">888</div>
@@ -297,14 +438,14 @@
       <div class="styles" id="styles">8</div>
       <div class="streak" id="streak">8</div>
     </div>
-    <div class="msg">
+    <div class="msg fade-in">
       Get notified for our App Store launch<br>instagram @motif.app.official
     </div>
-    <div class="mystyle">
+    <div class="mystyle fade-in">
       My Style
     </div>
     <div class="gallery">
-      <div class="card" id="card1">
+      <div class="card scroll-in" id="card1">
           <img src="/assets/casual.png" class="card-image" >
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -313,7 +454,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card2">
+      <div class="card scroll-in" id="card2">
           <img src="/assets/edgy.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -322,7 +463,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card3">
+      <div class="card scroll-in" id="card3">
           <img src="/assets/minimalist.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -331,7 +472,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card4">
+      <div class="card scroll-in" id="card4">
           <img src="/assets/sophisticated.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -340,7 +481,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card5">
+      <div class="card scroll-in" id="card5">
           <img src="/assets/athleisure.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -349,7 +490,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card6">
+      <div class="card scroll-in" id="card6">
           <img src="/assets/romantic.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -358,7 +499,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card7">
+      <div class="card scroll-in" id="card7">
           <img src="/assets/bohemian.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -367,7 +508,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card8">
+      <div class="card scroll-in" id="card8">
           <img src="/assets/street.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -376,7 +517,7 @@
               </div>
           </div>
       </div>
-      <div class="card" id="card9">
+      <div class="card scroll-in" id="card9">
           <img src="/assets/glam.png" class="card-image">
           <div class="card-footer">
               <span class="level">Lv 1</span>
@@ -385,19 +526,19 @@
               </div>
           </div>
       </div>
-      <div class="card">
+      <div class="card scroll-in">
           <img src="/assets/other.png" class="card-image">
       </div>
       <!-- Add more cards as needed -->
   </div>
   </div>
 
-  <img class="bottombar" src="/assets/bottombar.png">
-  <img class="camera" src="/assets/camera.png" onclick="triggerFileInput()">
-  <div class="ootd" id="ootdButton">ootd</div>
-  <div class="profile">profile</div>
+  <img class="bottombar fade-in" src="/assets/bottombar.png">
+  <img class="camera fade-in" src="/assets/camera.png" onclick="triggerFileInput()">
+  <div class="ootd fade-in" id="ootdButton">ootd</div>
+  <div class="profile fade-in">profile</div>
 
-  <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text" id="analyzingText" alt="Analyzing your Designer DNA...">
+  <img src="/assets/analyze-text.png" class="analyzing-text pulsing" id="analyzingText" alt="Analyzing your Designer DNA...">
 
   <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
   <script>
