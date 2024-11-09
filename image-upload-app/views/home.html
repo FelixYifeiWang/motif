@@ -431,16 +431,16 @@
   <!-- Mobile Container -->
   <div class="mobile-container hide-on-desktop">
     <!-- Logo Image -->
-    <img src="/assets/logo.png" alt="Motif Logo" class="logo">
+    <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
     <div class="gallery" id="gallery"></div>
     
-    <div class="lastparagraph">Get notified for our App Store launch<br>instagram @motif.app.official</div>
+    <div class="lastparagraph scroll-in">Get notified for our App Store launch<br>instagram @motif.app.official</div>
   </div>
 
-  <img class="bottombar" src="/assets/bottombar.png">
-  <img class="camera" src="/assets/camera.png" onclick="triggerFileInput()">
-  <div class="ootd">ootd</div>
-  <div class="profile" id="profileButton">profile</div>
+  <img class="bottombar fade-in" src="/assets/bottombar.png">
+  <img class="camera fade-in" src="/assets/camera.png" onclick="triggerFileInput()">
+  <div class="ootd fade-in">ootd</div>
+  <div class="profile fade-in" id="profileButton">profile</div>
 
   <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
 
@@ -567,6 +567,7 @@
                     imgContainer.appendChild(datediv);
                 }
                 
+                imgContainer.classList.add("scroll-in");
                 gallery.appendChild(imgContainer);
             });
         } catch (error) {
