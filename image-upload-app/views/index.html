@@ -969,11 +969,11 @@
         // If in an in-app browser
         if (isInAppBrowser()) {
             // Detect platform and redirect accordingly
-            alert("Link copied to clipboard! Open your browser and paste it to view the site.");
             navigator.clipboard.writeText(window.location.href).then(() => {
                 alert("Link copied to clipboard! Open your browser and paste it to view the site.");
             }).catch(err => {
                 console.error("Failed to copy: ", err);
+                alert(err);
             });
         }
     }
