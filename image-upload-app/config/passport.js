@@ -16,7 +16,7 @@ const now = new Date();
 passport.use(new GoogleStrategy({
   clientID: '274022818559-ea6ef22vv6li95t754epb48ug70hoh4m.apps.googleusercontent.com',
   clientSecret: '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',
-  callbackURL: 'http://motif-official.com/auth/google/callback',
+  callbackURL: 'https://motif-official.com/auth/google/callback',
 }, async (accessToken, refreshToken, profile, done) => {
   const user = {
     google_id: profile.id,
