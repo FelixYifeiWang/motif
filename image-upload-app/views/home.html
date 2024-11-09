@@ -458,16 +458,19 @@
 
 
     function animateElements() {
+        console.log(1);
         const slideElements = document.querySelectorAll('.scroll-in');
         const toptwo = document.querySelectorAll('.special');
+        toptwo.forEach((element) => {
+            console.log(1);
+            element.classList.add('scroll-in-visible');
+        });
         slideElements.forEach((element) => {
             if (isInViewport(element)) {
                 element.classList.add('scroll-in-visible');
             }
         });
-        toptwo.forEach((element) => {
-            element.classList.add('scroll-in-visible');
-        });
+        
     }
 
     // Run animation on scroll
