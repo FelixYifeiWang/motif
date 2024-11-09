@@ -550,16 +550,20 @@
           element.style.display = 'block';
       });
 
-      try {
-        file_input = compressImage(file_input);
-      } catch (error) {
-          console.error('Error during image compression:', error);
-          return;
-      }
+      // try {
+      //   file_input = compressImage(file_input);
+      // } catch (error) {
+      //     console.error('Error during image compression:', error);
+      //     return;
+      // }
       
       formDataAI.append('images', file_input);
 
       // Send file to OpenAI API (placeholder function)
+
+      const reader2 = new FileReader();
+      reader2.readAsDataURL(file_input);
+
       analyzeImage();
     }
 
@@ -604,12 +608,6 @@
 
                 img.src = event.target.result;
             };
-
-            reader.onerror = () => {
-                reject(new Error('File reading failed'));
-            };
-
-            reader.readAsDataURL(file);
         });
     }
     async function analyzeImage() {
