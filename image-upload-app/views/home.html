@@ -461,16 +461,13 @@
           });
           
           const user = await user_response.json();
-          console.log(user);
           const styles = user["styles"];
-          console.log(styles);
-          console.log(styles[pendingTags[0]]);
-          console.log(styles[pendingTags[1]]);
           const formData1 = new FormData();
           styles[pendingTags[0]] = styles[pendingTags[0]] + 100;
           styles[pendingTags[1]] = styles[pendingTags[1]] + 50;
           console.log(styles);
-          formData1.append('tags', styles)
+          formData1.append('tags', styles);
+          console.log(formData1);
 
           const response1 = await fetch('/upload/update-styles', {
             method: 'POST',
