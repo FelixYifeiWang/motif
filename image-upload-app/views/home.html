@@ -554,10 +554,7 @@
       } catch (error) {
           console.error('Error during image compression:', error);
           return;
-      }
-
-      console.log(file_input)
-      
+      }      
       formDataAI.append('images', file_input);
 
       // Send file to OpenAI API (placeholder function)
@@ -647,13 +644,12 @@
                 console.log(comment);
                 console.log(tags);
                 const filesArray = [];
+                console.log(file_input);
                 filesArray.push({
                   data: await fileToBase64(file_input), // Convert file to base64 for storage
                   name: file_input.name,
                   type: file_input.type,
                 });
-                sessionStorage.removeItem('pendingUploadFiles');
-                sessionStorage.removeItem('pendingUploadTags');
                 sessionStorage.setItem('pendingUploadFilesNew', JSON.stringify(filesArray));
                 sessionStorage.setItem('pendingUploadCommentNew', JSON.stringify(comment));
                 sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
