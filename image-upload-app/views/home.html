@@ -271,6 +271,14 @@
       margin-bottom: 30vh;
       margin-top: 10vw;
     }
+    .analyzing-text {
+      display: none;
+      position: fixed;
+      top: 45vh;
+      width: 70vw;
+      left: 5vw;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -296,6 +304,7 @@
 
   <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
 
+  <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text" id="analyzingText page2" alt="Analyzing your Designer DNA...">
   <script>
 
     // Function to fetch and display user images
@@ -507,16 +516,157 @@
         setTimeout(fetchUserImages, 100);
     };
 
+
+    // handle uplaod
+
+    var file_input;
+    const formData = new FormData();
+    var aires;
+    var designer_name;
+    var comment;
+    var intro;
+    var tags;
+
     function triggerFileInput() {
         document.getElementById("fileInput").click();
     }
 
     // Function to handle file selection or capture
     function handleFileSelect(event) {
-        const file = event.target.files[0];
-        if (file) {
-            // Display the selected file or do something with it
-            console.log("Selected file:", file);
+      const file = document.getElementById('imageUpload');
+
+      file_input = file.files[0];
+      if (!file_input) {
+          alert("Please upload an image.");
+          return;
+      }
+
+      document.querySelectorAll('body > *:not(.logo)').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      // Show analyzing text
+      document.querySelectorAll('.analyzing-text').forEach(element => {
+          element.style.display = 'block';
+      });
+
+      let compressedFile;
+      try {
+        file_input = await compressImage(file_input);
+      } catch (error) {
+          console.error('Error during image compression:', error);
+          return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          document.getElementById(`photo`).src = e.target.result;
+      };
+      reader.readAsDataURL(blob);
+
+      // Send file to OpenAI API (placeholder function)
+      analyzeImage();
+    }
+
+    function compressImage(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    // Create a canvas to draw the image
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Set desired dimensions (you can adjust this)
+                    const maxWidth = 800;
+                    const scaleFactor = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scaleFactor;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // Convert to a compressed JPEG with quality of 0.7
+                    canvas.toBlob(
+                        blob => {
+                            if (blob) {
+                                const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
+                                console.log(`Compressed file size for ${file.name}: ${compressedFile.size} bytes`);
+                                resolve(compressedFile);
+                            } else {
+                                reject(new Error('Compression failed'));
+                            }
+                        },
+                        'image/jpeg',
+                        0.7
+                    );
+                };
+
+                img.onerror = () => {
+                    reject(new Error('Failed to load image for compression'));
+                };
+
+                img.src = event.target.result;
+            };
+
+            reader.onerror = () => {
+                reject(new Error('File reading failed'));
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+    async function analyzeImage() {
+        console.log("Sending image to OpenAI API...");
+
+        try {
+            // Send file to OpenAI analysis API
+            const response = await fetch('/api/openai/analyze-image', {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            if (response.ok) {
+                const aires = result.results[0];
+                console.log(aires);
+                let designer_name, comment, intro, tags;
+
+                try {
+                    designer_name = aires["designer"];
+                } catch (error) {
+                    designer_name = "Unknown";
+                    console.error('Error getting designer name:', error);
+                }
+                try {
+                    comment = aires["compliment"];
+                    intro = aires["desc_sentence1"] + "<br><br>" + aires["desc_sentence2"];
+                } catch (error) {
+                    comment = "Unknown";
+                    intro = "Unknown";
+                    console.error('Error getting comments:', error);
+                }
+                try {
+                    tags = aires["tags"];
+                } catch (error) {
+                    tags = ["casual", "other"];
+                    console.error('Error getting comments:', error);
+                }
+                
+                const filesArray = [];
+                filesArray.push({
+                  data: await fileToBase64(file_input), // Convert file to base64 for storage
+                  name: file_inputs[i].name,
+                  type: file_inputs[i].type,
+                });
+                sessionStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
+                sessionStorage.setItem('pendingUploadTags', JSON.stringify(tags));
+
+                console.log(sessionStorage);
+            }
+        } catch (error) {
+            document.getElementById('uploadStatus').textContent = 'Analysis failed.';
+            console.error('Error analyzing image:', error);
         }
     }
   </script>
