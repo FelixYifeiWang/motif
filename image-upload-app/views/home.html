@@ -331,16 +331,18 @@
                     imgElement.classList.add('img-special-1');
                     imgContainer.appendChild(imgElement);
 
+                    const styles = image.styles.split(",");
+
                     const tag1 = document.createElement('img');
                     tag1.id = 'tag1';
-                    tag1.src = `/assets/${image.styles[0]}.png`;
+                    tag1.src = `/assets/${styles[0]}.png`;
                     tag1.alt = 'Uploaded Image';
                     tag1.classList.add('icon-img1');
                     imgContainer.appendChild(tag1);
 
                     const tag2 = document.createElement('img');
                     tag2.id = 'tag2';
-                    tag2.src = `/assets/${image.styles[1]}.png`;
+                    tag2.src = `/assets/${styles[1]}.png`;
                     tag2.alt = 'Uploaded Image';
                     tag2.classList.add('icon-img2');
                     imgContainer.appendChild(tag2);
@@ -464,8 +466,6 @@
           console.log(styles);
           console.log(styles[pendingTags[0]]);
           console.log(styles[pendingTags[1]]);
-          console.log(styles.json()[pendingTags[0]]);
-          console.log(styles.json()[pendingTags[1]]);
           const formData1 = new FormData();
           styles[pendingTags[0]] = styles[pendingTags[0]] + 100;
           styles[pendingTags[1]] = styles[pendingTags[1]] + 50;
