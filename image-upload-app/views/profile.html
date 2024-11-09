@@ -283,10 +283,10 @@
     <div class="namecard">
       <img src="/assets/namecard.png" alt="Motif Card" class="namecardcard">
       <div class="username" id="username">Placeholder</div>
-      <div class="outfits" id="outfits">116</div>
-      <div class="join" id="join">11/2024</div>
-      <div class="styles" id="styles">4</div>
-      <div class="streak" id="streak">5</div>
+      <div class="outfits" id="outfits">888</div>
+      <div class="join" id="join">88/8888</div>
+      <div class="styles" id="styles">8</div>
+      <div class="streak" id="streak">8</div>
     </div>
     <div class="msg">
       Get notified for our App Store launch<br>instagram @motif.app.official
@@ -447,23 +447,15 @@
             // Start counting consecutive days with at least one image
             let consecutiveDays = 0;
             let currentDate = new Date();
-            currentDate = convertToEST(currentDate); // Convert today's date to EST
-
-            const continuousDates = []; // Array to store continuous dates
 
             // Check each day, going back one day at a time
             while (imageDates.has(currentDate.toISOString().split('T')[0])) {
-                const dateStr = currentDate.toISOString().split('T')[0];
-                continuousDates.push(dateStr); // Store each continuous date
                 consecutiveDays++;
-
                 // Move to the previous day
                 currentDate.setDate(currentDate.getDate() - 1);
-                currentDate = convertToEST(currentDate); // Convert each date to EST for consistency
             }
 
-            console.log("Consecutive days with images:", consecutiveDays);
-            console.log("Continuous dates with images:", continuousDates);
+            document.getElementById(`streak`).innerHTML = consecutiveDays;
 
 
         } catch (error) {
