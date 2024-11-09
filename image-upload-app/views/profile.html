@@ -447,13 +447,23 @@
             // Start counting consecutive days with at least one image
             let consecutiveDays = 0;
             let currentDate = new Date();
+            currentDate = convertToEST(currentDate); // Convert today's date to EST
+
+            const continuousDates = []; // Array to store continuous dates
 
             // Check each day, going back one day at a time
             while (imageDates.has(currentDate.toISOString().split('T')[0])) {
+                const dateStr = currentDate.toISOString().split('T')[0];
+                continuousDates.push(dateStr); // Store each continuous date
                 consecutiveDays++;
+
                 // Move to the previous day
                 currentDate.setDate(currentDate.getDate() - 1);
+                currentDate = convertToEST(currentDate); // Convert each date to EST for consistency
             }
+
+            console.log("Consecutive days with images:", consecutiveDays);
+            console.log("Continuous dates with images:", continuousDates);
 
 
         } catch (error) {
