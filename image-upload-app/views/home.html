@@ -447,6 +447,12 @@
   <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text" id="analyzingText" alt="Analyzing your Designer DNA...">
   <script>
     // Function to fetch and display user images
+
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+    }
+    
     function animateElements() {
         const slideElements = document.querySelectorAll('.scroll-in');
         slideElements.forEach((element) => {
