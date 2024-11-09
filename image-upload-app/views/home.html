@@ -454,7 +454,7 @@
           const user = await fetch('/upload/user', {
               method: 'GET',
               headers: { 'Content-Type': 'application/json' },
-          });
+          }).json();
           
           console.log(user);
           const styles = user["styles"];
