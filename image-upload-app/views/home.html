@@ -651,9 +651,9 @@
                   name: file_input.name,
                   type: file_input.type,
                 });
-                sessionStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
-                sessionStorage.setItem('pendingUploadComment', JSON.stringify(comment));
-                sessionStorage.setItem('pendingUploadTags', JSON.stringify(tags));
+                sessionStorage.setItem('pendingUploadFilesNew', JSON.stringify(filesArray));
+                sessionStorage.setItem('pendingUploadCommentNew', JSON.stringify(comment));
+                sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
 
                 console.log(sessionStorage);
             }
@@ -665,10 +665,7 @@
     function fileToBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => {
-            console.log(`File size after conversion: ${file.size} bytes`);
-            resolve(reader.result);
-        };
+        reader.onload = () => resolve(reader.result);
         reader.onerror = error => reject(error);
         reader.readAsDataURL(file);
       });
