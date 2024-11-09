@@ -383,6 +383,7 @@
         });
 
         const reader = new FileReader();
+        console.log(image);
         reader.onload = function(e) {
             document.getElementById(`photo`).src = image;
         };

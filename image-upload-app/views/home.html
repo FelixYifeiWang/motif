@@ -428,10 +428,11 @@
     Please view this page on a mobile device.
   </div>
   <img class="cover fade-in" src="/assets/cover.png">
+  <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
   <!-- Mobile Container -->
   <div class="mobile-container hide-on-desktop">
     <!-- Logo Image -->
-    <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
+    
     <div class="gallery" id="gallery"></div>
     
     <div class="lastparagraph scroll-in">Get notified for our App Store launch<br>instagram @motif.app.official</div>
@@ -718,11 +719,24 @@
           return;
       }
 
-      document.querySelectorAll('body > *:not(.logo)').forEach(element => {
+      document.querySelectorAll('mobile-container').forEach(element => {
           element.style.display = 'none';
       });
-      document.querySelectorAll('.logo').forEach(element => {
-          element.style.display = 'block';
+
+      document.querySelectorAll('camera').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      document.querySelectorAll('profile').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      document.querySelectorAll('ootd').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      document.querySelectorAll('bottombar').forEach(element => {
+          element.style.display = 'none';
       });
       // Show analyzing text
       document.querySelectorAll('.analyzing-text').forEach(element => {

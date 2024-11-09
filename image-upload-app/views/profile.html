@@ -426,10 +426,11 @@
   <div class="desktop-warning">
     Please view this page on a mobile device.
   </div>
+  <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
   <!-- Mobile Container -->
   <div class="mobile-container hide-on-desktop">
     <!-- Logo Image -->
-    <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
+    
     <div class="namecard slide-in">
       <img src="/assets/namecard.png" alt="Motif Card" class="namecardcard">
       <div class="username" id="username">Placeholder</div>
@@ -719,14 +720,26 @@
           return;
       }
 
-      document.querySelectorAll('body > *:not(.logo)').forEach(element => {
+      document.querySelectorAll('mobile-container').forEach(element => {
           element.style.display = 'none';
       });
 
-      // Show analyzing text
-      document.querySelectorAll('.logo').forEach(element => {
-          element.style.display = 'block';
+      document.querySelectorAll('camera').forEach(element => {
+          element.style.display = 'none';
       });
+
+      document.querySelectorAll('profile').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      document.querySelectorAll('ootd').forEach(element => {
+          element.style.display = 'none';
+      });
+
+      document.querySelectorAll('bottombar').forEach(element => {
+          element.style.display = 'none';
+      });
+
       document.querySelectorAll('.analyzing-text').forEach(element => {
           element.style.display = 'block';
       });
