@@ -535,8 +535,7 @@
     function handleFileSelect(event) {
       const file = document.getElementById('fileInput');
 
-      file_input = file.files[0];
-      if (!file_input) {
+      if (!file.files[0]) {
           alert("Please upload an image.");
           return;
       }
@@ -551,11 +550,13 @@
       });
 
       try {
-        file_input = compressImage(file_input);
+        file_input = compressImage(file.files[0]);
       } catch (error) {
           console.error('Error during image compression:', error);
           return;
       }
+
+      console.log(file_input)
       
       formDataAI.append('images', file_input);
 
@@ -651,6 +652,8 @@
                   name: file_input.name,
                   type: file_input.type,
                 });
+                sessionStorage.removeItem('pendingUploadFiles');
+                sessionStorage.removeItem('pendingUploadTags');
                 sessionStorage.setItem('pendingUploadFilesNew', JSON.stringify(filesArray));
                 sessionStorage.setItem('pendingUploadCommentNew', JSON.stringify(comment));
                 sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
