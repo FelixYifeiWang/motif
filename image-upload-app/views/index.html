@@ -353,11 +353,14 @@
     }
 
     @keyframes fadeOut {
-      from {
+      0% {
         opacity: 1;
       }
-      to {
-        opacity: 0;
+      50% {
+        opacity: 1; /* Slower fade-out for the first half */
+      }
+      100% {
+        opacity: 0; /* Faster fade-out in the later half */
       }
     }
   </style>
