@@ -651,8 +651,8 @@
                 const filesArray = [];
                 filesArray.push({
                   data: await fileToBase64(file_input), // Convert file to base64 for storage
-                  name: file_inputs[i].name,
-                  type: file_inputs[i].type,
+                  name: file_input.name,
+                  type: file_input.type,
                 });
                 sessionStorage.setItem('pendingUploadFiles', JSON.stringify(filesArray));
                 sessionStorage.setItem('pendingUploadComment', JSON.stringify(comment));
@@ -668,7 +668,10 @@
     function fileToBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
+        reader.onload = () => {
+            console.log(`File size after conversion: ${file.size} bytes`);
+            resolve(reader.result);
+        };
         reader.onerror = error => reject(error);
         reader.readAsDataURL(file);
       });
