@@ -2,8 +2,8 @@
 const express = require('express');
 const multer = require('multer');
 const OpenAI = require('openai'); // Import the OpenAI class
-import { z } from "zod";
-import { zodResponseFormat } from "openai/helpers/zod";
+const { z } = require("zod");
+const { zodResponseFormat } = require("openai/helpers/zod");
 const router = express.Router();
 
 // Configure multer to handle multiple image uploads
