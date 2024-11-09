@@ -307,6 +307,7 @@
   <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text" id="analyzingText page2" alt="Analyzing your Designer DNA...">
   <script>
     // Function to fetch and display user images
+    const imageNum = 0;
     async function fetchUserImages() {
         history.replaceState(null, '', 'https://motif-official.com');
         try {
@@ -318,6 +319,7 @@
             images.sort((a, b) => {
                 return new Date(b.upload_date) - new Date(a.upload_date);
             });
+            imageNum = images.length;
 
             const gallery = document.getElementById('gallery');
 
@@ -495,6 +497,7 @@
         } catch (error) {
           console.error('Error uploading images:', error);
         }
+        fetchUserImages();
       }
     }
 
@@ -512,7 +515,7 @@
     // Call this function on the page after login (e.g., in home.html)
     window.onload = function() {
         checkAndUploadPendingFiles();
-        setTimeout(fetchUserImages, 100);
+        fetchUserImages();
     };
 
 
@@ -657,6 +660,7 @@
                 sessionStorage.setItem('pendingUploadFilesNew', JSON.stringify(filesArray));
                 sessionStorage.setItem('pendingUploadCommentNew', JSON.stringify(comment));
                 sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
+                sessionStorage.setItem('pendingUploadImageNum', JSON.stringify(imageNum));
 
                 console.log(sessionStorage);
 

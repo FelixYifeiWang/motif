@@ -66,6 +66,15 @@
       z-index: 1000;
     }
 
+    .arrow {
+      position: fixed;
+      bottom: 6vh;
+      right: 6vw;
+      width: 18.6vw;
+      max-width: 100px;
+      z-index: 1000;
+    }
+
     .photo {
       position: absolute;
       width: 21vw;
@@ -76,6 +85,95 @@
       object-fit: cover; /* Cover the area of the div without stretching */
       object-position: center;
     }
+
+    .date {
+      position: absolute;
+      z-index: 9;
+      top: 15vw;
+      left: -33vw;
+      width: 84vw;
+      font-family: "Antic Didone", serif;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 5vw;
+      color: #0F0F0F;
+      text-align: center;
+    }
+
+    .date .day {
+        font-size: 7vw;
+        -webkit-text-stroke: 0.2vw black;
+    }
+    .date .month {
+        font-size: 4vw;
+        letter-spacing: 0.05em;
+    }
+    .resultimage1 {
+      display: none;
+      position: fixed;
+      top: 55vh;
+      width: 37vw;
+      height: 41.38vw;
+      left: 10vw;
+      z-index: 2;
+    }
+    .resultimage1 .icon-img {
+      width: 37vw;
+    }
+    .resultimage2 .icon-img {
+      width: 37vw;
+    }
+
+    .resultimage2 {
+      display: none;
+      position: fixed;
+      top: 55vh;
+      width: 37vw;
+      right: 10vw;
+      z-index: 2;
+    }
+
+    .resultimage1 .t100 {
+      display: none;
+      position: absolute;
+      bottom: 2vw;
+      width: 12vw;
+      right: 3vw;
+      z-index: 3;
+    }
+
+    .resultimage2 .t50 {
+      display: none;
+      position: absolute;
+      bottom: 5vw;
+      width: 10vw;
+      right: 3vw;
+      z-index: 3;
+    }
+
+    .analysis-result {
+      position: fixed;
+      top: 35vh;
+      width: 80vw;
+      left: 10vw;
+      font-size: 4vw;
+      color: #333;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .outfitNum {
+      position: fixed;
+      top: 35vh;
+      width: 80vw;
+      left: 10vw;
+      font-size: 4vw;
+      color: #333;
+      text-align: left;
+      font-family: 'Antic Didone', serif;
+      font-size: 10vw;
+      z-index: 2;
+    }
   </style>
 </head>
 <body>
@@ -85,10 +183,22 @@
     Please view this page on a mobile device.
   </div>
   <!-- Mobile Container -->
-  <div class="mobile-container hide-on-desktop">
+  <div class="mobile-container hide-on-desktop" id="container">
     <!-- Logo Image -->
     <img src="/assets/logo.png" alt="Motif Logo" class="logo">
     <img src="/assets/photo.png" alt="" class="photo" id="photo">
+
+    <div class="resultimage1">
+      <img src="/assets/casual.png" class="icon-img" id="i100" alt="Result Image 1" id="styleimg1">
+      <img src="/assets/100.png" class="t100 page3" alt=" ">
+    </div>
+    <div class="resultimage2">
+      <img src="/assets/minimalist.png" class="icon-img" id="i50" alt="Result Image 2" id="styleimg2">
+      <img src="/assets/50.png" class="t50 page3" alt=" ">
+    </div>
+    <div class="outfitNum" id="outfitNum">Outfit 000</div>
+    <div class="analysis-result" id="analysisResult">Congrats! You’ve unlocked your signature styles!<br><br>Continue to view your best match fashion designer.</div>
+    <img src="/assets/arrow.png" class="arrow" id="arrow">
   </div>
 
 
@@ -111,15 +221,19 @@
     var tags;
     var image;
     var comment;
+    var imageNum;
 
     async function checkAndUploadPendingFiles() {
       // Retrieve pending files and tags from sessionStorage
       const pendingFiles = JSON.parse(sessionStorage.getItem('pendingUploadFilesNew'));
       const pendingTags = JSON.parse(sessionStorage.getItem('pendingUploadTagsNew'));
       const pendingComment = JSON.parse(sessionStorage.getItem('pendingUploadCommentNew'));
+      imageNum = JSON.parse(sessionStorage.getItem('pendingUploadImageNum'));
 
-      sessionStorage.removeItem('pendingUploadFiles');
-      sessionStorage.removeItem('pendingUploadTags');
+      sessionStorage.removeItem('pendingUploadFilesNew');
+      sessionStorage.removeItem('pendingUploadTagsNew');
+      sessionStorage.removeItem('pendingUploadCommentNew');
+      sessionStorage.removeItem('pendingUploadImageNum');
       console.log(pendingFiles);
       console.log(pendingTags);
       tags = pendingTags;
@@ -137,6 +251,30 @@
             document.getElementById(`photo`).src = e.target.result;
         };
         reader.readAsDataURL(image);
+        
+        const container = document.getElementById('container');
+
+        document.getElementById(`i100`).src = `/assets/${tags[0]}.png`;
+        document.getElementById(`i50`).src = `/assets/${tags[1]}.png`;
+        document.getElementById('analysisResult').innerHTML = comment;
+        const formattedImageNum = imageNum.toString().padStart(3, '0');
+        document.getElementById('outfitNum').innerHTML = `Outfit ${formattedImageNum}`;
+
+        const dateObj = new Date();
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        const month = monthNames[dateObj.getMonth()];
+        const datediv = document.createElement('div');
+        datediv.classList.add('date');
+        const daydiv = document.createElement('div');
+        daydiv.classList.add('day');
+        daydiv.textContent = day;
+        const mondiv = document.createElement('div');
+        mondiv.classList.add('month');
+        mondiv.textContent = month;
+        datediv.appendChild(daydiv);
+        datediv.appendChild(mondiv);
+        container.appendChild(datediv);
       }
     }
 
@@ -153,165 +291,9 @@
 
     // Call this function on the page after login (e.g., in home.html)
     window.onload = checkAndUploadPendingFiles();
-    // handle uplaod
-
-    var file_input;
-    const formDataAI = new FormData();
-    var aires;
-    var designer_name;
-    var comment;
-    var intro;
-    var tags;
-
-    function triggerFileInput() {
-        document.getElementById("fileInput").click();
-    }
-
-    // Function to handle file selection or capture
-    async function handleFileSelect(event) {
-      const file = document.getElementById('fileInput');
-      file_input = file.files[0];
-
-      if (!file_input) {
-          alert("Please upload an image.");
-          return;
-      }
-
-      document.querySelectorAll('body > *:not(.logo)').forEach(element => {
-          element.style.display = 'none';
-      });
-
-      // Show analyzing text
-      document.querySelectorAll('.analyzing-text').forEach(element => {
-          element.style.display = 'block';
-      });
-
-      console.log(1);
-
-      try {
-        const compressedFile = await compressImage(file_input);
-        console.log(2);
-        file_input = compressedFile;
-      } catch (error) {
-          console.error('Error during image compression:', error);
-          return;
-      }      
-      formDataAI.append('images', file_input);
-
-      // Send file to OpenAI API (placeholder function)
-      analyzeImage();
-    }
-
-    function compressImage(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    // Create a canvas to draw the image
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-
-                    // Set desired dimensions (you can adjust this)
-                    const maxWidth = 800;
-                    const scaleFactor = maxWidth / img.width;
-                    canvas.width = maxWidth;
-                    canvas.height = img.height * scaleFactor;
-
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                    // Convert to a compressed JPEG with quality of 0.7
-                    canvas.toBlob(
-                        blob => {
-                            if (blob) {
-                                const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
-                                console.log(`Compressed file size for ${file.name}: ${compressedFile.size} bytes`);
-                                resolve(compressedFile);
-                            } else {
-                                reject(new Error('Compression failed'));
-                            }
-                        },
-                        'image/jpeg',
-                        0.7
-                    );
-                };
-
-                img.onerror = () => {
-                    reject(new Error('Failed to load image for compression'));
-                };
-
-                img.src = event.target.result;
-            };
-
-            reader.onerror = () => {
-                reject(new Error('File reading failed'));
-            };
-
-            reader.readAsDataURL(file);
-        });
-    }
-    async function analyzeImage() {
-        console.log("Sending image to OpenAI API...");
-
-        try {
-            console.log(formDataAI);
-            // Send file to OpenAI analysis API
-            const response = await fetch('/api/openai/analyze-images', {
-                method: 'POST',
-                body: formDataAI,
-            });
-            const result = await response.json();
-            if (response.ok) {
-                const aires = result.results[0];
-                console.log(aires); 
-
-                try {
-                    designer_name = aires["designer"];
-                } catch (error) {
-                    designer_name = "Unknown";
-                    console.error('Error getting designer name:', error);
-                }
-                try {
-                    comment = aires["compliment"];
-                    intro = aires["desc_sentence1"] + "<br><br>" + aires["desc_sentence2"];
-                } catch (error) {
-                    comment = "Unknown";
-                    intro = "Unknown";
-                    console.error('Error getting comments:', error);
-                }
-                try {
-                    tags = aires["tags"];
-                } catch (error) {
-                    tags = ["casual", "other"];
-                    console.error('Error getting comments:', error);
-                }
-                const filesArray = [];
-                filesArray.push({
-                  data: await fileToBase64(file_input), // Convert file to base64 for storage
-                  name: file_input.name,
-                  type: file_input.type,
-                });
-                sessionStorage.setItem('pendingUploadFilesNew', JSON.stringify(filesArray));
-                sessionStorage.setItem('pendingUploadCommentNew', JSON.stringify(comment));
-                sessionStorage.setItem('pendingUploadTagsNew', JSON.stringify(tags));
-
-                console.log(sessionStorage);
-
-                
-            }
-        } catch (error) {
-            console.error('Error analyzing image:', error);
-        }
-    }
-
-    function fileToBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-        reader.readAsDataURL(file);
-      });
-    }
+    document.getElementById("arrow").addEventListener("click", function() {
+        window.location.href = "/home";
+    });
   </script>
 
 </body>
