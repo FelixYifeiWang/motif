@@ -465,9 +465,7 @@
           const formData1 = new FormData();
           styles[pendingTags[0]] = styles[pendingTags[0]] + 100;
           styles[pendingTags[1]] = styles[pendingTags[1]] + 50;
-          console.log(styles);
-          formData1.append('tags', styles);
-          console.log(formData1);
+          formData1.append('tags', JSON.stringify(styles));
 
           const response1 = await fetch('/upload/update-styles', {
             method: 'POST',
