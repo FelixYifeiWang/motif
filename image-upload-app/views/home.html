@@ -549,6 +549,8 @@
           element.style.display = 'block';
       });
 
+      console.log(1);
+
       try {
         file_input = await compressImage(file.files[0]);
       } catch (error) {
@@ -558,7 +560,7 @@
       formDataAI.append('images', file_input);
 
       // Send file to OpenAI API (placeholder function)
-
+      console.log(2);
       analyzeImage();
     }
 
@@ -644,9 +646,6 @@
                 console.log(comment);
                 console.log(tags);
 
-                
-                sessionStorage.removeItem('pendingUploadFiles');
-                sessionStorage.removeItem('pendingUploadTags');
                 const filesArray = [];
                 filesArray.push({
                   data: await fileToBase64(file_input), // Convert file to base64 for storage
