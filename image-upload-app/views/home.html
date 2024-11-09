@@ -462,6 +462,10 @@
           console.log(user);
           const styles = user["styles"];
           console.log(styles);
+          console.log(styles[pendingTags[0]]);
+          console.log(styles[pendingTags[1]]);
+          console.log(styles.json()[pendingTags[0]]);
+          console.log(styles.json()[pendingTags[1]]);
           const formData1 = new FormData();
           styles[pendingTags[0]] = styles[pendingTags[0]] + 100;
           styles[pendingTags[1]] = styles[pendingTags[1]] + 50;
