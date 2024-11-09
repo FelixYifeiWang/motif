@@ -8,7 +8,7 @@
   <!-- Favicon -->
   <link rel="icon" href="/assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/assets/app-icon.png">
-  <link rel="manifest" href="/assets/app-icon.json">
+  <link rel="manifest" href="/assets/manifest.json">
 
   <!-- Google Fonts for Amiri -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
@@ -606,12 +606,10 @@
     if (currentImage === "image1") {
       image1.classList.add("fade-in-bg");
       image1.style.opacity = 1;
-      image1.classList.add("fade-in");
       image2.style.opacity = 0;
     } else {
       image2.classList.add("fade-in-bg");
       image2.style.opacity = 1;
-      image2.classList.add("fade-in");
       image1.style.opacity = 0;
     }
 
