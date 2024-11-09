@@ -468,10 +468,13 @@
         //     console.log(2);
         //     element.classList.add('scroll-in-visible');
         // });
+        // slideElements.forEach((element) => {
+        //     if (isInViewport(element) && !element.classList.contains('animated')) {
+        //         element.classList.add('scroll-in-visible', 'animated');
+        //     }
+        // });
         slideElements.forEach((element) => {
-            if (isInViewport(element) && !element.classList.contains('animated')) {
-                element.classList.add('scroll-in-visible', 'animated');
-            }
+            element.classList.add('scroll-in-visible', 'animated');
         });
         
     }
@@ -692,7 +695,7 @@
         await checkAndUploadPendingFiles();
         await fetchUserImages();
         animateElements();
-        window.addEventListener('scroll', animateElements);
+        // window.addEventListener('scroll', animateElements);
     };
 
 
