@@ -981,9 +981,10 @@
                 // For Android, use an intent to open Chrome
                 window.location.href = "intent://motif-official.com#Intent;scheme=https;package=com.android.chrome;end";
             } else if (isiOS()) {
+                alert(111);
                 // For iOS, try opening Safari
                 window.open(window.location.href, "_blank");
-                alert(isiOS());
+                
             } else {
                 alert("Please open this link in a secure browser like Chrome or Safari.");
             }
