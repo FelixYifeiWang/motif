@@ -412,6 +412,69 @@
         opacity: 0; /* Faster fade-out in the later half */
       }
     }
+
+    /* Fade In Animation */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Slide In (from Right to Left) Animation */
+    .slide-in {
+      animation: slideIn 0.8s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Slide Out (from Left to Right) Animation */
+    .slide-out {
+      animation: slideOut 0.8s ease forwards;
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Emerge Animation */
+    .emerge {
+      animation: emerge 1s ease forwards;
+    }
+
+    @keyframes emerge {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -430,17 +493,17 @@
     <!-- Logo Image -->
     <img src="/assets/logo.png" alt="Motif Logo" class="logo">
 
-    <img src="/assets/start1.png" id="bg11" class="frontbg1 page0">
-    <img src="/assets/start2.png" id="bg22" class="frontbg2 page0">
-    <div class="returnuser page0">Returning User?</div>
-    <img src="/assets/start.png" id="startbutton" class="startbutton page0">
+    <img src="/assets/start1.png fade-in" id="bg11" class="frontbg1 page0">
+    <img src="/assets/start2.png fade-in" id="bg22" class="frontbg2 page0">
+    <div class="returnuser page0 emerge">Returning User?</div>
+    <img src="/assets/start.png fade-in" id="startbutton" class="startbutton page0">
 
     <!-- Black Square Image with Click Event (Upload Outfits Button) -->
     <div class="p1txt page1">Upload 3 outfits to unlock your unique<br>style guide and designer DNA.</div>
     <img src="/assets/first-upload.png" alt="Upload Outfits Button" class="black-square page1" onclick="handleBlackSquareClick()">
 
     <!-- Google Login Button Image with Click Event -->
-    <img src="/assets/login.png" alt="Log in with Google" class="login-button page0" onclick="handleLoginClick()">
+    <img src="/assets/login.png" alt="Log in with Google" class="login-button page0 emerge" onclick="handleLoginClick()">
 
     <img src="/assets/analyze-text.png" class="analyzing-text page2 pulsing" id="analyzingText page2" alt="Analyzing your Designer DNA...">
 
