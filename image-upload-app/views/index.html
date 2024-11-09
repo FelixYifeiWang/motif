@@ -337,11 +337,11 @@
 
     .startbutton {
       position: fixed;
-      top: 40vw;
+      top: 106vw;
       right: 0;
-      width: 60vw;
+      width: 67vw;
       z-index: 5;
-      object-fit: cover; /* Cover the area of the div without stretching */
+      object-fit: cover;
       object-position: left;
     }
 
@@ -678,6 +678,15 @@
             reader.readAsDataURL(file);
         });
     }
+
+    document.getElementById("startbutton").addEventListener("click", function() {
+      document.querySelectorAll('.page0').forEach(element => {
+        element.style.display = 'none';
+      });
+      document.querySelectorAll('.page1').forEach(element => {
+        element.style.display = 'block';
+      });
+    });
 
     // Placeholder function to simulate OpenAI API call
     async function analyzeImages() {
