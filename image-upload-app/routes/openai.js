@@ -22,7 +22,7 @@ const Feedback = z.object({
 
 // POST route to analyze up to three images in one request
 router.post('/analyze-images', upload.array('images', 3), async (req, res) => {
-  if (!req.files || req.files.length === 0) {
+  if (!req.files) {
     return res.status(400).json({ error: 'Please upload up to three images.' });
   }
 
