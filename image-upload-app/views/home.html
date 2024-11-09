@@ -520,7 +520,7 @@
     // handle uplaod
 
     var file_input;
-    const formData = new FormData();
+    const formDataAI = new FormData();
     var aires;
     var designer_name;
     var comment;
@@ -556,6 +556,8 @@
           console.error('Error during image compression:', error);
           return;
       }
+      
+      formDataAI.append('images', compressedFiles[0]);
 
       // Send file to OpenAI API (placeholder function)
       analyzeImage();
@@ -617,7 +619,7 @@
             // Send file to OpenAI analysis API
             const response = await fetch('/api/openai/analyze-image', {
                 method: 'POST',
-                body: formData,
+                body: formDataAI,
             });
             const result = await response.json();
             if (response.ok) {
