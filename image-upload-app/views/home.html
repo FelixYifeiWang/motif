@@ -279,6 +279,146 @@
       left: 5vw;
       cursor: pointer;
     }
+
+    .fade-in-bg {
+      animation: fadeInBg 3s ease forwards;
+    }
+
+    .fade-out-bg {
+      animation: fadeOutBg 5s ease forwards;
+    }
+
+    .pulsing {
+      animation: pulse 3s ease-in-out infinite;
+      transform-origin: left;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05); /* Slightly enlarges for a 'breathing' effect */
+      }
+      100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInBg {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOutBg {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1; /* Slower fade-out for the first half */
+      }
+      100% {
+        opacity: 0; /* Faster fade-out in the later half */
+      }
+    }
+
+    /* Fade In Animation */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Slide In (from Right to Left) Animation */
+    .side-slide-in {
+      animation: sideslideIn 0.8s ease forwards;
+    }
+
+    @keyframes sideslideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Slide Out (from Left to Right) Animation */
+    .side-slide-out {
+      animation: sideslideOut 0.8s ease forwards;
+    }
+
+    @keyframes sideslideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Emerge Animation */
+    .emerge {
+      animation: emerge 1s ease forwards;
+    }
+
+    @keyframes emerge {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .slide-in {
+        opacity: 0;
+        animation: slidein 1s ease forwards;
+        transform: translateY(10px); /* Starting point for slide-in */
+        /* transition: opacity 1.5s ease-out, transform 1.5s ease-out; */
+    }
+
+    @keyframes slidein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .scroll-in {
+        opacity: 0;
+        transform: translateY(30px); /* Starting point for slide-in */
+        transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+    }
+
+    /* Triggered slide-in effect */
+    .scroll-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
   </style>
 </head>
 <body>
@@ -287,7 +427,7 @@
   <div class="desktop-warning">
     Please view this page on a mobile device.
   </div>
-  <img class="cover" src="/assets/cover.png">
+  <img class="cover fade-in" src="/assets/cover.png">
   <!-- Mobile Container -->
   <div class="mobile-container hide-on-desktop">
     <!-- Logo Image -->
@@ -307,6 +447,21 @@
   <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text" id="analyzingText" alt="Analyzing your Designer DNA...">
   <script>
     // Function to fetch and display user images
+    function animateElements() {
+        const slideElements = document.querySelectorAll('.scroll-in');
+        slideElements.forEach((element) => {
+            if (isInViewport(element)) {
+                element.classList.add('scroll-in-visible');
+            }
+        });
+    }
+
+    // Run animation on scroll
+    window.addEventListener('scroll', animateElements);
+
+    // Run animation on load
+    window.addEventListener('load', animateElements);
+
     var imageNum = 0;
     async function fetchUserImages() {
         history.replaceState(null, '', 'https://motif-official.com');
