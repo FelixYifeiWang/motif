@@ -472,7 +472,7 @@
           console.log(styles);
           formData1.append('tags', styles)
 
-          const response1 = await fetch('/update-styles', {
+          const response1 = await fetch('/upload/update-styles', {
             method: 'POST',
             body: formData1,
           });
@@ -507,7 +507,7 @@
     // Call this function on the page after login (e.g., in home.html)
     window.onload = function() {
         checkAndUploadPendingFiles();
-        setTimeout(fetchUserImages, 500);
+        setTimeout(fetchUserImages, 100);
     };
   </script>
 
