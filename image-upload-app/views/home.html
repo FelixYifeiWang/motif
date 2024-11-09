@@ -532,7 +532,7 @@
     }
 
     // Function to handle file selection or capture
-    function handleFileSelect(event) {
+    async function handleFileSelect(event) {
       const file = document.getElementById('fileInput');
 
       if (!file.files[0]) {
@@ -550,11 +550,7 @@
       });
 
       try {
-        var file_inputs = [file_input];
-        const compressedFiles = await Promise.all(
-          file_inputs.map(file => compressImage(file))
-        );
-        file_input = compressedFiles[0];
+        file_input = await compressImage(file.files[0]);
       } catch (error) {
           console.error('Error during image compression:', error);
           return;
