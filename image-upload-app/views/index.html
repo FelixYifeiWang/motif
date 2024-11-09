@@ -339,10 +339,6 @@
       animation: fadeIn 1s ease forwards;
     }
 
-    .fade-out {
-      animation: fadeOut 1s ease forwards;
-    }
-
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -541,7 +537,6 @@
         file_inputs.map(file => compressImage(file))
       );
       file_inputs = compressedFiles;
-
 
       compressedFiles.forEach(file => formData.append('images', file));
 
