@@ -452,14 +452,14 @@
 
             document.getElementById(`streak`).innerHTML = consecutiveDays;
 
+            console.log(rank);
+
             rank.forEach((style, index) => {
-                // Select the card image by index (assuming ids are sequential like "card1", "card2", etc.)
-                const cardImage = document.getElementById(`card${index + 1}`);
-                
-                if (cardImage) {
-                    // Set the image source based on the style name
-                    cardImage.src = `/assets/${style}.png`;
-                }
+              const card = document.getElementById(`card${index + 1}`);
+              if (card) {
+                const img = card.querySelector(".card-image");
+                img.src = `/assets/${style}.png`; // Update the src with the corresponding style image
+              }
             });
 
         } catch (error) {
