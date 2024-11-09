@@ -406,7 +406,21 @@
                 headers: { 'Content-Type': 'application/json' },
             });
             const user = await response.json();
-            
+            const response1 = await fetch('/upload/list', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            });
+            const images = await response1.json();
+            images.sort((a, b) => {
+                return new Date(b.upload_date) - new Date(a.upload_date);
+            });
+
+            document.getElementById(`username`).innerHTML = user.name;
+            document.getElementById(`outfits`).innerHTML = images.length;
+
+            const styles = user.styles;
+            console.log(styles);
+
         } catch (error) {
             console.error('Error fetching user info:', error);
         }
