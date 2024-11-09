@@ -451,11 +451,12 @@
             body: formData,
           });
 
-          const user = await fetch('/upload/user', {
+          const user_response = await fetch('/upload/user', {
               method: 'GET',
               headers: { 'Content-Type': 'application/json' },
-          }).json();
+          });
           
+          const user = user_response.json();
           console.log(user);
           const styles = user["styles"];
           console.log(styles);
