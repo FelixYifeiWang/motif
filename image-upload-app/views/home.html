@@ -647,7 +647,7 @@
                 console.log(tags);
                 const filesArray = [];
                 filesArray.push({
-                  data: await fileToBase64(file_input), // Convert file to base64 for storage
+                  data: file_input, // Convert file to base64 for storage
                   name: file_input.name,
                   type: file_input.type,
                 });
