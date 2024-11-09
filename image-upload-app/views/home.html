@@ -426,17 +426,14 @@
 
     async function checkAndUploadPendingFiles() {
       // Retrieve pending files and tags from sessionStorage
-      console.log(1);
       const pendingFiles = JSON.parse(sessionStorage.getItem('pendingUploadFiles'));
       const pendingTags = JSON.parse(sessionStorage.getItem('pendingUploadTags'));
       console.log(pendingFiles);
       console.log(pendingTags);
       if (pendingFiles && pendingFiles.length > 0) {
-        console.log(3);
         const formData = new FormData();
 
         pendingFiles.forEach((file, index) => {
-          console.log(6);
           const blob = base64ToBlob(file.data, file.type);
           console.log(blob);
           console.log(file.data);
@@ -452,6 +449,22 @@
           const response = await fetch('/upload', {
             method: 'POST',
             body: formData,
+          });
+
+          const user = await fetch('/upload/user', {
+              method: 'GET',
+              headers: { 'Content-Type': 'application/json' },
+          });
+          
+          const styles = user.styles;
+          const formData1 = new FormData();
+          pendingTags[0]
+          pendingTags[1]
+          formData1.append('tags', styles)
+
+          const response1 = await fetch('/update-styles', {
+            method: 'POST',
+            body: formData1,
           });
 
           if (response && response.ok) {
