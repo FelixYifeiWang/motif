@@ -457,15 +457,19 @@
           });
           
           const styles = user.styles;
+          console.log(styles);
           const formData1 = new FormData();
-          pendingTags[0]
-          pendingTags[1]
+          styles[pendingTags[0]] = styles[pendingTags[0]] + 100;
+          styles[pendingTags[1]] = styles[pendingTags[1]] + 50;
+          console.log(styles);
           formData1.append('tags', styles)
 
           const response1 = await fetch('/update-styles', {
             method: 'POST',
             body: formData1,
           });
+
+          console.log(response1);
 
           if (response && response.ok) {
             console.log('Images uploaded successfully');
