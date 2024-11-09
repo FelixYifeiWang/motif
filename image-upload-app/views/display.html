@@ -324,7 +324,7 @@
   <div class="mobile-container hide-on-desktop" id="container">
     <!-- Logo Image -->
     <img src="/assets/logo.png" alt="Motif Logo" class="logo fade-in">
-    <img src="/assets/photo.png" alt="" class="photo slide-in" id="photo ">
+    <img src="/assets/photo.png" alt="" class="photo slide-in" id="photo">
 
     <div class="resultimage1 slide-in">
       <img src="/assets/casual.png" class="icon-img" id="i100" alt="Result Image 1" id="styleimg1">
@@ -385,7 +385,7 @@
         const reader = new FileReader();
         console.log(image);
         reader.onload = function(e) {
-            document.getElementById(`photo`).src = pendingFiles[0];
+            document.getElementById(`photo`).src = image;
         };
         reader.readAsDataURL(image);
         
