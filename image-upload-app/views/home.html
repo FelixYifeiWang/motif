@@ -719,9 +719,7 @@
           return;
       }
 
-      document.querySelectorAll('.mobile-container').forEach(element => {
-          element.style.display = 'none !important';
-      });
+      document.querySelector('.mobile-container').style.display = 'none';
 
       document.querySelectorAll('.camera').forEach(element => {
           element.style.display = 'none';
