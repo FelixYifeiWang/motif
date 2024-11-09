@@ -114,6 +114,7 @@ module.exports = {
   saveImageData,
   getUserImages,
   deleteImageData,
+  updateUserStyles,
 };
 
 
