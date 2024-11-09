@@ -932,7 +932,10 @@
       }
 
       // Proceed to Google login
-      window.location.href = '/auth/google';
+      alert(222);
+                // For iOS, try opening Safari
+      window.open('/auth/google', "_blank");
+      // window.location.href = '/auth/google';
     }
 
     // Helper function to convert a file to base64
