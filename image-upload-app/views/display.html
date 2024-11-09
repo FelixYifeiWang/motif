@@ -385,7 +385,7 @@
         const reader = new FileReader();
         console.log(image);
         reader.onload = function(e) {
-            document.getElementById(`photo`).src = image;
+            document.getElementById(`photo`).src = pendingFiles[0];
         };
         reader.readAsDataURL(image);
         
