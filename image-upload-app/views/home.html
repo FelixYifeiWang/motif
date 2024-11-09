@@ -906,6 +906,39 @@
         reader.readAsDataURL(file);
       });
     }
+
+    function isInAppBrowser() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        return (/instagram|fb_iab|fb4a|messenger|snapchat|twitter/i.test(ua));
+    }
+
+    function isAndroid() {
+        return /android/i.test(navigator.userAgent);
+    }
+
+    function isiOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+
+    function openInSecureBrowser() {
+        // If in an in-app browser
+        if (isInAppBrowser()) {
+            // Detect platform and redirect accordingly
+            if (isAndroid()) {
+                // For Android, use an intent to open Chrome
+                window.location.href = "intent://motif-official.com#Intent;scheme=https;package=com.android.chrome;end";
+            } else if (isiOS()) {
+                // For iOS, try opening Safari
+                window.open(window.location.href, "_blank");
+            } else {
+                alert("Please open this link in a secure browser like Chrome or Safari.");
+            }
+        }
+    }
+
+    // Run the function on page load
+    window.addEventListener("load", openInSecureBrowser);
+
   </script>
 
 </body>
