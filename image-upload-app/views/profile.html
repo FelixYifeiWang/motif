@@ -220,6 +220,18 @@
         max-width: 800px;
         width: 100%;
     }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .card-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
   </style>
 </head>
 <body>
@@ -246,6 +258,39 @@
     <div class="mystyle">
       My Style
     </div>
+    <div class="gallery">
+      <div class="card">
+          <img src="/assets/casual.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/edgy.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/minimalist.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/sophisticated.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/athleisure.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/romantic.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/bohemian.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/street.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/glam.png" class="card-image">
+      </div>
+      <div class="card">
+          <img src="/assets/other.png" class="card-image">
+      </div>
+      <!-- Add more cards as needed -->
+  </div>
   </div>
 
   <img class="bottombar" src="/assets/bottombar.png">
