@@ -428,11 +428,11 @@
     }
 
     /* Slide In (from Right to Left) Animation */
-    .slide-in {
-      animation: slideIn 0.8s ease forwards;
+    .side-slide-in {
+      animation: sideslideIn 0.8s ease forwards;
     }
 
-    @keyframes slideIn {
+    @keyframes sideslideIn {
       from {
         transform: translateX(100%);
         opacity: 0;
@@ -444,11 +444,11 @@
     }
 
     /* Slide Out (from Left to Right) Animation */
-    .slide-out {
-      animation: slideOut 0.8s ease forwards;
+    .side-slide-out {
+      animation: sideslideOut 0.8s ease forwards;
     }
 
-    @keyframes slideOut {
+    @keyframes sideslideOut {
       from {
         transform: translateX(0);
         opacity: 1;
@@ -475,6 +475,18 @@
       }
     }
 
+    .slide-in {
+        opacity: 0;
+        transform: translateY(30px); /* Starting point for slide-in */
+        transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+    }
+
+    /* Triggered slide-in effect */
+    .slide-in-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
   </style>
 </head>
 <body>
@@ -495,7 +507,7 @@
 
     <img src="/assets/start1.png" id="bg11" class="frontbg1 page0">
     <img src="/assets/start2.png" id="bg22" class="frontbg2 page0">
-    <div class="returnuser page0 emerge">Returning User?</div>
+    <div class="returnuser page0 slide-in">Returning User?</div>
     <img src="/assets/start.png" id="startbutton" class="startbutton page0 fade-in">
 
     <!-- Black Square Image with Click Event (Upload Outfits Button) -->
@@ -503,7 +515,7 @@
     <img src="/assets/first-upload.png" alt="Upload Outfits Button" class="black-square page1" onclick="handleBlackSquareClick()">
 
     <!-- Google Login Button Image with Click Event -->
-    <img src="/assets/login.png" alt="Log in with Google" class="login-button page0 emerge" onclick="handleLoginClick()">
+    <img src="/assets/login.png" alt="Log in with Google" class="login-button page0 slide-in" onclick="handleLoginClick()">
 
     <img src="/assets/analyze-text.png" class="analyzing-text page2 pulsing" id="analyzingText page2" alt="Analyzing your Designer DNA...">
 
@@ -942,6 +954,17 @@
     // Initial check and resize event listener
     checkScreenWidth();
     window.addEventListener('resize', checkScreenWidth);
+
+    function animateElements() {
+        const slideElements = document.querySelectorAll('.slide-in');
+        slideElements.forEach((element) => {
+            if (isInViewport(element)) {
+                element.classList.add('slide-in-visible');
+            }
+        });
+    }
+
+    window.addEventListener('load', animateElements);
 
 
   </script>
