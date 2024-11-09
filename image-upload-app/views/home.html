@@ -290,9 +290,11 @@
   </div>
 
   <img class="bottombar" src="/assets/bottombar.png">
-  <img class="camera" src="/assets/camera.png">
+  <img class="camera" src="/assets/camera.png" onclick="triggerFileInput()">
   <div class="ootd">ootd</div>
   <div class="profile" id="profileButton">profile</div>
+
+  <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
 
   <script>
 
@@ -504,6 +506,19 @@
         checkAndUploadPendingFiles();
         setTimeout(fetchUserImages, 100);
     };
+
+    function triggerFileInput() {
+        document.getElementById("fileInput").click();
+    }
+
+    // Function to handle file selection or capture
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Display the selected file or do something with it
+            console.log("Selected file:", file);
+        }
+    }
   </script>
 
 </body>
