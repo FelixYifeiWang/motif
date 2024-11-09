@@ -550,12 +550,12 @@
           element.style.display = 'block';
       });
 
-      // try {
-      //   file_input = compressImage(file_input);
-      // } catch (error) {
-      //     console.error('Error during image compression:', error);
-      //     return;
-      // }
+      try {
+        file_input = compressImage(file_input);
+      } catch (error) {
+          console.error('Error during image compression:', error);
+          return;
+      }
       
       formDataAI.append('images', file_input);
 
