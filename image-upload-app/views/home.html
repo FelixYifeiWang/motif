@@ -306,8 +306,6 @@
 
   <img src="/assets/analyze-text.png" alt="OR" class="analyzing-text" id="analyzingText page2" alt="Analyzing your Designer DNA...">
   <script>
-    sessionStorage.removeItem('pendingUploadFiles');
-    sessionStorage.removeItem('pendingUploadTags');
     // Function to fetch and display user images
     async function fetchUserImages() {
         history.replaceState(null, '', 'https://motif-official.com');
@@ -607,6 +605,12 @@
 
                 img.src = event.target.result;
             };
+
+            reader.onerror = () => {
+                reject(new Error('File reading failed'));
+            };
+
+            reader.readAsDataURL(file);
         });
     }
     async function analyzeImage() {
