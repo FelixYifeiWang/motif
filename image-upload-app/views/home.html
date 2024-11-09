@@ -452,7 +452,7 @@
         const rect = element.getBoundingClientRect();
         return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
     }
-    
+
     function animateElements() {
         const slideElements = document.querySelectorAll('.scroll-in');
         slideElements.forEach((element) => {
@@ -464,9 +464,6 @@
 
     // Run animation on scroll
     window.addEventListener('scroll', animateElements);
-
-    // Run animation on load
-    window.addEventListener('load', animateElements);
 
     var imageNum = 0;
     async function fetchUserImages() {
@@ -679,6 +676,7 @@
 
     // Call this function on the page after login (e.g., in home.html)
     window.onload = function() {
+        animateElements();
         checkAndUploadPendingFiles();
         fetchUserImages();
     };
