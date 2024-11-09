@@ -477,14 +477,19 @@
 
     .slide-in {
         opacity: 0;
+        animation: slidein;
         transform: translateY(30px); /* Starting point for slide-in */
         transition: opacity 1.5s ease-out, transform 1.5s ease-out;
     }
 
-    /* Triggered slide-in effect */
-    .slide-in-visible {
+    @keyframes slidein {
+      from {
+        opacity: 0;
+      }
+      to {
         opacity: 1;
         transform: translateX(0);
+      }
     }
 
   </style>
@@ -954,17 +959,6 @@
     // Initial check and resize event listener
     checkScreenWidth();
     window.addEventListener('resize', checkScreenWidth);
-
-    function animateElements() {
-        const slideElements = document.querySelectorAll('.slide-in');
-        slideElements.forEach((element) => {
-            if (isInViewport(element)) {
-                element.classList.add('slide-in-visible');
-            }
-        });
-    }
-
-    window.addEventListener('load', animateElements);
 
 
   </script>
